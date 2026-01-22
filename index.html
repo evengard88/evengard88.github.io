@@ -3,8 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KotlinProject</title>
+    <title>Snake Measurer</title>
     <link type="text/css" rel="stylesheet" href="styles.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyARDge4x1EEv5W1jJ15QdO5OW2RLLHNLqc",
+            authDomain: "snakemeasurer.firebaseapp.com",
+            projectId: "snakemeasurer",
+            storageBucket: "snakemeasurer.firebasestorage.app",
+            messagingSenderId: "223904200399",
+            appId: "1:223904200399:web:2e98ea1c1f3f9fa54069ba",
+            measurementId: "G-L6SQPK4C0V"
+        };
+
+        // Initialize Firebase
+        window.firebaseApp = firebase.initializeApp(firebaseConfig);
+        window.firebaseAnalytics = null;
+
+        // Function to enable/disable analytics (called from Kotlin)
+        window.initFirebaseAnalytics = function(enabled) {
+            if (enabled && !window.firebaseAnalytics) {
+                window.firebaseAnalytics = firebase.analytics();
+                console.log('Firebase Analytics initialized');
+            }
+        };
+
+        window.trackFirebaseEvent = function(eventName, params) {
+            if (window.firebaseAnalytics) {
+                window.firebaseAnalytics.logEvent(eventName, params);
+            }
+        };
+
+        window.trackFirebasePageView = function(pagePath) {
+            if (window.firebaseAnalytics) {
+                window.firebaseAnalytics.logEvent('page_view', { page_path: pagePath });
+            }
+        };
+    </script>
 </head>
 <body style="text-align: center; align-content: center">
 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50" role="presentation">
