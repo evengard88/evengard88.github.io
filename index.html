@@ -89,6 +89,125 @@
     </div>
 </div>
 
+<!-- Native login form for browser autofill support -->
+<div id="nativeLoginOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+    <form id="nativeLoginForm" autocomplete="on" style="background:#fff; border-radius:14px; padding:24px; width:90%; max-width:400px; box-sizing:border-box;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h2 id="nativeLoginTitle" style="margin:0; font-size:18px; color:#1c1c1e;">Sign In</h2>
+            <button type="button" id="nativeLoginClose" style="background:none; border:none; font-size:22px; cursor:pointer; color:#8e8e93; padding:4px 8px;">&times;</button>
+        </div>
+        <div id="nativeLoginError" style="display:none; background:#ffe0e0; color:#c00; border-radius:8px; padding:10px 12px; margin-bottom:12px; font-size:14px; text-align:center;"></div>
+        <input id="nativeLoginEmail" type="email" name="email" autocomplete="username" placeholder="Email" required
+               style="display:block; width:100%; padding:12px; margin-bottom:12px; border:1px solid #d1d1d6; border-radius:8px; font-size:16px; box-sizing:border-box; outline:none;">
+        <input id="nativeLoginPassword" type="password" name="password" autocomplete="current-password" placeholder="Password" required
+               style="display:block; width:100%; padding:12px; margin-bottom:16px; border:1px solid #d1d1d6; border-radius:8px; font-size:16px; box-sizing:border-box; outline:none;">
+        <button type="submit" id="nativeLoginSubmit" style="display:block; width:100%; padding:14px; background:#AF52DE; color:#fff; border:none; border-radius:8px; font-size:16px; font-weight:600; cursor:pointer;">Sign In</button>
+        <div style="display:flex; justify-content:space-between; margin-top:12px;">
+            <a href="#" id="nativeLoginToggle" style="font-size:13px; color:#AF52DE; text-decoration:none;">No account? Create one</a>
+            <a href="#" id="nativeLoginForgot" style="font-size:13px; color:#8e8e93; text-decoration:none;">Forgot password?</a>
+        </div>
+    </form>
+</div>
+<script>
+(function() {
+    var overlay = document.getElementById('nativeLoginOverlay');
+    var form = document.getElementById('nativeLoginForm');
+    var emailInput = document.getElementById('nativeLoginEmail');
+    var passwordInput = document.getElementById('nativeLoginPassword');
+    var titleEl = document.getElementById('nativeLoginTitle');
+    var submitBtn = document.getElementById('nativeLoginSubmit');
+    var toggleLink = document.getElementById('nativeLoginToggle');
+    var forgotLink = document.getElementById('nativeLoginForgot');
+    var closeBtn = document.getElementById('nativeLoginClose');
+    var errorDiv = document.getElementById('nativeLoginError');
+    var isCreate = false;
+
+    window.showNativeLoginError = function(msg) {
+        errorDiv.textContent = msg;
+        errorDiv.style.display = msg ? 'block' : 'none';
+    };
+
+    window.hideNativeLoginError = function() {
+        errorDiv.style.display = 'none';
+    };
+
+    function updateMode(createMode) {
+        isCreate = createMode;
+        titleEl.textContent = isCreate ? 'Create Account' : 'Sign In';
+        submitBtn.textContent = isCreate ? 'Create Account' : 'Sign In';
+        passwordInput.autocomplete = isCreate ? 'new-password' : 'current-password';
+        toggleLink.textContent = isCreate ? 'Already have an account? Sign in' : 'No account? Create one';
+        forgotLink.style.display = isCreate ? 'none' : '';
+    }
+
+    window.showNativeLoginForm = function(mode) {
+        updateMode(mode === 'create');
+        emailInput.value = '';
+        passwordInput.value = '';
+        errorDiv.style.display = 'none';
+        overlay.style.display = 'flex';
+        setTimeout(function() { emailInput.focus(); }, 50);
+    };
+
+    window.hideNativeLoginForm = function() {
+        overlay.style.display = 'none';
+    };
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = emailInput.value;
+        var password = passwordInput.value;
+        if (email && password) {
+            if (isCreate && window._nativeLoginOnCreateAccount) {
+                window._nativeLoginOnCreateAccount(email, password);
+            } else if (window._nativeLoginOnSubmit) {
+                window._nativeLoginOnSubmit(email, password);
+            }
+        }
+    });
+
+    toggleLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        errorDiv.style.display = 'none';
+        updateMode(!isCreate);
+    });
+
+    forgotLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        var email = emailInput.value;
+        if (window._nativeLoginOnForgotPassword) {
+            window._nativeLoginOnForgotPassword(email);
+        }
+    });
+
+    closeBtn.addEventListener('click', function() {
+        window.hideNativeLoginForm();
+        if (window._nativeLoginOnDismiss) window._nativeLoginOnDismiss();
+    });
+
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            window.hideNativeLoginForm();
+            if (window._nativeLoginOnDismiss) window._nativeLoginOnDismiss();
+        }
+    });
+
+    // Dark mode support
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        form.style.background = '#2c2c2e';
+        titleEl.style.color = '#f2f2f7';
+        emailInput.style.background = '#1c1c1e';
+        emailInput.style.color = '#f2f2f7';
+        emailInput.style.borderColor = '#48484a';
+        passwordInput.style.background = '#1c1c1e';
+        passwordInput.style.color = '#f2f2f7';
+        passwordInput.style.borderColor = '#48484a';
+        errorDiv.style.background = '#3a1c1c';
+        errorDiv.style.color = '#ff6b6b';
+    }
+})();
+</script>
+
 <script type="application/javascript" src="composeApp.js"></script>
 <script>
     // Hide loader when Compose canvas appears
@@ -147,6 +266,14 @@
             window.firebaseApp = firebase.initializeApp(firebaseConfig);
             window.firebaseAnalytics = null;
             window._firebaseReady = true;
+
+            // Initialize Auth immediately so it's ready for Kotlin
+            window.firebaseAuth = firebase.auth();
+            window.firebaseAuth.onAuthStateChanged(function(user) {
+                window.currentFirebaseUser = user;
+            });
+            window._firebaseAuthReady = true;
+
             if (window._firebaseReadyResolve) window._firebaseReadyResolve();
         }
 
