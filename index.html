@@ -5,86 +5,188 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Snake Measurer</title>
     <link type="text/css" rel="stylesheet" href="styles.css">
-
-    <!-- Firebase SDK (defer to avoid blocking initial render & WASM loading) -->
-    <script defer src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
-    <script defer>
-        // Wait for Firebase SDK to be available, then initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            function tryInitFirebase() {
-                if (typeof firebase !== 'undefined' && firebase.initializeApp) {
-                    var firebaseConfig = {
-                        apiKey: "AIzaSyARDge4x1EEv5W1jJ15QdO5OW2RLLHNLqc",
-                        authDomain: "snakemeasurer.firebaseapp.com",
-                        projectId: "snakemeasurer",
-                        storageBucket: "snakemeasurer.firebasestorage.app",
-                        messagingSenderId: "223904200399",
-                        appId: "1:223904200399:web:2e98ea1c1f3f9fa54069ba",
-                        measurementId: "G-L6SQPK4C0V"
-                    };
-
-                    window.firebaseApp = firebase.initializeApp(firebaseConfig);
-                    window.firebaseAnalytics = null;
-                    window._firebaseReady = true;
-
-                    // Resolve any pending Firebase init waiters
-                    if (window._firebaseReadyResolve) window._firebaseReadyResolve();
-                } else {
-                    // Firebase SDK not yet loaded, retry
-                    setTimeout(tryInitFirebase, 50);
-                }
-            }
-            tryInitFirebase();
-        });
-
-        // Promise that resolves when Firebase is ready (used by Kotlin interop)
-        window._firebaseReadyPromise = new Promise(function(resolve) {
-            window._firebaseReadyResolve = resolve;
-            if (window._firebaseReady) resolve();
-        });
-
-        // Firebase helper functions (available immediately, guard with _firebaseReady check)
-        window.initFirebaseAnalytics = function(enabled) {
-            if (!window._firebaseReady) {
-                window._firebaseReadyPromise.then(function() { window.initFirebaseAnalytics(enabled); });
-                return;
-            }
-            if (enabled && !window.firebaseAnalytics) {
-                window.firebaseAnalytics = firebase.analytics();
-            }
-        };
-
-        window.trackFirebaseEvent = function(eventName, params) {
-            if (window.firebaseAnalytics) {
-                window.firebaseAnalytics.logEvent(eventName, params);
-            }
-        };
-
-        window.trackFirebasePageView = function(pagePath) {
-            if (window.firebaseAnalytics) {
-                window.firebaseAnalytics.logEvent('page_view', { page_path: pagePath });
-            }
-        };
-    </script>
+    <style>
+        #loader {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f8f8fa;
+            z-index: 9999;
+            transition: opacity 0.4s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        @media (prefers-color-scheme: dark) {
+            #loader { background: #1c1c1e; }
+            #loader .loader-title { color: #f2f2f7; }
+            #loader .loader-subtitle { color: #98989f; }
+            #loader .loader-bar-bg { background: #2c2c2e; }
+            #loader .loader-bar-fill { background: linear-gradient(90deg, #0A84FF, #BF5AF2); }
+        }
+        .loader-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+        }
+        .loader-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1c1c1e;
+            margin: 0 0 6px;
+        }
+        .loader-subtitle {
+            font-size: 14px;
+            color: #8e8e93;
+            margin: 0 0 28px;
+        }
+        .loader-bar-bg {
+            width: 200px;
+            height: 4px;
+            border-radius: 2px;
+            background: #e5e5ea;
+            overflow: hidden;
+        }
+        .loader-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #007AFF, #AF52DE);
+            animation: loader-progress 2.5s ease-in-out infinite;
+        }
+        @keyframes loader-progress {
+            0%   { width: 0%; transform: translateX(0); }
+            50%  { width: 70%; }
+            100% { width: 100%; }
+        }
+        #loader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
 </head>
-<body style="text-align: center; align-content: center">
-<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50" role="presentation">
-    <circle cx="25" cy="25" r="20" stroke="#ccc" stroke-width="4" fill="none"/>
-    <circle cx="25" cy="25" r="20" stroke="#333" stroke-width="4" fill="none" stroke-linecap="round"
-            stroke-dasharray="90 125">
-        <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s"
-                          repeatCount="indefinite"/>
-    </circle>
-</svg>
+<body>
+<!-- Loading screen -->
+<div id="loader">
+    <!-- Snake icon -->
+    <svg class="loader-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="36" fill="url(#grad)" opacity="0.12"/>
+        <path d="M24 52c0-8 6-12 12-12s8 4 8 4 2-4 8-4 12 4 12 12" stroke="url(#grad)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+        <circle cx="30" cy="36" r="2.5" fill="#AF52DE"/>
+        <circle cx="50" cy="36" r="2.5" fill="#AF52DE"/>
+        <path d="M36 44c2 2 6 2 8 0" stroke="#AF52DE" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <defs>
+            <linearGradient id="grad" x1="0" y1="0" x2="80" y2="80">
+                <stop stop-color="#007AFF"/>
+                <stop offset="1" stop-color="#AF52DE"/>
+            </linearGradient>
+        </defs>
+    </svg>
+    <p class="loader-title">Snake Measurer</p>
+    <p class="loader-subtitle">Loading app...</p>
+    <div class="loader-bar-bg">
+        <div class="loader-bar-fill"></div>
+    </div>
+</div>
+
 <script type="application/javascript" src="composeApp.js"></script>
 <script>
+    // Hide loader when Compose canvas appears
+    (function() {
+        var loader = document.getElementById('loader');
+        var observer = new MutationObserver(function(mutations) {
+            for (var i = 0; i < mutations.length; i++) {
+                for (var j = 0; j < mutations[i].addedNodes.length; j++) {
+                    var node = mutations[i].addedNodes[j];
+                    if (node.tagName === 'CANVAS') {
+                        loader.classList.add('fade-out');
+                        setTimeout(function() { loader.remove(); }, 500);
+                        observer.disconnect();
+                        return;
+                    }
+                }
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Fallback: hide after 30s regardless
+        setTimeout(function() {
+            if (loader.parentNode) {
+                loader.classList.add('fade-out');
+                setTimeout(function() { loader.remove(); }, 500);
+            }
+        }, 30000);
+    })();
+
+    // Register Service Worker
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(function(e) {
             console.warn('SW registration failed:', e);
         });
     }
+
+    // Load Firebase AFTER Canvas is ready (non-blocking)
+    function loadFirebase() {
+        var scripts = [
+            'https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js',
+            'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js',
+            'https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js'
+        ];
+        var loaded = 0;
+
+        function onAllLoaded() {
+            var firebaseConfig = {
+                apiKey: "AIzaSyARDge4x1EEv5W1jJ15QdO5OW2RLLHNLqc",
+                authDomain: "snakemeasurer.firebaseapp.com",
+                projectId: "snakemeasurer",
+                storageBucket: "snakemeasurer.firebasestorage.app",
+                messagingSenderId: "223904200399",
+                appId: "1:223904200399:web:2e98ea1c1f3f9fa54069ba",
+                measurementId: "G-L6SQPK4C0V"
+            };
+            window.firebaseApp = firebase.initializeApp(firebaseConfig);
+            window.firebaseAnalytics = null;
+            window._firebaseReady = true;
+            if (window._firebaseReadyResolve) window._firebaseReadyResolve();
+        }
+
+        // Load scripts sequentially (auth depends on app, analytics depends on app)
+        function loadNext() {
+            if (loaded >= scripts.length) { onAllLoaded(); return; }
+            var s = document.createElement('script');
+            s.src = scripts[loaded];
+            s.onload = function() { loaded++; loadNext(); };
+            s.onerror = function() { loaded++; loadNext(); };
+            document.head.appendChild(s);
+        }
+        loadNext();
+    }
+
+    // Firebase ready promise (Kotlin interop can await this)
+    window._firebaseReady = false;
+    window._firebaseReadyPromise = new Promise(function(resolve) {
+        window._firebaseReadyResolve = resolve;
+    });
+
+    // Firebase helper functions (safe to call before Firebase loads)
+    window.initFirebaseAnalytics = function(enabled) {
+        if (!window._firebaseReady) {
+            window._firebaseReadyPromise.then(function() { window.initFirebaseAnalytics(enabled); });
+            return;
+        }
+        if (enabled && !window.firebaseAnalytics) {
+            window.firebaseAnalytics = firebase.analytics();
+        }
+    };
+    window.trackFirebaseEvent = function(eventName, params) {
+        if (window.firebaseAnalytics) window.firebaseAnalytics.logEvent(eventName, params);
+    };
+    window.trackFirebasePageView = function(pagePath) {
+        if (window.firebaseAnalytics) window.firebaseAnalytics.logEvent('page_view', { page_path: pagePath });
+    };
+
+    // Start loading Firebase after a short delay (let WASM download take priority)
+    setTimeout(loadFirebase, 100);
 </script>
 </body>
 </html>
