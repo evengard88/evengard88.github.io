@@ -100,30 +100,21 @@
         if (built) return;
         built = true;
 
-        var isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var bg = isDark ? '#2c2c2e' : '#fff';
-        var textColor = isDark ? '#f2f2f7' : '#1c1c1e';
-        var inputBg = isDark ? '#1c1c1e' : '#fff';
-        var inputColor = isDark ? '#f2f2f7' : '#1c1c1e';
-        var inputBorder = isDark ? '#48484a' : '#d1d1d6';
-        var errBg = isDark ? '#3a1c1c' : '#ffe0e0';
-        var errColor = isDark ? '#ff6b6b' : '#c00';
-
         overlay = document.createElement('div');
         overlay.id = 'nativeLoginOverlay';
         overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;width:' + window.innerWidth + 'px;height:' + window.innerHeight + 'px;background:rgba(0,0,0,0.5);z-index:2147483647;display:none;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;';
 
         overlay.innerHTML =
-            '<form id="nativeLoginForm" autocomplete="on" style="background:' + bg + ';border-radius:14px;padding:24px;width:90%;max-width:400px;box-sizing:border-box;">' +
+            '<form id="nativeLoginForm" autocomplete="on" style="border-radius:14px;padding:24px;width:90%;max-width:400px;box-sizing:border-box;">' +
                 '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">' +
-                    '<h2 id="nativeLoginTitle" style="margin:0;font-size:18px;color:' + textColor + ';">Sign In</h2>' +
+                    '<h2 id="nativeLoginTitle" style="margin:0;font-size:18px;">Sign In</h2>' +
                     '<button type="button" id="nativeLoginClose" style="background:none;border:none;font-size:22px;cursor:pointer;color:#8e8e93;padding:4px 8px;">&times;</button>' +
                 '</div>' +
-                '<div id="nativeLoginError" style="display:none;background:' + errBg + ';color:' + errColor + ';border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:14px;text-align:center;"></div>' +
+                '<div id="nativeLoginError" style="display:none;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:14px;text-align:center;"></div>' +
                 '<input id="nativeLoginEmail" type="email" name="email" autocomplete="username" placeholder="Email" required ' +
-                    'style="display:block;width:100%;padding:12px;margin-bottom:12px;border:1px solid ' + inputBorder + ';border-radius:8px;font-size:16px;box-sizing:border-box;outline:none;background:' + inputBg + ';color:' + inputColor + ';">' +
+                    'style="display:block;width:100%;padding:12px;margin-bottom:12px;border-radius:8px;font-size:16px;box-sizing:border-box;outline:none;">' +
                 '<input id="nativeLoginPassword" type="password" name="password" autocomplete="current-password" placeholder="Password" required ' +
-                    'style="display:block;width:100%;padding:12px;margin-bottom:16px;border:1px solid ' + inputBorder + ';border-radius:8px;font-size:16px;box-sizing:border-box;outline:none;background:' + inputBg + ';color:' + inputColor + ';">' +
+                    'style="display:block;width:100%;padding:12px;margin-bottom:16px;border-radius:8px;font-size:16px;box-sizing:border-box;outline:none;">' +
                 '<button type="submit" id="nativeLoginSubmit" style="display:block;width:100%;padding:14px;background:#AF52DE;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;">Sign In</button>' +
                 '<div style="display:flex;justify-content:space-between;margin-top:12px;">' +
                     '<a href="#" id="nativeLoginToggle" style="font-size:13px;color:#AF52DE;text-decoration:none;">No account? Create one</a>' +
@@ -192,13 +183,39 @@
         forgotLink.style.display = isCreate ? 'none' : '';
     }
 
+    function applyTheme(isDark) {
+        // Colors matching AppTheme.kt
+        var bg = isDark ? '#2c2c2e' : '#fff';
+        var textColor = isDark ? '#fff' : '#000';
+        var inputBg = isDark ? '#1c1c1e' : '#fff';
+        var inputColor = isDark ? '#fff' : '#000';
+        var inputBorder = isDark ? '#48484a' : '#d1d1d6';
+        var errBg = isDark ? '#3a1c1c' : '#ffe0e0';
+        var errColor = isDark ? '#ff6b6b' : '#c00';
+        var snake = isDark ? '#BF5AF2' : '#AF52DE';
+
+        form.style.background = bg;
+        titleEl.style.color = textColor;
+        emailInput.style.background = inputBg;
+        emailInput.style.color = inputColor;
+        emailInput.style.border = '1px solid ' + inputBorder;
+        passwordInput.style.background = inputBg;
+        passwordInput.style.color = inputColor;
+        passwordInput.style.border = '1px solid ' + inputBorder;
+        errorDiv.style.background = errBg;
+        errorDiv.style.color = errColor;
+        submitBtn.style.background = snake;
+        toggleLink.style.color = snake;
+    }
+
     function setCanvasPointerEvents(enabled) {
         var canvas = document.querySelector('canvas');
         if (canvas) canvas.style.pointerEvents = enabled ? 'auto' : 'none';
     }
 
-    window.showNativeLoginForm = function(mode) {
+    window.showNativeLoginForm = function(mode, isDark) {
         buildForm();
+        applyTheme(isDark);
         updateMode(mode === 'create');
         emailInput.value = '';
         passwordInput.value = '';
