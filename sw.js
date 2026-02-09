@@ -1,7 +1,8 @@
 // Snake Measurer Service Worker
 // Cache-first strategy for WASM/JS assets, network-first for HTML
+// Auto-updates when new version is deployed
 
-var CACHE_VERSION = 'v2-bunny';
+var CACHE_VERSION = 'v3-auto-update';
 var CACHE_NAME = 'snake-measurer-' + CACHE_VERSION;
 
 // Assets cached on install (shell)
@@ -71,8 +72,8 @@ self.addEventListener('fetch', function(event) {
     // Skip non-http(s) requests
     if (!url.protocol.startsWith('http')) return;
 
-    // Force HTTPS for same-origin requests to prevent mixed content
-    if (url.origin === self.location.origin && url.protocol === 'http:') {
+    // Force HTTPS for same-origin requests (production only)
+    if (url.origin === self.location.origin && url.protocol === 'http:' && self.location.hostname !== 'localhost') {
         url.protocol = 'https:';
         event.respondWith(fetch(url.toString()));
         return;

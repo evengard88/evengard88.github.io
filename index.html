@@ -392,12 +392,12 @@
         }, 30000);
     })();
 
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js').catch(function(e) {
-            console.warn('SW registration failed:', e);
-        });
-    }
+    // Register Service Worker (DISABLED TEMPORARILY - caching issues)
+    // if ('serviceWorker' in navigator) {
+    //     navigator.serviceWorker.register('sw.js').catch(function(e) {
+    //         console.warn('SW registration failed:', e);
+    //     });
+    // }
 
     // Load Firebase AFTER Canvas is ready (non-blocking)
     function loadFirebase() {
