@@ -1,0 +1,24 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* Prevent browser gestures from interfering with app */
+    touch-action: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Prevent double-tap zoom */
+    -ms-touch-action: manipulation;
+}
+
+/* Prevent pull-to-refresh on mobile */
+body {
+    overscroll-behavior: none;
+}
+
+/* Canvas should handle its own touch events */
+canvas {
+    touch-action: none;
+}

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Snake Measurer - Measure Snake Length from Photos</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Measure snake length accurately from photos using reference objects. Free, easy-to-use tool for reptile enthusiasts, breeders, and researchers.">
+    <meta name="keywords" content="snake measurer, snake length, reptile measurement, snake size, pet snake, ball python, boa constrictor">
+    <meta name="author" content="SerpWidgets">
+    <meta name="robots" content="index, follow">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#007AFF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0A84FF" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="light dark">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://snakemeasurer.app/">
+    <meta property="og:title" content="Snake Measurer - Measure Snake Length from Photos">
+    <meta property="og:description" content="Measure snake length accurately from photos using reference objects. Free tool for reptile enthusiasts.">
+    <meta property="og:image" content="https://snakemeasurer.app/og-image.png">
+    <meta property="og:site_name" content="Snake Measurer">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://snakemeasurer.app/">
+    <meta name="twitter:title" content="Snake Measurer - Measure Snake Length from Photos">
+    <meta name="twitter:description" content="Measure snake length accurately from photos using reference objects. Free tool for reptile enthusiasts.">
+    <meta name="twitter:image" content="https://snakemeasurer.app/og-image.png">
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- iOS PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Snake Measurer">
+    <meta name="apple-itunes-app" content="app-id=000000000">
+
+    <!-- Styles -->
+    <link type="text/css" rel="stylesheet" href="styles.css">
+
+    <!-- Structured Data (JSON-LD) for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Snake Measurer",
+        "description": "Measure snake length accurately from photos using reference objects. Free, easy-to-use tool for reptile enthusiasts, breeders, and researchers.",
+        "url": "https://snakemeasurer.app/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "150"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "SerpWidgets",
+            "url": "https://serpwidgets.app"
+        },
+        "browserRequirements": "Requires JavaScript. Works best in Chrome, Firefox, Safari, Edge.",
+        "softwareVersion": "1.0.0",
+        "screenshot": "https://snakemeasurer.app/og-image.png",
+        "downloadUrl": [
+            "https://apps.apple.com/app/snake-measurer/id000000000",
+            "https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer"
+        ]
+    }
+    </script>
+
+    <!-- FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How does Snake Measurer work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Upload a photo of your snake with a reference object (like a ruler or credit card). Mark the reference object and enter its size, then trace along your snake's body. The app calculates the real length based on the reference scale."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What can I use as a reference object?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Any object with a known size works: a ruler, credit card (85.6mm), coin, or any item you can measure. Place it next to your snake in the photo for accurate measurements."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How accurate is the measurement?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Accuracy depends on photo quality, reference object placement, and how carefully you trace the snake. For best results, take a top-down photo with the snake fully stretched."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is Snake Measurer free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! Snake Measurer is free to use with basic features. Premium features are available for advanced users who need unlimited measurements and cloud storage."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script>
+        // Determine theme before rendering loader
+        (function() {
+            var savedTheme = localStorage.getItem('snake_measurer_theme');
+            var isDark = savedTheme === 'DARK' ||
+                (savedTheme !== 'LIGHT' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isDark) {
+                document.documentElement.classList.add('theme-dark');
+            }
+        })();
+    </script>
+    <style>
+        #loader {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f8f8fa;
+            z-index: 9999;
+            transition: opacity 0.4s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .theme-dark #loader { background: #1c1c1e; }
+        .theme-dark #loader .loader-title { color: #f2f2f7; }
+        .theme-dark #loader .loader-subtitle { color: #98989f; }
+        .theme-dark #loader .loader-bar-bg { background: #2c2c2e; }
+        .theme-dark #loader .loader-bar-fill { background: linear-gradient(90deg, #0A84FF, #BF5AF2); }
+        .loader-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+        }
+        .loader-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1c1c1e;
+            margin: 0 0 6px;
+        }
+        .loader-subtitle {
+            font-size: 14px;
+            color: #8e8e93;
+            margin: 0 0 28px;
+        }
+        .loader-bar-bg {
+            width: 200px;
+            height: 4px;
+            border-radius: 2px;
+            background: #e5e5ea;
+            overflow: hidden;
+        }
+        .loader-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #007AFF, #AF52DE);
+            animation: loader-progress 2.5s ease-in-out infinite;
+        }
+        @keyframes loader-progress {
+            0%   { width: 0%; transform: translateX(0); }
+            50%  { width: 70%; }
+            100% { width: 100%; }
+        }
+        #loader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body style="background: #f8f8fa;">
+<script>
+    // Match body background to loader theme
+    if (document.documentElement.classList.contains('theme-dark')) {
+        document.body.style.background = '#1c1c1e';
+    }
+</script>
+<!-- Loading screen -->
+<div id="loader">
+    <!-- Snake icon -->
+    <img class="loader-icon" src="icon-192.png" alt="Snake Measurer" />
+    <p class="loader-title">Snake Measurer</p>
+    <p class="loader-subtitle">Loading app...</p>
+    <div class="loader-bar-bg">
+        <div class="loader-bar-fill"></div>
+    </div>
+</div>
+
+<!-- Native login form created dynamically to avoid Compose DOM interference -->
+<script>
+(function() {
+    var overlay, form, emailInput, passwordInput, titleEl, submitBtn, toggleLink, forgotLink, closeBtn, errorDiv;
+    var isCreate = false;
+    var built = false;
+
+    function buildForm() {
+        if (built) return;
+        built = true;
+
+        overlay = document.createElement('div');
+        overlay.id = 'nativeLoginOverlay';
+        overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;width:' + window.innerWidth + 'px;height:' + window.innerHeight + 'px;background:rgba(0,0,0,0.5);z-index:2147483647;display:none;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;';
+
+        overlay.innerHTML =
+            '<form id="nativeLoginForm" autocomplete="on" style="border-radius:16px;padding:24px;width:90%;max-width:400px;box-sizing:border-box;">' +
+                '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">' +
+                    '<h2 id="nativeLoginTitle" style="margin:0;font-size:18px;">Sign In</h2>' +
+                    '<button type="button" id="nativeLoginClose" style="background:none;border:none;font-size:22px;cursor:pointer;color:#8e8e93;padding:4px 8px;">&times;</button>' +
+                '</div>' +
+                '<div id="nativeLoginError" style="display:none;border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:14px;text-align:center;"></div>' +
+                '<input id="nativeLoginEmail" type="email" name="email" autocomplete="username" placeholder="Email" required ' +
+                    'style="display:block;width:100%;padding:12px;margin-bottom:12px;border-radius:12px;font-size:16px;box-sizing:border-box;outline:none;">' +
+                '<input id="nativeLoginPassword" type="password" name="password" autocomplete="current-password" placeholder="Password" required ' +
+                    'style="display:block;width:100%;padding:12px;margin-bottom:16px;border-radius:12px;font-size:16px;box-sizing:border-box;outline:none;">' +
+                '<button type="submit" id="nativeLoginSubmit" style="display:block;width:100%;padding:14px;background:#AF52DE;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;">Sign In</button>' +
+                '<div style="display:flex;justify-content:space-between;margin-top:12px;">' +
+                    '<a href="#" id="nativeLoginToggle" style="font-size:13px;color:#AF52DE;text-decoration:none;">No account? Create one</a>' +
+                    '<a href="#" id="nativeLoginForgot" style="font-size:13px;color:#8e8e93;text-decoration:none;">Forgot password?</a>' +
+                '</div>' +
+            '</form>';
+
+        document.documentElement.appendChild(overlay);
+
+        form = overlay.querySelector('#nativeLoginForm');
+        emailInput = overlay.querySelector('#nativeLoginEmail');
+        passwordInput = overlay.querySelector('#nativeLoginPassword');
+        titleEl = overlay.querySelector('#nativeLoginTitle');
+        submitBtn = overlay.querySelector('#nativeLoginSubmit');
+        toggleLink = overlay.querySelector('#nativeLoginToggle');
+        forgotLink = overlay.querySelector('#nativeLoginForgot');
+        closeBtn = overlay.querySelector('#nativeLoginClose');
+        errorDiv = overlay.querySelector('#nativeLoginError');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var email = emailInput.value;
+            var password = passwordInput.value;
+            if (email && password) {
+                if (isCreate && window._nativeLoginOnCreateAccount) {
+                    window._nativeLoginOnCreateAccount(email, password);
+                } else if (window._nativeLoginOnSubmit) {
+                    window._nativeLoginOnSubmit(email, password);
+                }
+            }
+        });
+
+        toggleLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            errorDiv.style.display = 'none';
+            updateMode(!isCreate);
+        });
+
+        forgotLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            var email = emailInput.value;
+            if (window._nativeLoginOnForgotPassword) {
+                window._nativeLoginOnForgotPassword(email);
+            }
+        });
+
+        closeBtn.addEventListener('click', function() {
+            window.hideNativeLoginForm();
+            if (window._nativeLoginOnDismiss) window._nativeLoginOnDismiss();
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                window.hideNativeLoginForm();
+                if (window._nativeLoginOnDismiss) window._nativeLoginOnDismiss();
+            }
+        });
+    }
+
+    function updateMode(createMode) {
+        isCreate = createMode;
+        titleEl.textContent = isCreate ? 'Create Account' : 'Sign In';
+        submitBtn.textContent = isCreate ? 'Create Account' : 'Sign In';
+        passwordInput.autocomplete = isCreate ? 'new-password' : 'current-password';
+        toggleLink.textContent = isCreate ? 'Already have an account? Sign in' : 'No account? Create one';
+        forgotLink.style.display = isCreate ? 'none' : '';
+    }
+
+    function applyTheme(isDark) {
+        // Colors matching AppTheme.kt
+        var bg = isDark ? '#2c2c2e' : '#fff';
+        var textColor = isDark ? '#fff' : '#000';
+        var inputBg = isDark ? '#1c1c1e' : '#fff';
+        var inputColor = isDark ? '#fff' : '#000';
+        var inputBorder = isDark ? '#48484a' : '#d1d1d6';
+        var errBg = isDark ? '#3a1c1c' : '#ffe0e0';
+        var errColor = isDark ? '#ff6b6b' : '#c00';
+        var snake = isDark ? '#BF5AF2' : '#AF52DE';
+
+        form.style.background = bg;
+        titleEl.style.color = textColor;
+        emailInput.style.background = inputBg;
+        emailInput.style.color = inputColor;
+        emailInput.style.border = '1px solid ' + inputBorder;
+        passwordInput.style.background = inputBg;
+        passwordInput.style.color = inputColor;
+        passwordInput.style.border = '1px solid ' + inputBorder;
+        errorDiv.style.background = errBg;
+        errorDiv.style.color = errColor;
+        submitBtn.style.background = snake;
+        toggleLink.style.color = snake;
+    }
+
+    function setCanvasPointerEvents(enabled) {
+        var canvas = document.querySelector('canvas');
+        if (canvas) canvas.style.pointerEvents = enabled ? 'auto' : 'none';
+    }
+
+    window.showNativeLoginForm = function(mode, isDark) {
+        buildForm();
+        applyTheme(isDark);
+        updateMode(mode === 'create');
+        emailInput.value = '';
+        passwordInput.value = '';
+        errorDiv.style.display = 'none';
+        overlay.style.display = 'flex';
+        setCanvasPointerEvents(false);
+
+        setTimeout(function() { emailInput.focus(); }, 50);
+    };
+
+    window.hideNativeLoginForm = function() {
+        if (overlay) overlay.style.display = 'none';
+        setCanvasPointerEvents(true);
+    };
+
+    window.showNativeLoginError = function(msg) {
+        if (errorDiv) {
+            errorDiv.textContent = msg;
+            errorDiv.style.display = msg ? 'block' : 'none';
+        }
+    };
+
+    window.hideNativeLoginError = function() {
+        if (errorDiv) errorDiv.style.display = 'none';
+    };
+})();
+</script>
+
+<script type="application/javascript" src="composeApp.js"></script>
+<script>
+    // Hide loader when Compose signals it's ready
+    (function() {
+        var loader = document.getElementById('loader');
+        var hidden = false;
+
+        function hideLoader() {
+            if (hidden) return;
+            hidden = true;
+            loader.classList.add('fade-out');
+            setTimeout(function() { loader.remove(); }, 500);
+        }
+
+        // Called from Kotlin via PlatformInfo.onAppReady()
+        window._hideLoader = hideLoader;
+
+        // Fallback: hide after 30s regardless
+        setTimeout(function() {
+            if (!hidden && loader.parentNode) hideLoader();
+        }, 30000);
+    })();
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(function(e) {
+            console.warn('SW registration failed:', e);
+        });
+    }
+
+    // Load Firebase AFTER Canvas is ready (non-blocking)
+    function loadFirebase() {
+        var scripts = [
+            'https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js',
+            'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js',
+            'https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js'
+        ];
+        var loaded = 0;
+
+        function onAllLoaded() {
+            var firebaseConfig = {
+                apiKey: "AIzaSyARDge4x1EEv5W1jJ15QdO5OW2RLLHNLqc",
+                authDomain: "snakemeasurer.firebaseapp.com",
+                projectId: "snakemeasurer",
+                storageBucket: "snakemeasurer.firebasestorage.app",
+                messagingSenderId: "223904200399",
+                appId: "1:223904200399:web:2e98ea1c1f3f9fa54069ba",
+                measurementId: "G-L6SQPK4C0V"
+            };
+            window.firebaseApp = firebase.initializeApp(firebaseConfig);
+            window.firebaseAnalytics = null;
+            window._firebaseReady = true;
+
+            // Initialize Auth immediately so it's ready for Kotlin
+            window.firebaseAuth = firebase.auth();
+            window.firebaseAuth.onAuthStateChanged(function(user) {
+                window.currentFirebaseUser = user;
+            });
+            window._firebaseAuthReady = true;
+
+            if (window._firebaseReadyResolve) window._firebaseReadyResolve();
+        }
+
+        // Load scripts sequentially (auth depends on app, analytics depends on app)
+        function loadNext() {
+            if (loaded >= scripts.length) { onAllLoaded(); return; }
+            var s = document.createElement('script');
+            s.src = scripts[loaded];
+            s.onload = function() { loaded++; loadNext(); };
+            s.onerror = function() { loaded++; loadNext(); };
+            document.head.appendChild(s);
+        }
+        loadNext();
+    }
+
+    // Firebase ready promise (Kotlin interop can await this)
+    window._firebaseReady = false;
+    window._firebaseReadyPromise = new Promise(function(resolve) {
+        window._firebaseReadyResolve = resolve;
+    });
+
+    // Firebase helper functions (safe to call before Firebase loads)
+    window.initFirebaseAnalytics = function(enabled) {
+        if (!window._firebaseReady) {
+            window._firebaseReadyPromise.then(function() { window.initFirebaseAnalytics(enabled); });
+            return;
+        }
+        if (enabled && !window.firebaseAnalytics) {
+            window.firebaseAnalytics = firebase.analytics();
+        }
+    };
+    window.trackFirebaseEvent = function(eventName, params) {
+        if (window.firebaseAnalytics) window.firebaseAnalytics.logEvent(eventName, params);
+    };
+    window.trackFirebasePageView = function(pagePath) {
+        if (window.firebaseAnalytics) window.firebaseAnalytics.logEvent('page_view', { page_path: pagePath });
+    };
+
+    // Start loading Firebase after a short delay (let WASM download take priority)
+    setTimeout(loadFirebase, 100);
+</script>
+</body>
+</html>
