@@ -1,7 +1,7 @@
 // Snake Measurer Service Worker
 // Cache-first strategy for WASM/JS assets, network-first for HTML
 
-var CACHE_VERSION = 'v1';
+var CACHE_VERSION = 'v2-bunny';
 var CACHE_NAME = 'snake-measurer-' + CACHE_VERSION;
 
 // Assets cached on install (shell)
@@ -71,6 +71,13 @@ self.addEventListener('fetch', function(event) {
     // Skip non-http(s) requests
     if (!url.protocol.startsWith('http')) return;
 
+    // Force HTTPS for same-origin requests to prevent mixed content
+    if (url.origin === self.location.origin && url.protocol === 'http:') {
+        url.protocol = 'https:';
+        event.respondWith(fetch(url.toString()));
+        return;
+    }
+
     // 1. Content-hashed assets (.wasm, chunked .js) → cache-first
     //    These are immutable — once cached, never re-fetch
     if (isCacheFirstAsset(url)) {
@@ -78,10 +85,12 @@ self.addEventListener('fetch', function(event) {
             caches.match(event.request).then(function(cached) {
                 if (cached) return cached;
                 return fetch(event.request).then(function(response) {
-                    if (response.ok) {
+                    if (response.ok && response.type !== 'opaque') {
                         var clone = response.clone();
                         caches.open(CACHE_NAME).then(function(cache) {
-                            cache.put(event.request, clone);
+                            cache.put(event.request, clone).catch(function(err) {
+                                console.warn('Cache put failed:', event.request.url, err);
+                            });
                         });
                     }
                     return response;
@@ -97,10 +106,12 @@ self.addEventListener('fetch', function(event) {
         event.respondWith(
             caches.match(event.request).then(function(cached) {
                 var fetchPromise = fetch(event.request).then(function(response) {
-                    if (response.ok) {
+                    if (response.ok && response.type !== 'opaque') {
                         var clone = response.clone();
                         caches.open(CACHE_NAME).then(function(cache) {
-                            cache.put(event.request, clone);
+                            cache.put(event.request, clone).catch(function(err) {
+                                console.warn('Cache put failed:', event.request.url, err);
+                            });
                         });
                     }
                     return response;
@@ -120,10 +131,12 @@ self.addEventListener('fetch', function(event) {
     if (isFirebaseCDN(url)) {
         event.respondWith(
             fetch(event.request).then(function(response) {
-                if (response.ok) {
+                if (response.ok && response.type !== 'opaque') {
                     var clone = response.clone();
                     caches.open(CACHE_NAME).then(function(cache) {
-                        cache.put(event.request, clone);
+                        cache.put(event.request, clone).catch(function(err) {
+                            console.warn('Cache put failed:', event.request.url, err);
+                        });
                     });
                 }
                 return response;
@@ -137,10 +150,12 @@ self.addEventListener('fetch', function(event) {
     // 4. Everything else (compose resources, etc.) → network-first with cache
     event.respondWith(
         fetch(event.request).then(function(response) {
-            if (response.ok && url.origin === self.location.origin) {
+            if (response.ok && response.type !== 'opaque' && url.origin === self.location.origin) {
                 var clone = response.clone();
                 caches.open(CACHE_NAME).then(function(cache) {
-                    cache.put(event.request, clone);
+                    cache.put(event.request, clone).catch(function(err) {
+                        console.warn('Cache put failed:', event.request.url, err);
+                    });
                 });
             }
             return response;
