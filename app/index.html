@@ -467,7 +467,7 @@
         if (window.firebaseAnalytics) window.firebaseAnalytics.logEvent('page_view', { page_path: pagePath });
     };
 
-    // Start loading Firebase after a short delay (let WASM download take priority)
+    // Start loading Firebase after a short delay (let app JS download take priority)
     setTimeout(loadFirebase, 100);
 </script>
 </body>
