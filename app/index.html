@@ -18,19 +18,19 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://snakemeasurer.app/">
+    <meta property="og:url" content="https://snakemeasurer.com/">
     <meta property="og:title" content="Snake Measurer - Measure Snake Length from Photos">
     <meta property="og:description" content="Measure snake length accurately from photos using reference objects. Free tool for reptile enthusiasts.">
-    <meta property="og:image" content="https://snakemeasurer.app/og-image.png">
+    <meta property="og:image" content="https://snakemeasurer.com/og-image.png">
     <meta property="og:site_name" content="Snake Measurer">
     <meta property="og:locale" content="en_US">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://snakemeasurer.app/">
+    <meta name="twitter:url" content="https://snakemeasurer.com/">
     <meta name="twitter:title" content="Snake Measurer - Measure Snake Length from Photos">
     <meta name="twitter:description" content="Measure snake length accurately from photos using reference objects. Free tool for reptile enthusiasts.">
-    <meta name="twitter:image" content="https://snakemeasurer.app/og-image.png">
+    <meta name="twitter:image" content="https://snakemeasurer.com/og-image.png">
 
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -47,6 +47,9 @@
     <meta name="apple-mobile-web-app-title" content="Snake Measurer">
     <meta name="apple-itunes-app" content="app-id=000000000">
 
+    <!-- Telegram Web App SDK (no-op outside Telegram, ~20KB) -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
     <!-- Styles -->
     <link type="text/css" rel="stylesheet" href="styles.css">
 
@@ -57,7 +60,7 @@
         "@type": "WebApplication",
         "name": "Snake Measurer",
         "description": "Measure snake length accurately from photos using reference objects. Free, easy-to-use tool for reptile enthusiasts, breeders, and researchers.",
-        "url": "https://snakemeasurer.app/",
+        "url": "https://snakemeasurer.com/",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -77,7 +80,7 @@
         },
         "browserRequirements": "Requires JavaScript. Works best in Chrome, Firefox, Safari, Edge.",
         "softwareVersion": "1.0.0",
-        "screenshot": "https://snakemeasurer.app/og-image.png",
+        "screenshot": "https://snakemeasurer.com/og-image.png",
         "downloadUrl": [
             "https://apps.apple.com/app/snake-measurer/id000000000",
             "https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer"
@@ -128,11 +131,25 @@
     </script>
 
     <script>
+        // Detect Telegram Web App environment
+        window._isTelegram = !!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData);
+
         // Determine theme before rendering loader
         (function() {
-            var savedTheme = localStorage.getItem('snake_measurer_theme');
-            var isDark = savedTheme === 'DARK' ||
-                (savedTheme !== 'LIGHT' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            var tg = window._isTelegram ? window.Telegram.WebApp : null;
+            var isDark;
+
+            if (tg) {
+                // Use Telegram's theme
+                isDark = tg.colorScheme === 'dark';
+                // Save so Kotlin picks it up
+                localStorage.setItem('snake_measurer_theme', isDark ? 'DARK' : 'LIGHT');
+            } else {
+                var savedTheme = localStorage.getItem('snake_measurer_theme');
+                isDark = savedTheme === 'DARK' ||
+                    (savedTheme !== 'LIGHT' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            }
+
             if (isDark) {
                 document.documentElement.classList.add('theme-dark');
             }
@@ -384,7 +401,45 @@
         }
 
         // Called from Kotlin via PlatformInfo.onAppReady()
-        window._hideLoader = hideLoader;
+        window._hideLoader = function() {
+            hideLoader();
+
+            // Initialize Telegram Web App after Compose is ready
+            if (window._isTelegram) {
+                var tg = window.Telegram.WebApp;
+
+                // Expand to full screen
+                tg.expand();
+                tg.disableVerticalSwipes();
+
+                // Tell Telegram we're ready
+                tg.ready();
+
+                // Handle back button
+                tg.BackButton.onClick(function() {
+                    // Let Kotlin handle navigation; if no modal open, close the app
+                    if (window._onTelegramBack) {
+                        window._onTelegramBack();
+                    } else {
+                        tg.close();
+                    }
+                });
+
+                // Listen for theme changes
+                tg.onEvent('themeChanged', function() {
+                    var isDark = tg.colorScheme === 'dark';
+                    localStorage.setItem('snake_measurer_theme', isDark ? 'DARK' : 'LIGHT');
+                    // Notify Kotlin to update theme
+                    if (window._onTelegramThemeChanged) {
+                        window._onTelegramThemeChanged(isDark);
+                    }
+                });
+
+                // Expose Telegram user data for Kotlin
+                window._telegramUser = tg.initDataUnsafe && tg.initDataUnsafe.user || null;
+                window._telegramInitData = tg.initData || '';
+            }
+        };
 
         // Fallback: hide after 30s regardless
         setTimeout(function() {
@@ -392,8 +447,8 @@
         }, 30000);
     })();
 
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
+    // Register Service Worker (skip in Telegram — not needed)
+    if ('serviceWorker' in navigator && !window._isTelegram) {
         navigator.serviceWorker.register('sw.js').catch(function(e) {
             console.warn('SW registration failed:', e);
         });
@@ -458,6 +513,10 @@
         }
         if (enabled && !window.firebaseAnalytics) {
             window.firebaseAnalytics = firebase.analytics();
+            // Distinguish Telegram Mini App vs regular web traffic
+            firebase.analytics().setUserProperties({
+                app_source: window._isTelegram ? 'telegram' : 'web'
+            });
         }
     };
     window.trackFirebaseEvent = function(eventName, params) {
