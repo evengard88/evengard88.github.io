@@ -220,6 +220,60 @@
         document.body.style.background = '#1c1c1e';
     }
 </script>
+
+<!-- Unsupported browser fallback (no WASM / in-app WebView) -->
+<script>
+(function() {
+    var supported = typeof WebAssembly === 'object' && typeof WebAssembly.instantiate === 'function';
+    if (supported) return;
+
+    // Detect platform for store links
+    var ua = navigator.userAgent || '';
+    var isAndroid = /android/i.test(ua);
+    var isIOS = /iphone|ipad|ipod/i.test(ua);
+    var isDark = document.documentElement.classList.contains('theme-dark');
+
+    var playStoreUrl = 'https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer';
+    var appStoreUrl = 'https://apps.apple.com/app/snake-measurer/id000000000';
+
+    // Try to open in system browser (works in Telegram, some other in-app browsers)
+    var currentUrl = window.location.href;
+    var openInBrowserUrl = isAndroid
+        ? 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;end'
+        : currentUrl;
+
+    var bg = isDark ? '#1c1c1e' : '#f8f8fa';
+    var textColor = isDark ? '#f2f2f7' : '#1c1c1e';
+    var subtitleColor = isDark ? '#98989f' : '#8e8e93';
+    var btnBg = '#AF52DE';
+    var btnSecondaryBg = isDark ? '#2c2c2e' : '#e5e5ea';
+    var btnSecondaryColor = isDark ? '#f2f2f7' : '#1c1c1e';
+
+    var storeButton = '';
+    if (isAndroid) {
+        storeButton = '<a href="' + playStoreUrl + '" style="display:block;width:100%;max-width:280px;padding:14px 20px;background:' + btnBg + ';color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;text-align:center;box-sizing:border-box;">Download from Google Play</a>';
+    } else if (isIOS) {
+        storeButton = '<a href="' + appStoreUrl + '" style="display:block;width:100%;max-width:280px;padding:14px 20px;background:' + btnBg + ';color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;text-align:center;box-sizing:border-box;">Download from App Store</a>';
+    }
+
+    var openBrowserButton = '<a href="' + openInBrowserUrl + '" style="display:block;width:100%;max-width:280px;padding:14px 20px;background:' + btnSecondaryBg + ';color:' + btnSecondaryColor + ';border:none;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;text-align:center;box-sizing:border-box;">'
+        + (isAndroid ? 'Open in Chrome' : isIOS ? 'Open in Safari' : 'Open in Browser')
+        + '</a>';
+
+    document.body.style.background = bg;
+    document.body.innerHTML =
+        '<div style="position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;text-align:center;">' +
+            '<img src="icon-192.png" alt="Snake Measurer" style="width:80px;height:80px;margin-bottom:24px;" />' +
+            '<p style="font-size:22px;font-weight:700;color:' + textColor + ';margin:0 0 8px;">Snake Measurer</p>' +
+            '<p style="font-size:14px;color:' + subtitleColor + ';margin:0 0 32px;max-width:300px;line-height:1.5;">This browser doesn\'t support the app. Please open in a regular browser or download the app.</p>' +
+            '<div style="display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;">' +
+                storeButton +
+                openBrowserButton +
+            '</div>' +
+        '</div>';
+})();
+</script>
+
 <!-- Loading screen -->
 <div id="loader">
     <!-- Snake icon -->
