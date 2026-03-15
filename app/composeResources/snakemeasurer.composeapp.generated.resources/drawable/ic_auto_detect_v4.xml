@@ -1,0 +1,53 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+
+  <!-- scan brackets + snake curve inside -->
+
+  <!-- top-left -->
+  <path
+          android:strokeWidth="2"
+          android:strokeColor="#FFFFFF"
+          android:fillColor="#00000000"
+          android:strokeLineCap="round"
+          android:strokeLineJoin="round"
+          android:pathData="M3,8 L3,4 L8,4"/>
+
+  <!-- top-right -->
+  <path
+          android:strokeWidth="2"
+          android:strokeColor="#FFFFFF"
+          android:fillColor="#00000000"
+          android:strokeLineCap="round"
+          android:strokeLineJoin="round"
+          android:pathData="M16,4 L21,4 L21,8"/>
+
+  <!-- bottom-left -->
+  <path
+          android:strokeWidth="2"
+          android:strokeColor="#FFFFFF"
+          android:fillColor="#00000000"
+          android:strokeLineCap="round"
+          android:strokeLineJoin="round"
+          android:pathData="M3,16 L3,20 L8,20"/>
+
+  <!-- bottom-right -->
+  <path
+          android:strokeWidth="2"
+          android:strokeColor="#FFFFFF"
+          android:fillColor="#00000000"
+          android:strokeLineCap="round"
+          android:strokeLineJoin="round"
+          android:pathData="M16,20 L21,20 L21,16"/>
+
+  <!-- snake S-curve detected inside frame -->
+  <path
+          android:strokeWidth="2.5"
+          android:strokeColor="#FFFFFF"
+          android:fillColor="#00000000"
+          android:strokeLineCap="round"
+          android:pathData="M7,15 C9,9 11,17 14,11 C16,7 18,12 19,9"/>
+
+</vector>

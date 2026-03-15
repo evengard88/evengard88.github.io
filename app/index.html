@@ -50,6 +50,34 @@
     <!-- Telegram Web App SDK (no-op outside Telegram, ~20KB) -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
+    <!-- RevenueCat Web Billing SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@revenuecat/purchases-js@latest/dist/purchases-js.min.js"></script>
+
+    <!-- GlitchTip Error Tracking (self-hosted, Sentry-compatible SDK, production only) -->
+    <script>
+        (function() {
+            if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
+            var s = document.createElement('script');
+            s.src = 'https://browser.sentry-cdn.com/9.20.0/bundle.tracing.min.js';
+            s.crossOrigin = 'anonymous';
+            s.onload = function() {
+                Sentry.init({
+                    dsn: 'https://YOUR_GLITCHTIP_KEY@snakemeasurer.app/glitchtip/1',
+                    environment: location.hostname === 'snakemeasurer.app' ? 'production' : 'staging',
+                    release: 'snake-measurer-web@1.0.0',
+                    tracesSampleRate: 0.2,
+                    allowUrls: [/snakemeasurer\.app/],
+                    ignoreErrors: [
+                        'ResizeObserver loop',
+                        'Non-Error promise rejection',
+                        'Load failed'
+                    ]
+                });
+            };
+            document.head.appendChild(s);
+        })();
+    </script>
+
     <!-- Styles -->
     <link type="text/css" rel="stylesheet" href="styles.css">
 
@@ -489,9 +517,11 @@
                     }
                 });
 
-                // Expose Telegram user data for Kotlin
-                window._telegramUser = tg.initDataUnsafe && tg.initDataUnsafe.user || null;
-                window._telegramInitData = tg.initData || '';
+                // Expose Telegram user data for Kotlin (read-once, cleared after access)
+                var _tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user || null;
+                var _tgInitData = tg.initData || '';
+                window._getTelegramUser = function() { var u = _tgUser; return u; };
+                window._getTelegramInitData = function() { var d = _tgInitData; _tgInitData = ''; return d; };
             }
         };
 
@@ -582,6 +612,78 @@
 
     // Start loading Firebase after a short delay (let app JS download take priority)
     setTimeout(loadFirebase, 100);
+
+    // --- RevenueCat Web Billing ---
+    window._rcInstance = null;
+    window._rcReady = false;
+    window._rcApiKey = 'YOUR_REVENUECAT_WEB_API_KEY'; // TODO: replace with real web API key
+
+    window.rcConfigure = function(userId) {
+        try {
+            if (typeof Purchases === 'undefined') {
+                console.warn('RevenueCat SDK not loaded');
+                return false;
+            }
+            window._rcInstance = Purchases.Purchases.configure(window._rcApiKey, userId || null);
+            window._rcReady = true;
+            return true;
+        } catch(e) {
+            console.error('RevenueCat configure failed:', e);
+            return false;
+        }
+    };
+
+    window.rcGetCustomerInfo = function() {
+        if (!window._rcInstance) return Promise.reject('RC not configured');
+        return window._rcInstance.getCustomerInfo();
+    };
+
+    window.rcGetOfferings = function() {
+        if (!window._rcInstance) return Promise.reject('RC not configured');
+        return window._rcInstance.getOfferings();
+    };
+
+    window.rcPurchase = function(pkg) {
+        if (!window._rcInstance) return Promise.reject('RC not configured');
+        return window._rcInstance.purchase({ rcPackage: pkg });
+    };
+
+    window.rcRestorePurchases = function() {
+        if (!window._rcInstance) return Promise.reject('RC not configured');
+        return window._rcInstance.restorePurchases();
+    };
+
+    window.rcLogIn = function(userId) {
+        if (!window._rcInstance) return Promise.reject('RC not configured');
+        return window._rcInstance.logIn(userId);
+    };
+
+    window.rcLogOut = function() {
+        if (!window._rcInstance) return Promise.reject('RC not configured');
+        return window._rcInstance.logOut();
+    };
+
+    window.rcCheckEntitlement = function(customerInfo, entitlementId) {
+        try {
+            var ent = customerInfo.entitlements.active[entitlementId];
+            return ent ? true : false;
+        } catch(e) { return false; }
+    };
+
+    window.rcGetProductId = function(customerInfo, entitlementId) {
+        try {
+            var ent = customerInfo.entitlements.active[entitlementId];
+            return ent ? (ent.productIdentifier || '') : '';
+        } catch(e) { return ''; }
+    };
+
+    window.rcGetExpiration = function(customerInfo, entitlementId) {
+        try {
+            var ent = customerInfo.entitlements.active[entitlementId];
+            if (ent && ent.expirationDate) return new Date(ent.expirationDate).getTime();
+            return 0;
+        } catch(e) { return 0; }
+    };
 </script>
 </body>
 </html>

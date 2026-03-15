@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+
+  <!-- magnifying glass -->
+  <path
+          android:strokeWidth="2"
+          android:strokeColor="#FFFFFF"
+          android:fillColor="#00000000"
+          android:pathData="M10.5,4 A6.5,6.5 0,1,0 10.5,17 A6.5,6.5 0,1,0 10.5,4z"/>
+  <path
+          android:strokeWidth="2.5"
+          android:strokeColor="#FFFFFF"
+          android:strokeLineCap="round"
+          android:pathData="M15.5,15.5 L20,20"/>
+
+  <!-- snake S-curve inside glass -->
+  <path
+          android:strokeWidth="2"
+          android:strokeColor="#FFFFFF"
+          android:fillColor="#00000000"
+          android:strokeLineCap="round"
+          android:pathData="M6.5,12.5 C8,9 9.5,14 11,10.5 C12.5,7 14,11 14.5,9"/>
+
+</vector>
