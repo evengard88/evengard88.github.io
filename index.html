@@ -2,121 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Measurer - Measure Snake Length from Photos</title>
-
-    <!-- SEO Meta Tags -->
     <meta name="description" content="Measure snake length accurately from photos using reference objects. Free, easy-to-use tool for reptile enthusiasts, breeders, and researchers.">
-    <meta name="keywords" content="snake measurer, snake length, reptile measurement, snake size, pet snake, ball python, boa constrictor">
+    <meta name="keywords" content="snake measurer, measure snake length, snake length from photo, reptile measurement tool, snake size calculator, ball python length, boa constrictor size, corn snake measurement, reference object measurement, pet snake growth tracker">
     <meta name="author" content="SerpWidgets">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://snakemeasurer.com/">
 
-    <!-- Theme Color -->
     <meta name="theme-color" content="#007AFF" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#0A84FF" media="(prefers-color-scheme: dark)">
-    <meta name="color-scheme" content="light dark">
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://snakemeasurer.com/">
     <meta property="og:title" content="Snake Measurer - Measure Snake Length from Photos">
     <meta property="og:description" content="Measure snake length accurately from photos using reference objects. Free tool for reptile enthusiasts.">
     <meta property="og:image" content="https://snakemeasurer.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Snake Measurer">
     <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ru_RU">
+    <meta property="og:locale:alternate" content="es_ES">
+    <meta property="og:locale:alternate" content="fr_FR">
+    <meta property="og:locale:alternate" content="de_DE">
+    <meta property="og:locale:alternate" content="pt_BR">
+    <meta property="og:locale:alternate" content="it_IT">
 
-    <!-- Twitter Card -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://snakemeasurer.com/">
     <meta name="twitter:title" content="Snake Measurer - Measure Snake Length from Photos">
-    <meta name="twitter:description" content="Measure snake length accurately from photos using reference objects. Free tool for reptile enthusiasts.">
+    <meta name="twitter:description" content="Measure snake length accurately from photos using reference objects.">
     <meta name="twitter:image" content="https://snakemeasurer.com/og-image.png">
 
-    <!-- Favicon & Icons -->
+    <!-- hreflang — single page with JS switching; x-default for all -->
+    <link rel="alternate" hreflang="x-default" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="en" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="ru" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="es" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="fr" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="de" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="pt" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="it" href="https://snakemeasurer.com/">
+
+    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
-
-    <!-- iOS PWA -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Snake Measurer">
-    <meta name="apple-itunes-app" content="app-id=000000000">
-
-    <!-- Telegram Web App SDK (no-op outside Telegram, ~20KB) -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <!-- RevenueCat Web Billing SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@revenuecat/purchases-js@latest/dist/purchases-js.min.js"></script>
-
-    <!-- GlitchTip Error Tracking (self-hosted, Sentry-compatible SDK, production only) -->
-    <script>
-        (function() {
-            if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
-            var s = document.createElement('script');
-            s.src = 'https://browser.sentry-cdn.com/9.20.0/bundle.tracing.min.js';
-            s.crossOrigin = 'anonymous';
-            s.onload = function() {
-                Sentry.init({
-                    dsn: 'https://YOUR_GLITCHTIP_KEY@snakemeasurer.app/glitchtip/1',
-                    environment: location.hostname === 'snakemeasurer.app' ? 'production' : 'staging',
-                    release: 'snake-measurer-web@0.10.0',
-                    tracesSampleRate: 0.2,
-                    allowUrls: [/snakemeasurer\.app/],
-                    ignoreErrors: [
-                        'ResizeObserver loop',
-                        'Non-Error promise rejection',
-                        'Load failed'
-                    ]
-                });
-            };
-            document.head.appendChild(s);
-        })();
-    </script>
-
-    <!-- Styles -->
-    <link type="text/css" rel="stylesheet" href="styles.css">
-
-    <!-- Structured Data (JSON-LD) for SEO -->
+    <!-- Structured Data: WebApplication -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Snake Measurer",
-        "description": "Measure snake length accurately from photos using reference objects. Free, easy-to-use tool for reptile enthusiasts, breeders, and researchers.",
+        "alternateName": ["Измеритель змей", "Medidor de Serpientes", "Mesureur de Serpents", "Schlangenmesser", "Medidor de Cobras", "Misuratore di Serpenti"],
+        "description": "Measure snake length accurately from photos using reference objects. Free tool for reptile enthusiasts, breeders, and researchers.",
         "url": "https://snakemeasurer.com/",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "150"
-        },
-        "author": {
-            "@type": "Organization",
-            "name": "SerpWidgets",
-            "url": "https://serpwidgets.app"
-        },
-        "browserRequirements": "Requires JavaScript. Works best in Chrome, Firefox, Safari, Edge.",
+        "browserRequirements": "Requires JavaScript and WebAssembly support.",
         "softwareVersion": "1.0.0",
+        "inLanguage": ["en", "ru", "es", "fr", "de", "pt", "it"],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Organization", "name": "SerpWidgets", "url": "https://serpwidgets.app" },
         "screenshot": "https://snakemeasurer.com/og-image.png",
-        "downloadUrl": [
-            "https://apps.apple.com/app/snake-measurer/id000000000",
-            "https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer"
-        ]
+        "featureList": "Measure snake length from photos, Multiple measurement units (cm/mm/m/in/ft), Reference object calibration, Measurement history, Works offline, Dark mode"
     }
     </script>
 
-    <!-- FAQ Structured Data -->
+    <!-- Structured Data: FAQ (for rich snippets) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -127,7 +84,7 @@
                 "name": "How does Snake Measurer work?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Upload a photo of your snake with a reference object (like a ruler or credit card). Mark the reference object and enter its size, then trace along your snake's body. The app calculates the real length based on the reference scale."
+                    "text": "Upload a photo of your snake with a reference object (ruler, credit card, etc.). Mark the reference, enter its size, then trace along your snake's body. The app uses the reference scale to calculate the real length."
                 }
             },
             {
@@ -135,15 +92,15 @@
                 "name": "What can I use as a reference object?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Any object with a known size works: a ruler, credit card (85.6mm), coin, or any item you can measure. Place it next to your snake in the photo for accurate measurements."
+                    "text": "Any object with a known size: a ruler, credit card (85.6 mm), coin, or anything you can measure. Place it next to your snake in the photo."
                 }
             },
             {
                 "@type": "Question",
-                "name": "How accurate is the measurement?",
+                "name": "How accurate is Snake Measurer?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Accuracy depends on photo quality, reference object placement, and how carefully you trace the snake. For best results, take a top-down photo with the snake fully stretched."
+                    "text": "Accuracy depends on photo quality, reference placement, and tracing precision. For best results, take a top-down photo with the snake fully visible and the reference object nearby."
                 }
             },
             {
@@ -151,7 +108,7 @@
                 "name": "Is Snake Measurer free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes! Snake Measurer is free to use with basic features. Premium features are available for advanced users who need unlimited measurements and cloud storage."
+                    "text": "Yes! Snake Measurer is free with all core features including measuring, multiple units, and offline support. Premium options are available for cloud sync and unlimited history."
                 }
             }
         ]
@@ -159,531 +116,687 @@
     </script>
 
     <script>
-        // Detect Telegram Web App environment
-        window._isTelegram = !!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData);
-
-        // Determine theme before rendering loader
         (function() {
-            var tg = window._isTelegram ? window.Telegram.WebApp : null;
-            var isDark;
-
-            if (tg) {
-                // Use Telegram's theme
-                isDark = tg.colorScheme === 'dark';
-                // Save so Kotlin picks it up
-                localStorage.setItem('snake_measurer_theme', isDark ? 'DARK' : 'LIGHT');
-            } else {
-                var savedTheme = localStorage.getItem('snake_measurer_theme');
-                isDark = savedTheme === 'DARK' ||
-                    (savedTheme !== 'LIGHT' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            }
-
-            if (isDark) {
-                document.documentElement.classList.add('theme-dark');
-            }
+            var saved = localStorage.getItem('landing_theme');
+            var dark = saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (dark) document.documentElement.classList.add('dark');
         })();
     </script>
+
     <style>
-        #loader {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #f8f8fa;
-            z-index: 9999;
-            transition: opacity 0.4s ease;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        /* ── Reset & Base ── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
         }
-        .theme-dark #loader { background: #1c1c1e; }
-        .theme-dark #loader .loader-title { color: #f2f2f7; }
-        .theme-dark #loader .loader-subtitle { color: #98989f; }
-        .theme-dark #loader .loader-bar-bg { background: #2c2c2e; }
-        .theme-dark #loader .loader-bar-fill { background: linear-gradient(90deg, #0A84FF, #BF5AF2); }
-        .loader-icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 24px;
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ── Theme Variables ── */
+        :root {
+            --bg: #F2F2F7;
+            --bg-card: #FFFFFF;
+            --text: #1C1C1E;
+            --text-sec: #636366;
+            --accent: #AF52DE;
+            --accent-h: #9B3DC8;
+            --accent2: #007AFF;
+            --border: #E5E5EA;
+            --hero-g1: rgba(175, 82, 222, 0.06);
+            --hero-g2: rgba(0, 122, 255, 0.06);
+            --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --icon-bg: rgba(175, 82, 222, 0.1);
         }
-        .loader-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1c1c1e;
-            margin: 0 0 6px;
+        .dark {
+            --bg: #000000;
+            --bg-card: #1C1C1E;
+            --text: #FFFFFF;
+            --text-sec: #98989F;
+            --accent: #BF5AF2;
+            --accent-h: #D17BF7;
+            --accent2: #0A84FF;
+            --border: #38383A;
+            --hero-g1: rgba(191, 90, 242, 0.08);
+            --hero-g2: rgba(10, 132, 255, 0.08);
+            --card-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            --icon-bg: rgba(191, 90, 242, 0.15);
         }
-        .loader-subtitle {
-            font-size: 14px;
-            color: #8e8e93;
-            margin: 0 0 28px;
+
+        /* ── Layout ── */
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── Header ── */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--bg); border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
         }
-        .loader-bar-bg {
-            width: 200px;
-            height: 4px;
-            border-radius: 2px;
-            background: #e5e5ea;
-            overflow: hidden;
+        .header-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 56px; max-width: 1080px; margin: 0 auto; padding: 0 24px;
         }
-        .loader-bar-fill {
-            height: 100%;
-            border-radius: 2px;
-            background: linear-gradient(90deg, #007AFF, #AF52DE);
-            animation: loader-progress 2.5s ease-in-out infinite;
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; color: var(--text); }
+        .logo img { width: 32px; height: 32px; border-radius: 8px; }
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .lang-select {
+            background: var(--bg-card); color: var(--text); border: 1px solid var(--border);
+            border-radius: 8px; padding: 6px 10px; font-size: 14px; cursor: pointer;
+            -webkit-appearance: none; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23636366'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 8px center; padding-right: 26px;
         }
-        @keyframes loader-progress {
-            0%   { width: 0%; transform: translateX(0); }
-            50%  { width: 70%; }
-            100% { width: 100%; }
+        .theme-btn {
+            background: none; border: 1px solid var(--border); border-radius: 8px;
+            width: 36px; height: 36px; cursor: pointer; font-size: 18px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text); transition: background 0.2s;
         }
-        #loader.fade-out {
-            opacity: 0;
+        .theme-btn:hover { background: var(--border); }
+        .header-cta {
+            background: var(--accent); color: #fff; border: none; border-radius: 10px;
+            padding: 8px 18px; font-size: 14px; font-weight: 600; cursor: pointer;
+            transition: background 0.2s; text-decoration: none;
+        }
+        .header-cta:hover { background: var(--accent-h); text-decoration: none; }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative; text-align: center;
+            padding: 80px 24px 64px; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, var(--hero-g1) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 30%, var(--hero-g2) 0%, transparent 60%);
             pointer-events: none;
+        }
+        .hero-icon { width: 88px; height: 88px; border-radius: 22px; margin-bottom: 24px; position: relative; }
+        .hero h1 {
+            font-size: 40px; font-weight: 800; line-height: 1.15;
+            letter-spacing: -0.5px; margin-bottom: 16px; position: relative;
+        }
+        .hero p { font-size: 18px; color: var(--text-sec); max-width: 560px; margin: 0 auto 32px; position: relative; }
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--accent); color: #fff; border: none; border-radius: 14px;
+            padding: 16px 36px; font-size: 17px; font-weight: 700; cursor: pointer;
+            transition: background 0.2s, transform 0.15s; position: relative;
+            text-decoration: none;
+        }
+        .hero-cta:hover { background: var(--accent-h); transform: translateY(-1px); text-decoration: none; }
+        .hero-cta svg { width: 20px; height: 20px; }
+        .hero-stores { margin-top: 20px; font-size: 14px; color: var(--text-sec); position: relative; }
+        .hero-stores a { color: var(--accent2); font-weight: 600; }
+
+        /* ── Section shared ── */
+        section { padding: 64px 0; }
+        .section-title {
+            text-align: center; font-size: 30px; font-weight: 800;
+            margin-bottom: 48px; letter-spacing: -0.3px;
+        }
+
+        /* ── Steps ── */
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .step { text-align: center; }
+        .step-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px; border-radius: 50%;
+            background: var(--accent); color: #fff;
+            font-size: 20px; font-weight: 800; margin-bottom: 16px;
+        }
+        .step-icon {
+            display: flex; align-items: center; justify-content: center;
+            width: 56px; height: 56px; border-radius: 16px;
+            background: var(--icon-bg); margin: 0 auto 12px; color: var(--accent);
+        }
+        .step-icon svg { width: 28px; height: 28px; }
+        .step h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .step p { font-size: 15px; color: var(--text-sec); line-height: 1.5; }
+
+        /* ── Features ── */
+        .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .feature-card {
+            background: var(--bg-card); border-radius: 16px;
+            padding: 28px; box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .dark .feature-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .feature-icon {
+            display: flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px; border-radius: 14px;
+            background: var(--icon-bg); margin-bottom: 16px; color: var(--accent);
+        }
+        .feature-icon svg { width: 24px; height: 24px; }
+        .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+        .feature-card p { font-size: 15px; color: var(--text-sec); line-height: 1.5; }
+
+        /* ── FAQ ── */
+        .faq-list { max-width: 720px; margin: 0 auto; }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+        .faq-q {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; padding: 20px 0; background: none; border: none;
+            font-size: 16px; font-weight: 600; color: var(--text);
+            cursor: pointer; text-align: left; line-height: 1.4;
+            font-family: inherit;
+        }
+        .faq-q::after {
+            content: '+'; font-size: 22px; font-weight: 400; color: var(--text-sec);
+            transition: transform 0.3s; flex-shrink: 0; margin-left: 16px;
+        }
+        .faq-item.open .faq-q::after { content: '\2212'; }
+        .faq-a {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+        }
+        .faq-item.open .faq-a { max-height: 300px; }
+        .faq-a p { font-size: 15px; color: var(--text-sec); line-height: 1.6; padding-bottom: 20px; }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 0; text-align: center;
+            font-size: 14px; color: var(--text-sec);
+        }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 12px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-sec); }
+        .footer-links a:hover { color: var(--accent); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero { padding: 56px 20px 48px; }
+            .hero h1 { font-size: 28px; }
+            .hero p { font-size: 16px; }
+            .hero-cta { padding: 14px 28px; font-size: 16px; }
+            .section-title { font-size: 24px; margin-bottom: 32px; }
+            .steps-grid { grid-template-columns: 1fr; gap: 28px; }
+            .features-grid { grid-template-columns: 1fr; gap: 16px; }
+            .header-cta span { display: none; }
+            .header-cta { padding: 8px 12px; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 24px; }
+            .hero-icon { width: 72px; height: 72px; border-radius: 18px; }
         }
     </style>
 </head>
-<body style="background: #f8f8fa;">
-<script>
-    // Match body background to loader theme
-    if (document.documentElement.classList.contains('theme-dark')) {
-        document.body.style.background = '#1c1c1e';
-    }
-</script>
+<body>
 
-<!-- Unsupported browser fallback (no WASM / in-app WebView) -->
-<script>
-(function() {
-    var supported = typeof WebAssembly === 'object' && typeof WebAssembly.instantiate === 'function';
-    if (supported) return;
-
-    // Detect platform for store links
-    var ua = navigator.userAgent || '';
-    var isAndroid = /android/i.test(ua);
-    var isIOS = /iphone|ipad|ipod/i.test(ua);
-    var isDark = document.documentElement.classList.contains('theme-dark');
-
-    var playStoreUrl = 'https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer';
-    var appStoreUrl = 'https://apps.apple.com/app/snake-measurer/id000000000';
-
-    // Try to open in system browser (works in Telegram, some other in-app browsers)
-    var currentUrl = window.location.href;
-    var openInBrowserUrl = isAndroid
-        ? 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;end'
-        : currentUrl;
-
-    var bg = isDark ? '#1c1c1e' : '#f8f8fa';
-    var textColor = isDark ? '#f2f2f7' : '#1c1c1e';
-    var subtitleColor = isDark ? '#98989f' : '#8e8e93';
-    var btnBg = '#AF52DE';
-    var btnSecondaryBg = isDark ? '#2c2c2e' : '#e5e5ea';
-    var btnSecondaryColor = isDark ? '#f2f2f7' : '#1c1c1e';
-
-    var storeButton = '';
-    if (isAndroid) {
-        storeButton = '<a href="' + playStoreUrl + '" style="display:block;width:100%;max-width:280px;padding:14px 20px;background:' + btnBg + ';color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;text-align:center;box-sizing:border-box;">Download from Google Play</a>';
-    } else if (isIOS) {
-        storeButton = '<a href="' + appStoreUrl + '" style="display:block;width:100%;max-width:280px;padding:14px 20px;background:' + btnBg + ';color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;text-align:center;box-sizing:border-box;">Download from App Store</a>';
-    }
-
-    var openBrowserButton = '<a href="' + openInBrowserUrl + '" style="display:block;width:100%;max-width:280px;padding:14px 20px;background:' + btnSecondaryBg + ';color:' + btnSecondaryColor + ';border:none;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;text-align:center;box-sizing:border-box;">'
-        + (isAndroid ? 'Open in Chrome' : isIOS ? 'Open in Safari' : 'Open in Browser')
-        + '</a>';
-
-    document.body.style.background = bg;
-    document.body.innerHTML =
-        '<div style="position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;text-align:center;">' +
-            '<img src="icon-192.png" alt="Snake Measurer" style="width:80px;height:80px;margin-bottom:24px;" />' +
-            '<p style="font-size:22px;font-weight:700;color:' + textColor + ';margin:0 0 8px;">Snake Measurer</p>' +
-            '<p style="font-size:14px;color:' + subtitleColor + ';margin:0 0 32px;max-width:300px;line-height:1.5;">This browser doesn\'t support the app. Please open in a regular browser or download the app.</p>' +
-            '<div style="display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;">' +
-                storeButton +
-                openBrowserButton +
-            '</div>' +
-        '</div>';
-})();
-</script>
-
-<!-- Loading screen -->
-<div id="loader">
-    <!-- Snake icon -->
-    <img class="loader-icon" src="icon-192.png" alt="Snake Measurer" />
-    <p class="loader-title">Snake Measurer</p>
-    <p class="loader-subtitle">Loading app...</p>
-    <div class="loader-bar-bg">
-        <div class="loader-bar-fill"></div>
+<!-- Header -->
+<header>
+    <div class="header-inner">
+        <div class="logo">
+            <img src="icon-192.png" alt="Snake Measurer" width="32" height="32">
+            <span data-t="app_name">Snake Measurer</span>
+        </div>
+        <div class="header-actions">
+            <select class="lang-select" id="langSelect" aria-label="Language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="pt">Português</option>
+                <option value="it">Italiano</option>
+            </select>
+            <button class="theme-btn" id="themeBtn" aria-label="Toggle theme"></button>
+            <a href="/app/" class="header-cta"><span data-t="nav_cta">Open App</span> &rarr;</a>
+        </div>
     </div>
-</div>
+</header>
 
-<!-- Native login form created dynamically to avoid Compose DOM interference -->
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <img class="hero-icon" src="icon-192.png" alt="Snake Measurer" width="88" height="88">
+        <h1 data-t="hero_title">Measure Your Snake's Length from Photos</h1>
+        <p data-t="hero_sub">Accurate measurements using reference objects. Free, easy, works on any device.</p>
+        <a href="/app/" class="hero-cta">
+            <span data-t="hero_cta">Open App</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <p class="hero-stores">
+            <span data-t="hero_also">Also available on</span>
+            <a href="https://apps.apple.com/app/snake-measurer/id000000000">App Store</a> &middot;
+            <a href="https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer">Google Play</a>
+        </p>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works">
+    <div class="container">
+        <h2 class="section-title" data-t="how_title">How It Works</h2>
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </div>
+                <h3 data-t="s1_title">Upload a Photo</h3>
+                <p data-t="s1_desc">Take a photo of your snake next to a reference object like a ruler or credit card.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="22" height="12" rx="1"/><line x1="4" y1="6" x2="4" y2="10"/><line x1="8" y1="6" x2="8" y2="12"/><line x1="12" y1="6" x2="12" y2="10"/><line x1="16" y1="6" x2="16" y2="12"/><line x1="20" y1="6" x2="20" y2="10"/></svg>
+                </div>
+                <h3 data-t="s2_title">Set the Reference</h3>
+                <p data-t="s2_desc">Mark two points on the reference object and enter its known size.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <h3 data-t="s3_title">Measure the Snake</h3>
+                <p data-t="s3_desc">Trace points along your snake's body. The app calculates the real length instantly.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="features">
+    <div class="container">
+        <h2 class="section-title" data-t="feat_title">Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <h3 data-t="f1_title">Precise Measurements</h3>
+                <p data-t="f1_desc">Pixel-accurate calculations based on reference object scale.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+                </div>
+                <h3 data-t="f2_title">Multiple Units</h3>
+                <p data-t="f2_desc">Centimeters, millimeters, meters, inches, or feet — your choice.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><polyline points="9.5 14.5 11 16 14.5 12.5"/></svg>
+                </div>
+                <h3 data-t="f3_title">Works Offline</h3>
+                <p data-t="f3_desc">No internet needed after loading. Your data stays on your device.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3 data-t="f4_title">Save &amp; Compare</h3>
+                <p data-t="f4_desc">Save measurements and track your snake's growth over time.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+    <div class="container">
+        <h2 class="section-title" data-t="faq_title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-q" data-t="q1">How does Snake Measurer work?</button>
+                <div class="faq-a"><p data-t="a1">Upload a photo of your snake with a reference object (ruler, credit card, etc.). Mark the reference, enter its size, then trace along your snake's body. The app uses the reference scale to calculate the real length.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" data-t="q2">What can I use as a reference object?</button>
+                <div class="faq-a"><p data-t="a2">Any object with a known size: a ruler, credit card (85.6 mm), coin, or anything you can measure. Place it next to your snake in the photo.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" data-t="q3">How accurate is it?</button>
+                <div class="faq-a"><p data-t="a3">Accuracy depends on photo quality, reference placement, and tracing precision. For best results, take a top-down photo with the snake fully visible and the reference object nearby.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" data-t="q4">Is it free?</button>
+                <div class="faq-a"><p data-t="a4">Yes! Snake Measurer is free with all core features. Premium options are available for users who need cloud sync and unlimited history.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="#" id="privacyLink" data-t="privacy">Privacy Policy</a>
+            <a href="#" id="termsLink" data-t="terms">Terms of Use</a>
+        </div>
+        <p>&copy; 2026 SerpWidgets. All rights reserved.</p>
+    </div>
+</footer>
+
 <script>
 (function() {
-    var overlay, form, emailInput, passwordInput, titleEl, submitBtn, toggleLink, forgotLink, closeBtn, errorDiv;
-    var isCreate = false;
-    var built = false;
-
-    function buildForm() {
-        if (built) return;
-        built = true;
-
-        overlay = document.createElement('div');
-        overlay.id = 'nativeLoginOverlay';
-        overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;width:' + window.innerWidth + 'px;height:' + window.innerHeight + 'px;background:rgba(0,0,0,0.5);z-index:2147483647;display:none;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;';
-
-        overlay.innerHTML =
-            '<form id="nativeLoginForm" autocomplete="on" style="border-radius:16px;padding:24px;width:90%;max-width:400px;box-sizing:border-box;">' +
-                '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">' +
-                    '<h2 id="nativeLoginTitle" style="margin:0;font-size:18px;">Sign In</h2>' +
-                    '<button type="button" id="nativeLoginClose" style="background:none;border:none;font-size:22px;cursor:pointer;color:#8e8e93;padding:4px 8px;">&times;</button>' +
-                '</div>' +
-                '<div id="nativeLoginError" style="display:none;border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:14px;text-align:center;"></div>' +
-                '<input id="nativeLoginEmail" type="email" name="email" autocomplete="username" placeholder="Email" required ' +
-                    'style="display:block;width:100%;padding:12px;margin-bottom:12px;border-radius:12px;font-size:16px;box-sizing:border-box;outline:none;">' +
-                '<input id="nativeLoginPassword" type="password" name="password" autocomplete="current-password" placeholder="Password" required ' +
-                    'style="display:block;width:100%;padding:12px;margin-bottom:16px;border-radius:12px;font-size:16px;box-sizing:border-box;outline:none;">' +
-                '<button type="submit" id="nativeLoginSubmit" style="display:block;width:100%;padding:14px;background:#AF52DE;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;">Sign In</button>' +
-                '<div style="display:flex;justify-content:space-between;margin-top:12px;">' +
-                    '<a href="#" id="nativeLoginToggle" style="font-size:13px;color:#AF52DE;text-decoration:none;">No account? Create one</a>' +
-                    '<a href="#" id="nativeLoginForgot" style="font-size:13px;color:#8e8e93;text-decoration:none;">Forgot password?</a>' +
-                '</div>' +
-            '</form>';
-
-        document.documentElement.appendChild(overlay);
-
-        form = overlay.querySelector('#nativeLoginForm');
-        emailInput = overlay.querySelector('#nativeLoginEmail');
-        passwordInput = overlay.querySelector('#nativeLoginPassword');
-        titleEl = overlay.querySelector('#nativeLoginTitle');
-        submitBtn = overlay.querySelector('#nativeLoginSubmit');
-        toggleLink = overlay.querySelector('#nativeLoginToggle');
-        forgotLink = overlay.querySelector('#nativeLoginForgot');
-        closeBtn = overlay.querySelector('#nativeLoginClose');
-        errorDiv = overlay.querySelector('#nativeLoginError');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var email = emailInput.value;
-            var password = passwordInput.value;
-            if (email && password) {
-                if (isCreate && window._nativeLoginOnCreateAccount) {
-                    window._nativeLoginOnCreateAccount(email, password);
-                } else if (window._nativeLoginOnSubmit) {
-                    window._nativeLoginOnSubmit(email, password);
-                }
-            }
-        });
-
-        toggleLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            errorDiv.style.display = 'none';
-            updateMode(!isCreate);
-        });
-
-        forgotLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            var email = emailInput.value;
-            if (window._nativeLoginOnForgotPassword) {
-                window._nativeLoginOnForgotPassword(email);
-            }
-        });
-
-        closeBtn.addEventListener('click', function() {
-            window.hideNativeLoginForm();
-            if (window._nativeLoginOnDismiss) window._nativeLoginOnDismiss();
-        });
-
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                window.hideNativeLoginForm();
-                if (window._nativeLoginOnDismiss) window._nativeLoginOnDismiss();
-            }
-        });
-    }
-
-    function updateMode(createMode) {
-        isCreate = createMode;
-        titleEl.textContent = isCreate ? 'Create Account' : 'Sign In';
-        submitBtn.textContent = isCreate ? 'Create Account' : 'Sign In';
-        passwordInput.autocomplete = isCreate ? 'new-password' : 'current-password';
-        toggleLink.textContent = isCreate ? 'Already have an account? Sign in' : 'No account? Create one';
-        forgotLink.style.display = isCreate ? 'none' : '';
-    }
-
-    function applyTheme(isDark) {
-        // Colors matching AppTheme.kt
-        var bg = isDark ? '#2c2c2e' : '#fff';
-        var textColor = isDark ? '#fff' : '#000';
-        var inputBg = isDark ? '#1c1c1e' : '#fff';
-        var inputColor = isDark ? '#fff' : '#000';
-        var inputBorder = isDark ? '#48484a' : '#d1d1d6';
-        var errBg = isDark ? '#3a1c1c' : '#ffe0e0';
-        var errColor = isDark ? '#ff6b6b' : '#c00';
-        var snake = isDark ? '#BF5AF2' : '#AF52DE';
-
-        form.style.background = bg;
-        titleEl.style.color = textColor;
-        emailInput.style.background = inputBg;
-        emailInput.style.color = inputColor;
-        emailInput.style.border = '1px solid ' + inputBorder;
-        passwordInput.style.background = inputBg;
-        passwordInput.style.color = inputColor;
-        passwordInput.style.border = '1px solid ' + inputBorder;
-        errorDiv.style.background = errBg;
-        errorDiv.style.color = errColor;
-        submitBtn.style.background = snake;
-        toggleLink.style.color = snake;
-    }
-
-    function setCanvasPointerEvents(enabled) {
-        var canvas = document.querySelector('canvas');
-        if (canvas) canvas.style.pointerEvents = enabled ? 'auto' : 'none';
-    }
-
-    window.showNativeLoginForm = function(mode, isDark) {
-        buildForm();
-        applyTheme(isDark);
-        updateMode(mode === 'create');
-        emailInput.value = '';
-        passwordInput.value = '';
-        errorDiv.style.display = 'none';
-        overlay.style.display = 'flex';
-        setCanvasPointerEvents(false);
-
-        setTimeout(function() { emailInput.focus(); }, 50);
-    };
-
-    window.hideNativeLoginForm = function() {
-        if (overlay) overlay.style.display = 'none';
-        setCanvasPointerEvents(true);
-    };
-
-    window.showNativeLoginError = function(msg) {
-        if (errorDiv) {
-            errorDiv.textContent = msg;
-            errorDiv.style.display = msg ? 'block' : 'none';
+    /* ── Translations ── */
+    var L = {
+        en: {
+            app_name: "Snake Measurer",
+            meta_keywords: "snake measurer, measure snake length, snake length from photo, reptile measurement tool, snake size calculator, ball python length, boa constrictor size, corn snake measurement, reference object measurement, pet snake growth tracker, how to measure a snake, snake length app, reptile care tools",
+            nav_cta: "Open App",
+            hero_title: "Measure Your Snake's Length from Photos",
+            hero_sub: "Accurate measurements using reference objects. Free, easy, works on any device.",
+            hero_cta: "Open App",
+            hero_also: "Also available on",
+            how_title: "How It Works",
+            s1_title: "Upload a Photo",
+            s1_desc: "Take a photo of your snake next to a reference object like a ruler or credit card.",
+            s2_title: "Set the Reference",
+            s2_desc: "Mark two points on the reference object and enter its known size.",
+            s3_title: "Measure the Snake",
+            s3_desc: "Trace points along your snake's body. The app calculates the real length instantly.",
+            feat_title: "Features",
+            f1_title: "Precise Measurements",
+            f1_desc: "Pixel-accurate calculations based on reference object scale.",
+            f2_title: "Multiple Units",
+            f2_desc: "Centimeters, millimeters, meters, inches, or feet \u2014 your choice.",
+            f3_title: "Works Offline",
+            f3_desc: "No internet needed after loading. Your data stays on your device.",
+            f4_title: "Save & Compare",
+            f4_desc: "Save measurements and track your snake\u2019s growth over time.",
+            faq_title: "Frequently Asked Questions",
+            q1: "How does Snake Measurer work?",
+            a1: "Upload a photo of your snake with a reference object (ruler, credit card, etc.). Mark the reference, enter its size, then trace along your snake\u2019s body. The app uses the reference scale to calculate the real length.",
+            q2: "What can I use as a reference object?",
+            a2: "Any object with a known size: a ruler, credit card (85.6\u00a0mm), coin, or anything you can measure. Place it next to your snake in the photo.",
+            q3: "How accurate is it?",
+            a3: "Accuracy depends on photo quality, reference placement, and tracing precision. For best results, take a top-down photo with the snake fully visible and the reference object nearby.",
+            q4: "Is it free?",
+            a4: "Yes! Snake Measurer is free with all core features. Premium options are available for users who need cloud sync and unlimited history.",
+            privacy: "Privacy Policy",
+            terms: "Terms of Use"
+        },
+        ru: {
+            app_name: "\u0418\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0437\u043c\u0435\u0439",
+            meta_keywords: "\u0438\u0437\u043c\u0435\u0440\u0438\u0442\u044c \u0434\u043b\u0438\u043d\u0443 \u0437\u043c\u0435\u0438, \u0438\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0437\u043c\u0435\u0439, \u0434\u043b\u0438\u043d\u0430 \u0437\u043c\u0435\u0438 \u043f\u043e \u0444\u043e\u0442\u043e, \u043a\u0430\u043a \u0438\u0437\u043c\u0435\u0440\u0438\u0442\u044c \u0437\u043c\u0435\u044e, \u0440\u0430\u0437\u043c\u0435\u0440 \u0437\u043c\u0435\u0438, \u043f\u0438\u0442\u043e\u043d \u0434\u043b\u0438\u043d\u0430, \u0443\u0434\u0430\u0432 \u0440\u0430\u0437\u043c\u0435\u0440, \u043a\u043e\u0440\u043e\u043b\u0435\u0432\u0441\u043a\u0438\u0439 \u043f\u0438\u0442\u043e\u043d, \u043c\u043e\u043b\u043e\u0447\u043d\u0430\u044f \u0437\u043c\u0435\u044f, \u0440\u043e\u0441\u0442 \u0437\u043c\u0435\u0438, \u0442\u0435\u0440\u0440\u0430\u0440\u0438\u0443\u043c\u043d\u044b\u0435 \u0436\u0438\u0432\u043e\u0442\u043d\u044b\u0435, \u0441\u043e\u0434\u0435\u0440\u0436\u0430\u043d\u0438\u0435 \u0437\u043c\u0435\u0439, \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u0435 \u0440\u0435\u043f\u0442\u0438\u043b\u0438\u0439",
+            nav_cta: "\u041e\u0442\u043a\u0440\u044b\u0442\u044c",
+            hero_title: "\u0418\u0437\u043c\u0435\u0440\u044f\u0439\u0442\u0435 \u0434\u043b\u0438\u043d\u0443 \u0437\u043c\u0435\u0438 \u043f\u043e \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0438",
+            hero_sub: "\u0422\u043e\u0447\u043d\u044b\u0435 \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e \u044d\u0442\u0430\u043b\u043e\u043d\u043d\u044b\u0445 \u043e\u0431\u044a\u0435\u043a\u0442\u043e\u0432. \u0411\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e, \u043f\u0440\u043e\u0441\u0442\u043e, \u043d\u0430 \u043b\u044e\u0431\u043e\u043c \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u0435.",
+            hero_cta: "\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+            hero_also: "\u0422\u0430\u043a\u0436\u0435 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e \u043d\u0430",
+            how_title: "\u041a\u0430\u043a \u044d\u0442\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442",
+            s1_title: "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u0435 \u0444\u043e\u0442\u043e",
+            s1_desc: "\u0421\u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0440\u0443\u0439\u0442\u0435 \u0437\u043c\u0435\u044e \u0440\u044f\u0434\u043e\u043c \u0441 \u044d\u0442\u0430\u043b\u043e\u043d\u043d\u044b\u043c \u043e\u0431\u044a\u0435\u043a\u0442\u043e\u043c \u2014 \u043b\u0438\u043d\u0435\u0439\u043a\u043e\u0439 \u0438\u043b\u0438 \u0431\u0430\u043d\u043a\u043e\u0432\u0441\u043a\u043e\u0439 \u043a\u0430\u0440\u0442\u043e\u0439.",
+            s2_title: "\u0423\u043a\u0430\u0436\u0438\u0442\u0435 \u044d\u0442\u0430\u043b\u043e\u043d",
+            s2_desc: "\u041e\u0442\u043c\u0435\u0442\u044c\u0442\u0435 \u0434\u0432\u0435 \u0442\u043e\u0447\u043a\u0438 \u043d\u0430 \u044d\u0442\u0430\u043b\u043e\u043d\u043d\u043e\u043c \u043e\u0431\u044a\u0435\u043a\u0442\u0435 \u0438 \u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0435\u0433\u043e \u0440\u0430\u0437\u043c\u0435\u0440.",
+            s3_title: "\u0418\u0437\u043c\u0435\u0440\u044c\u0442\u0435 \u0437\u043c\u0435\u044e",
+            s3_desc: "\u0420\u0430\u0441\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u0442\u043e\u0447\u043a\u0438 \u0432\u0434\u043e\u043b\u044c \u0442\u0435\u043b\u0430 \u0437\u043c\u0435\u0438. \u041f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u043c\u0433\u043d\u043e\u0432\u0435\u043d\u043d\u043e \u0440\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u0435\u0442 \u0440\u0435\u0430\u043b\u044c\u043d\u0443\u044e \u0434\u043b\u0438\u043d\u0443.",
+            feat_title: "\u0412\u043e\u0437\u043c\u043e\u0436\u043d\u043e\u0441\u0442\u0438",
+            f1_title: "\u0422\u043e\u0447\u043d\u044b\u0435 \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f",
+            f1_desc: "\u0420\u0430\u0441\u0447\u0451\u0442\u044b \u0441 \u0442\u043e\u0447\u043d\u043e\u0441\u0442\u044c\u044e \u0434\u043e \u043f\u0438\u043a\u0441\u0435\u043b\u044f \u043d\u0430 \u043e\u0441\u043d\u043e\u0432\u0435 \u043c\u0430\u0441\u0448\u0442\u0430\u0431\u0430 \u044d\u0442\u0430\u043b\u043e\u043d\u0430.",
+            f2_title: "\u0420\u0430\u0437\u043d\u044b\u0435 \u0435\u0434\u0438\u043d\u0438\u0446\u044b",
+            f2_desc: "\u0421\u0430\u043d\u0442\u0438\u043c\u0435\u0442\u0440\u044b, \u043c\u0438\u043b\u043b\u0438\u043c\u0435\u0442\u0440\u044b, \u043c\u0435\u0442\u0440\u044b, \u0434\u044e\u0439\u043c\u044b \u0438\u043b\u0438 \u0444\u0443\u0442\u044b \u2014 \u043d\u0430 \u0432\u0430\u0448 \u0432\u044b\u0431\u043e\u0440.",
+            f3_title: "\u0420\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u043e\u0444\u043b\u0430\u0439\u043d",
+            f3_desc: "\u0418\u043d\u0442\u0435\u0440\u043d\u0435\u0442 \u043d\u0435 \u043d\u0443\u0436\u0435\u043d \u043f\u043e\u0441\u043b\u0435 \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438. \u0414\u0430\u043d\u043d\u044b\u0435 \u043e\u0441\u0442\u0430\u044e\u0442\u0441\u044f \u043d\u0430 \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u0435.",
+            f4_title: "\u0421\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0435 \u0438 \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435",
+            f4_desc: "\u0421\u043e\u0445\u0440\u0430\u043d\u044f\u0439\u0442\u0435 \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f \u0438 \u043e\u0442\u0441\u043b\u0435\u0436\u0438\u0432\u0430\u0439\u0442\u0435 \u0440\u043e\u0441\u0442 \u0437\u043c\u0435\u0438 \u0441\u043e \u0432\u0440\u0435\u043c\u0435\u043d\u0435\u043c.",
+            faq_title: "\u0427\u0430\u0441\u0442\u043e \u0437\u0430\u0434\u0430\u0432\u0430\u0435\u043c\u044b\u0435 \u0432\u043e\u043f\u0440\u043e\u0441\u044b",
+            q1: "\u041a\u0430\u043a \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u0418\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0437\u043c\u0435\u0439?",
+            a1: "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u0435 \u0444\u043e\u0442\u043e \u0437\u043c\u0435\u0438 \u0441 \u044d\u0442\u0430\u043b\u043e\u043d\u043d\u044b\u043c \u043e\u0431\u044a\u0435\u043a\u0442\u043e\u043c (\u043b\u0438\u043d\u0435\u0439\u043a\u0430, \u043a\u0430\u0440\u0442\u0430 \u0438 \u0442.\u0434.). \u041e\u0442\u043c\u0435\u0442\u044c\u0442\u0435 \u044d\u0442\u0430\u043b\u043e\u043d, \u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0440\u0430\u0437\u043c\u0435\u0440, \u0437\u0430\u0442\u0435\u043c \u0440\u0430\u0441\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u0442\u043e\u0447\u043a\u0438 \u0432\u0434\u043e\u043b\u044c \u0442\u0435\u043b\u0430 \u0437\u043c\u0435\u0438. \u041f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u0440\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u0435\u0442 \u0440\u0435\u0430\u043b\u044c\u043d\u0443\u044e \u0434\u043b\u0438\u043d\u0443.",
+            q2: "\u0427\u0442\u043e \u043c\u043e\u0436\u043d\u043e \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u0432 \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0435 \u044d\u0442\u0430\u043b\u043e\u043d\u0430?",
+            a2: "\u041b\u044e\u0431\u043e\u0439 \u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u0441 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u043c \u0440\u0430\u0437\u043c\u0435\u0440\u043e\u043c: \u043b\u0438\u043d\u0435\u0439\u043a\u0430, \u0431\u0430\u043d\u043a\u043e\u0432\u0441\u043a\u0430\u044f \u043a\u0430\u0440\u0442\u0430 (85,6\u00a0\u043c\u043c), \u043c\u043e\u043d\u0435\u0442\u0430 \u0438\u043b\u0438 \u043b\u044e\u0431\u043e\u0439 \u0438\u0437\u043c\u0435\u0440\u0438\u043c\u044b\u0439 \u043f\u0440\u0435\u0434\u043c\u0435\u0442. \u041f\u043e\u043b\u043e\u0436\u0438\u0442\u0435 \u0435\u0433\u043e \u0440\u044f\u0434\u043e\u043c \u0441\u043e \u0437\u043c\u0435\u0451\u0439 \u043d\u0430 \u0444\u043e\u0442\u043e.",
+            q3: "\u041d\u0430\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u044d\u0442\u043e \u0442\u043e\u0447\u043d\u043e?",
+            a3: "\u0422\u043e\u0447\u043d\u043e\u0441\u0442\u044c \u0437\u0430\u0432\u0438\u0441\u0438\u0442 \u043e\u0442 \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0430 \u0444\u043e\u0442\u043e, \u0440\u0430\u0441\u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0438\u044f \u044d\u0442\u0430\u043b\u043e\u043d\u0430 \u0438 \u0442\u043e\u0447\u043d\u043e\u0441\u0442\u0438 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u0438. \u0414\u043b\u044f \u043b\u0443\u0447\u0448\u0438\u0445 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432 \u0441\u0434\u0435\u043b\u0430\u0439\u0442\u0435 \u0444\u043e\u0442\u043e \u0441\u0432\u0435\u0440\u0445\u0443 \u0441 \u043f\u043e\u043b\u043d\u043e\u0441\u0442\u044c\u044e \u0432\u0438\u0434\u0438\u043c\u043e\u0439 \u0437\u043c\u0435\u0451\u0439.",
+            q4: "\u042d\u0442\u043e \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e?",
+            a4: "\u0414\u0430! \u0418\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0437\u043c\u0435\u0439 \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u0435\u043d \u0441\u043e \u0432\u0441\u0435\u043c\u0438 \u043e\u0441\u043d\u043e\u0432\u043d\u044b\u043c\u0438 \u0444\u0443\u043d\u043a\u0446\u0438\u044f\u043c\u0438. \u041f\u0440\u0435\u043c\u0438\u0443\u043c-\u043e\u043f\u0446\u0438\u0438 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b \u0434\u043b\u044f \u043e\u0431\u043b\u0430\u0447\u043d\u043e\u0439 \u0441\u0438\u043d\u0445\u0440\u043e\u043d\u0438\u0437\u0430\u0446\u0438\u0438 \u0438 \u043d\u0435\u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0439 \u0438\u0441\u0442\u043e\u0440\u0438\u0438.",
+            privacy: "\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438",
+            terms: "\u0423\u0441\u043b\u043e\u0432\u0438\u044f \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u044f"
+        },
+        es: {
+            app_name: "Medidor de Serpientes",
+            meta_keywords: "medir serpiente, medidor de serpientes, longitud de serpiente por foto, medir largo de serpiente, tama\u00f1o de serpiente, pit\u00f3n bola longitud, boa constrictor tama\u00f1o, serpiente del ma\u00edz, herramienta medici\u00f3n reptiles, crecimiento serpiente mascota, c\u00f3mo medir una serpiente, cuidado de reptiles",
+            nav_cta: "Abrir",
+            hero_title: "Mide la longitud de tu serpiente con fotos",
+            hero_sub: "Mediciones precisas con objetos de referencia. Gratis, f\u00e1cil, en cualquier dispositivo.",
+            hero_cta: "Abrir aplicaci\u00f3n",
+            hero_also: "Tambi\u00e9n disponible en",
+            how_title: "C\u00f3mo funciona",
+            s1_title: "Sube una foto",
+            s1_desc: "Toma una foto de tu serpiente junto a un objeto de referencia como una regla o tarjeta.",
+            s2_title: "Establece la referencia",
+            s2_desc: "Marca dos puntos en el objeto de referencia e ingresa su tama\u00f1o conocido.",
+            s3_title: "Mide la serpiente",
+            s3_desc: "Traza puntos a lo largo del cuerpo. La app calcula la longitud real al instante.",
+            feat_title: "Caracter\u00edsticas",
+            f1_title: "Mediciones precisas", f1_desc: "C\u00e1lculos precisos basados en la escala del objeto de referencia.",
+            f2_title: "M\u00faltiples unidades", f2_desc: "Cent\u00edmetros, mil\u00edmetros, metros, pulgadas o pies \u2014 t\u00fa eliges.",
+            f3_title: "Funciona sin internet", f3_desc: "Sin internet despu\u00e9s de cargar. Tus datos permanecen en tu dispositivo.",
+            f4_title: "Guardar y comparar", f4_desc: "Guarda mediciones y sigue el crecimiento de tu serpiente.",
+            faq_title: "Preguntas frecuentes",
+            q1: "\u00bfC\u00f3mo funciona Medidor de Serpientes?",
+            a1: "Sube una foto de tu serpiente con un objeto de referencia (regla, tarjeta, etc.). Marca la referencia, ingresa su tama\u00f1o, luego traza el cuerpo. La app usa la escala para calcular la longitud real.",
+            q2: "\u00bfQu\u00e9 puedo usar como objeto de referencia?",
+            a2: "Cualquier objeto con tama\u00f1o conocido: regla, tarjeta bancaria (85,6\u00a0mm), moneda o cualquier cosa medible. Col\u00f3calo junto a tu serpiente.",
+            q3: "\u00bfQu\u00e9 tan preciso es?",
+            a3: "La precisi\u00f3n depende de la calidad de la foto, la colocaci\u00f3n de la referencia y la precisi\u00f3n del trazado. Para mejores resultados, toma una foto desde arriba.",
+            q4: "\u00bfEs gratis?",
+            a4: "\u00a1S\u00ed! Medidor de Serpientes es gratis con todas las funciones principales. Opciones premium disponibles para sincronizaci\u00f3n en la nube e historial ilimitado.",
+            privacy: "Pol\u00edtica de privacidad", terms: "T\u00e9rminos de uso"
+        },
+        fr: {
+            app_name: "Mesureur de Serpents",
+            meta_keywords: "mesurer serpent, mesureur de serpents, longueur serpent photo, taille du serpent, python royal longueur, boa constrictor taille, serpent des bl\u00e9s, outil mesure reptile, croissance serpent, comment mesurer un serpent, application serpent, soins reptiles, terrariophilie",
+            nav_cta: "Ouvrir",
+            hero_title: "Mesurez votre serpent \u00e0 partir de photos",
+            hero_sub: "Mesures pr\u00e9cises avec des objets de r\u00e9f\u00e9rence. Gratuit, simple, sur tout appareil.",
+            hero_cta: "Ouvrir l\u2019application",
+            hero_also: "\u00c9galement disponible sur",
+            how_title: "Comment \u00e7a marche",
+            s1_title: "Chargez une photo",
+            s1_desc: "Prenez une photo de votre serpent \u00e0 c\u00f4t\u00e9 d\u2019un objet de r\u00e9f\u00e9rence comme une r\u00e8gle.",
+            s2_title: "D\u00e9finir la r\u00e9f\u00e9rence",
+            s2_desc: "Marquez deux points sur l\u2019objet de r\u00e9f\u00e9rence et entrez sa taille connue.",
+            s3_title: "Mesurez le serpent",
+            s3_desc: "Tracez des points le long du corps. L\u2019appli calcule la longueur r\u00e9elle instantan\u00e9ment.",
+            feat_title: "Fonctionnalit\u00e9s",
+            f1_title: "Mesures pr\u00e9cises", f1_desc: "Calculs pr\u00e9cis bas\u00e9s sur l\u2019\u00e9chelle de l\u2019objet de r\u00e9f\u00e9rence.",
+            f2_title: "Plusieurs unit\u00e9s", f2_desc: "Centim\u00e8tres, millim\u00e8tres, m\u00e8tres, pouces ou pieds \u2014 \u00e0 vous de choisir.",
+            f3_title: "Fonctionne hors ligne", f3_desc: "Pas d\u2019internet n\u00e9cessaire apr\u00e8s le chargement. Vos donn\u00e9es restent sur votre appareil.",
+            f4_title: "Enregistrer et comparer", f4_desc: "Enregistrez les mesures et suivez la croissance de votre serpent.",
+            faq_title: "Questions fr\u00e9quentes",
+            q1: "Comment fonctionne Mesureur de Serpents\u00a0?",
+            a1: "Chargez une photo avec un objet de r\u00e9f\u00e9rence (r\u00e8gle, carte, etc.). Marquez la r\u00e9f\u00e9rence, entrez sa taille, puis tracez le corps. L\u2019appli calcule la longueur r\u00e9elle.",
+            q2: "Que puis-je utiliser comme r\u00e9f\u00e9rence\u00a0?",
+            a2: "Tout objet de taille connue\u00a0: r\u00e8gle, carte bancaire (85,6\u00a0mm), pi\u00e8ce de monnaie. Placez-le \u00e0 c\u00f4t\u00e9 de votre serpent.",
+            q3: "Quelle est la pr\u00e9cision\u00a0?",
+            a3: "La pr\u00e9cision d\u00e9pend de la qualit\u00e9 de la photo, du placement de la r\u00e9f\u00e9rence et du trac\u00e9. Pour de meilleurs r\u00e9sultats, prenez une photo du dessus.",
+            q4: "Est-ce gratuit\u00a0?",
+            a4: "Oui\u00a0! Mesureur de Serpents est gratuit avec toutes les fonctions principales. Options premium pour la synchronisation cloud et l\u2019historique illimit\u00e9.",
+            privacy: "Politique de confidentialit\u00e9", terms: "Conditions d\u2019utilisation"
+        },
+        de: {
+            app_name: "Schlangenmesser",
+            meta_keywords: "Schlange messen, Schlangenmesser, Schlangenl\u00e4nge Foto, Schlange vermessen, K\u00f6nigspython L\u00e4nge, Boa Constrictor Gr\u00f6\u00dfe, Kornnatter messen, Reptilien Messwerkzeug, Schlangenwachstum, wie Schlange messen, Reptilienpflege, Terrarienhaltung, Schlangen App",
+            nav_cta: "\u00d6ffnen",
+            hero_title: "Messen Sie Ihre Schlange anhand von Fotos",
+            hero_sub: "Pr\u00e4zise Messungen mit Referenzobjekten. Kostenlos, einfach, auf jedem Ger\u00e4t.",
+            hero_cta: "App \u00f6ffnen",
+            hero_also: "Auch verf\u00fcgbar auf",
+            how_title: "So funktioniert\u2019s",
+            s1_title: "Foto hochladen",
+            s1_desc: "Fotografieren Sie Ihre Schlange neben einem Referenzobjekt wie einem Lineal oder einer Kreditkarte.",
+            s2_title: "Referenz festlegen",
+            s2_desc: "Markieren Sie zwei Punkte am Referenzobjekt und geben Sie seine bekannte Gr\u00f6\u00dfe ein.",
+            s3_title: "Schlange messen",
+            s3_desc: "Setzen Sie Punkte entlang des K\u00f6rpers. Die App berechnet sofort die echte L\u00e4nge.",
+            feat_title: "Funktionen",
+            f1_title: "Pr\u00e4zise Messungen", f1_desc: "Pixelgenaue Berechnungen basierend auf der Referenzobjekt-Skala.",
+            f2_title: "Mehrere Einheiten", f2_desc: "Zentimeter, Millimeter, Meter, Zoll oder Fu\u00df \u2014 Ihre Wahl.",
+            f3_title: "Funktioniert offline", f3_desc: "Nach dem Laden kein Internet n\u00f6tig. Ihre Daten bleiben auf Ihrem Ger\u00e4t.",
+            f4_title: "Speichern & Vergleichen", f4_desc: "Speichern Sie Messungen und verfolgen Sie das Wachstum Ihrer Schlange.",
+            faq_title: "H\u00e4ufige Fragen",
+            q1: "Wie funktioniert Schlangenmesser?",
+            a1: "Laden Sie ein Foto mit einem Referenzobjekt (Lineal, Kreditkarte usw.) hoch. Markieren Sie die Referenz, geben Sie die Gr\u00f6\u00dfe ein und zeichnen Sie entlang des K\u00f6rpers. Die App berechnet die echte L\u00e4nge.",
+            q2: "Was kann ich als Referenzobjekt verwenden?",
+            a2: "Jedes Objekt mit bekannter Gr\u00f6\u00dfe: Lineal, Kreditkarte (85,6\u00a0mm), M\u00fcnze oder alles Messbare. Legen Sie es neben Ihre Schlange.",
+            q3: "Wie genau ist es?",
+            a3: "Die Genauigkeit h\u00e4ngt von der Fotoqualit\u00e4t, der Referenzplatzierung und der Zeichengenauigkeit ab. Fotografieren Sie von oben f\u00fcr beste Ergebnisse.",
+            q4: "Ist es kostenlos?",
+            a4: "Ja! Schlangenmesser ist kostenlos mit allen Kernfunktionen. Premium-Optionen f\u00fcr Cloud-Sync und unbegrenzten Verlauf verf\u00fcgbar.",
+            privacy: "Datenschutz", terms: "Nutzungsbedingungen"
+        },
+        pt: {
+            app_name: "Medidor de Cobras",
+            meta_keywords: "medir cobra, medidor de cobras, comprimento cobra foto, tamanho de cobra, p\u00edton-real comprimento, jiboia tamanho, cobra do milho, ferramenta medi\u00e7\u00e3o r\u00e9pteis, crescimento cobra, como medir uma cobra, cuidados r\u00e9pteis, app serpentes",
+            nav_cta: "Abrir",
+            hero_title: "Me\u00e7a o comprimento da sua cobra com fotos",
+            hero_sub: "Medi\u00e7\u00f5es precisas com objetos de refer\u00eancia. Gr\u00e1tis, f\u00e1cil, em qualquer dispositivo.",
+            hero_cta: "Abrir aplicativo",
+            hero_also: "Tamb\u00e9m dispon\u00edvel no",
+            how_title: "Como funciona",
+            s1_title: "Envie uma foto",
+            s1_desc: "Tire uma foto da sua cobra ao lado de um objeto de refer\u00eancia como uma r\u00e9gua ou cart\u00e3o.",
+            s2_title: "Defina a refer\u00eancia",
+            s2_desc: "Marque dois pontos no objeto de refer\u00eancia e insira seu tamanho conhecido.",
+            s3_title: "Me\u00e7a a cobra",
+            s3_desc: "Trace pontos ao longo do corpo. O app calcula o comprimento real instantaneamente.",
+            feat_title: "Recursos",
+            f1_title: "Medi\u00e7\u00f5es precisas", f1_desc: "C\u00e1lculos precisos baseados na escala do objeto de refer\u00eancia.",
+            f2_title: "M\u00faltiplas unidades", f2_desc: "Cent\u00edmetros, mil\u00edmetros, metros, polegadas ou p\u00e9s \u2014 voc\u00ea escolhe.",
+            f3_title: "Funciona offline", f3_desc: "Sem internet ap\u00f3s o carregamento. Seus dados ficam no seu dispositivo.",
+            f4_title: "Salvar e comparar", f4_desc: "Salve medi\u00e7\u00f5es e acompanhe o crescimento da sua cobra.",
+            faq_title: "Perguntas frequentes",
+            q1: "Como funciona o Medidor de Cobras?",
+            a1: "Envie uma foto com um objeto de refer\u00eancia (r\u00e9gua, cart\u00e3o, etc.). Marque a refer\u00eancia, insira o tamanho, depois trace o corpo. O app calcula o comprimento real.",
+            q2: "O que posso usar como refer\u00eancia?",
+            a2: "Qualquer objeto com tamanho conhecido: r\u00e9gua, cart\u00e3o banc\u00e1rio (85,6\u00a0mm), moeda ou qualquer coisa mensur\u00e1vel.",
+            q3: "Qu\u00e3o preciso \u00e9?",
+            a3: "A precis\u00e3o depende da qualidade da foto, posicionamento da refer\u00eancia e precis\u00e3o do tra\u00e7ado. Tire uma foto de cima para melhores resultados.",
+            q4: "\u00c9 gratuito?",
+            a4: "Sim! Medidor de Cobras \u00e9 gratuito com todos os recursos principais. Op\u00e7\u00f5es premium para sincroniza\u00e7\u00e3o na nuvem e hist\u00f3rico ilimitado.",
+            privacy: "Pol\u00edtica de privacidade", terms: "Termos de uso"
+        },
+        it: {
+            app_name: "Misuratore di Serpenti",
+            meta_keywords: "misurare serpente, misuratore di serpenti, lunghezza serpente foto, dimensioni serpente, pitone reale lunghezza, boa constrictor dimensioni, serpente del grano, strumento misurazione rettili, crescita serpente, come misurare un serpente, cura rettili, terrariofilia, app serpenti",
+            nav_cta: "Apri",
+            hero_title: "Misura la lunghezza del tuo serpente dalle foto",
+            hero_sub: "Misurazioni precise con oggetti di riferimento. Gratuito, semplice, su qualsiasi dispositivo.",
+            hero_cta: "Apri l\u2019app",
+            hero_also: "Disponibile anche su",
+            how_title: "Come funziona",
+            s1_title: "Carica una foto",
+            s1_desc: "Scatta una foto del tuo serpente accanto a un oggetto di riferimento come un righello o una carta.",
+            s2_title: "Imposta il riferimento",
+            s2_desc: "Segna due punti sull\u2019oggetto di riferimento e inserisci la dimensione nota.",
+            s3_title: "Misura il serpente",
+            s3_desc: "Traccia punti lungo il corpo. L\u2019app calcola la lunghezza reale istantaneamente.",
+            feat_title: "Funzionalit\u00e0",
+            f1_title: "Misurazioni precise", f1_desc: "Calcoli precisi basati sulla scala dell\u2019oggetto di riferimento.",
+            f2_title: "Pi\u00f9 unit\u00e0", f2_desc: "Centimetri, millimetri, metri, pollici o piedi \u2014 a tua scelta.",
+            f3_title: "Funziona offline", f3_desc: "Nessuna connessione necessaria dopo il caricamento. I tuoi dati restano sul dispositivo.",
+            f4_title: "Salva e confronta", f4_desc: "Salva le misurazioni e monitora la crescita del tuo serpente.",
+            faq_title: "Domande frequenti",
+            q1: "Come funziona Misuratore di Serpenti?",
+            a1: "Carica una foto con un oggetto di riferimento (righello, carta, ecc.). Segna il riferimento, inserisci la dimensione, poi traccia il corpo. L\u2019app calcola la lunghezza reale.",
+            q2: "Cosa posso usare come riferimento?",
+            a2: "Qualsiasi oggetto di dimensioni note: righello, carta di credito (85,6\u00a0mm), moneta o qualsiasi cosa misurabile.",
+            q3: "Quanto \u00e8 preciso?",
+            a3: "La precisione dipende dalla qualit\u00e0 della foto, dal posizionamento del riferimento e dalla precisione del tracciamento. Scatta dall\u2019alto per risultati migliori.",
+            q4: "\u00c8 gratuito?",
+            a4: "S\u00ec! Misuratore di Serpenti \u00e8 gratuito con tutte le funzionalit\u00e0 principali. Opzioni premium per sincronizzazione cloud e cronologia illimitata.",
+            privacy: "Privacy Policy", terms: "Termini di utilizzo"
         }
     };
 
-    window.hideNativeLoginError = function() {
-        if (errorDiv) errorDiv.style.display = 'none';
-    };
-})();
-</script>
+    /* Privacy/terms file suffixes per language */
+    var policySuffix = { en: '', ru: '-ru', es: '-es', fr: '-fr', de: '-de', pt: '-pt', it: '-it' };
 
-<script type="application/javascript" src="composeApp.js"></script>
-<script>
-    // Hide loader when Compose signals it's ready
-    (function() {
-        var loader = document.getElementById('loader');
-        var hidden = false;
+    /* ── State ── */
+    var lang = 'en';
+    var isDark = document.documentElement.classList.contains('dark');
 
-        function hideLoader() {
-            if (hidden) return;
-            hidden = true;
-            loader.classList.add('fade-out');
-            setTimeout(function() { loader.remove(); }, 500);
-        }
-
-        // Called from Kotlin via PlatformInfo.onAppReady()
-        window._hideLoader = function() {
-            hideLoader();
-
-            // Initialize Telegram Web App after Compose is ready
-            if (window._isTelegram) {
-                var tg = window.Telegram.WebApp;
-
-                // Expand to full screen
-                tg.expand();
-                tg.disableVerticalSwipes();
-
-                // Tell Telegram we're ready
-                tg.ready();
-
-                // Handle back button
-                tg.BackButton.onClick(function() {
-                    // Let Kotlin handle navigation; if no modal open, close the app
-                    if (window._onTelegramBack) {
-                        window._onTelegramBack();
-                    } else {
-                        tg.close();
-                    }
-                });
-
-                // Listen for theme changes
-                tg.onEvent('themeChanged', function() {
-                    var isDark = tg.colorScheme === 'dark';
-                    localStorage.setItem('snake_measurer_theme', isDark ? 'DARK' : 'LIGHT');
-                    // Notify Kotlin to update theme
-                    if (window._onTelegramThemeChanged) {
-                        window._onTelegramThemeChanged(isDark);
-                    }
-                });
-
-                // Expose Telegram user data for Kotlin (read-once, cleared after access)
-                var _tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user || null;
-                var _tgInitData = tg.initData || '';
-                window._getTelegramUser = function() { var u = _tgUser; return u; };
-                window._getTelegramInitData = function() { var d = _tgInitData; _tgInitData = ''; return d; };
-            }
-        };
-
-        // Fallback: hide after 30s regardless
-        setTimeout(function() {
-            if (!hidden && loader.parentNode) hideLoader();
-        }, 30000);
-    })();
-
-    // Register Service Worker (skip in Telegram — not needed)
-    if ('serviceWorker' in navigator && !window._isTelegram) {
-        navigator.serviceWorker.register('sw.js').catch(function(e) {
-            console.warn('SW registration failed:', e);
-        });
+    /* ── Detect language ── */
+    function detectLang() {
+        /* 1. URL hash */
+        var h = location.hash.replace('#', '').toLowerCase();
+        if (L[h]) return h;
+        /* 2. localStorage */
+        var saved = localStorage.getItem('landing_lang');
+        if (L[saved]) return saved;
+        /* 3. Browser language */
+        var nav = (navigator.language || '').slice(0, 2).toLowerCase();
+        if (L[nav]) return nav;
+        return 'en';
     }
 
-    // Load Firebase AFTER Canvas is ready (non-blocking)
-    function loadFirebase() {
-        var scripts = [
-            'https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js',
-            'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js',
-            'https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js'
-        ];
-        var loaded = 0;
+    /* ── Apply translations ── */
+    function applyLang(code) {
+        lang = code;
+        localStorage.setItem('landing_lang', code);
+        document.documentElement.lang = code;
+        location.hash = code === 'en' ? '' : code;
+        document.getElementById('langSelect').value = code;
 
-        function onAllLoaded() {
-            var firebaseConfig = {
-                apiKey: "AIzaSyARDge4x1EEv5W1jJ15QdO5OW2RLLHNLqc",
-                authDomain: "snakemeasurer.firebaseapp.com",
-                projectId: "snakemeasurer",
-                storageBucket: "snakemeasurer.firebasestorage.app",
-                messagingSenderId: "223904200399",
-                appId: "1:223904200399:web:2e98ea1c1f3f9fa54069ba",
-                measurementId: "G-L6SQPK4C0V"
-            };
-            window.firebaseApp = firebase.initializeApp(firebaseConfig);
-            window.firebaseAnalytics = null;
-            window._firebaseReady = true;
-
-            // Initialize Auth immediately so it's ready for Kotlin
-            window.firebaseAuth = firebase.auth();
-            window.firebaseAuth.onAuthStateChanged(function(user) {
-                window.currentFirebaseUser = user;
-            });
-            window._firebaseAuthReady = true;
-
-            if (window._firebaseReadyResolve) window._firebaseReadyResolve();
+        var strings = L[code] || L.en;
+        var els = document.querySelectorAll('[data-t]');
+        for (var i = 0; i < els.length; i++) {
+            var key = els[i].getAttribute('data-t');
+            if (strings[key]) els[i].textContent = strings[key];
+            else if (L.en[key]) els[i].textContent = L.en[key];
         }
 
-        // Load scripts sequentially (auth depends on app, analytics depends on app)
-        function loadNext() {
-            if (loaded >= scripts.length) { onAllLoaded(); return; }
-            var s = document.createElement('script');
-            s.src = scripts[loaded];
-            s.onload = function() { loaded++; loadNext(); };
-            s.onerror = function() { loaded++; loadNext(); };
-            document.head.appendChild(s);
-        }
-        loadNext();
+        /* Update meta */
+        document.title = strings.app_name + ' \u2014 ' + strings.hero_title;
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.content = strings.hero_sub;
+        var metaKw = document.querySelector('meta[name="keywords"]');
+        if (metaKw && strings.meta_keywords) metaKw.content = strings.meta_keywords;
+
+        /* Update policy links */
+        var suffix = policySuffix[code] || '';
+        document.getElementById('privacyLink').href = '/app/privacy-policy' + suffix + '.html';
+        document.getElementById('termsLink').href = '/app/terms' + suffix + '.html';
     }
 
-    // Firebase ready promise (Kotlin interop can await this)
-    window._firebaseReady = false;
-    window._firebaseReadyPromise = new Promise(function(resolve) {
-        window._firebaseReadyResolve = resolve;
+    /* ── Theme toggle ── */
+    var themeBtn = document.getElementById('themeBtn');
+    function updateThemeBtn() {
+        themeBtn.textContent = isDark ? '\u2600\ufe0f' : '\ud83c\udf19';
+    }
+    themeBtn.addEventListener('click', function() {
+        isDark = !isDark;
+        document.documentElement.classList.toggle('dark', isDark);
+        localStorage.setItem('landing_theme', isDark ? 'dark' : 'light');
+        updateThemeBtn();
+    });
+    updateThemeBtn();
+
+    /* ── Language selector ── */
+    document.getElementById('langSelect').addEventListener('change', function() {
+        applyLang(this.value);
     });
 
-    // Firebase helper functions (safe to call before Firebase loads)
-    window.initFirebaseAnalytics = function(enabled) {
-        if (!window._firebaseReady) {
-            window._firebaseReadyPromise.then(function() { window.initFirebaseAnalytics(enabled); });
-            return;
-        }
-        if (enabled && !window.firebaseAnalytics) {
-            window.firebaseAnalytics = firebase.analytics();
-            // Distinguish Telegram Mini App vs regular web traffic
-            firebase.analytics().setUserProperties({
-                app_source: window._isTelegram ? 'telegram' : 'web'
-            });
-        }
-    };
-    window.trackFirebaseEvent = function(eventName, params) {
-        if (window.firebaseAnalytics) window.firebaseAnalytics.logEvent(eventName, params);
-    };
-    window.trackFirebasePageView = function(pagePath) {
-        if (window.firebaseAnalytics) window.firebaseAnalytics.logEvent('page_view', { page_path: pagePath });
-    };
+    /* ── FAQ accordion ── */
+    var faqBtns = document.querySelectorAll('.faq-q');
+    for (var i = 0; i < faqBtns.length; i++) {
+        faqBtns[i].addEventListener('click', function() {
+            var item = this.parentElement;
+            var wasOpen = item.classList.contains('open');
+            /* Close all */
+            var items = document.querySelectorAll('.faq-item');
+            for (var j = 0; j < items.length; j++) items[j].classList.remove('open');
+            /* Toggle clicked */
+            if (!wasOpen) item.classList.add('open');
+        });
+    }
 
-    // Start loading Firebase after a short delay (let app JS download take priority)
-    setTimeout(loadFirebase, 100);
-
-    // --- RevenueCat Web Billing ---
-    window._rcInstance = null;
-    window._rcReady = false;
-    window._rcApiKey = 'YOUR_REVENUECAT_WEB_API_KEY'; // TODO: replace with real web API key
-
-    window.rcConfigure = function(userId) {
-        try {
-            if (typeof Purchases === 'undefined') {
-                console.warn('RevenueCat SDK not loaded');
-                return false;
-            }
-            window._rcInstance = Purchases.Purchases.configure(window._rcApiKey, userId || null);
-            window._rcReady = true;
-            return true;
-        } catch(e) {
-            console.error('RevenueCat configure failed:', e);
-            return false;
-        }
-    };
-
-    window.rcGetCustomerInfo = function() {
-        if (!window._rcInstance) return Promise.reject('RC not configured');
-        return window._rcInstance.getCustomerInfo();
-    };
-
-    window.rcGetOfferings = function() {
-        if (!window._rcInstance) return Promise.reject('RC not configured');
-        return window._rcInstance.getOfferings();
-    };
-
-    window.rcPurchase = function(pkg) {
-        if (!window._rcInstance) return Promise.reject('RC not configured');
-        return window._rcInstance.purchase({ rcPackage: pkg });
-    };
-
-    window.rcRestorePurchases = function() {
-        if (!window._rcInstance) return Promise.reject('RC not configured');
-        return window._rcInstance.restorePurchases();
-    };
-
-    window.rcLogIn = function(userId) {
-        if (!window._rcInstance) return Promise.reject('RC not configured');
-        return window._rcInstance.logIn(userId);
-    };
-
-    window.rcLogOut = function() {
-        if (!window._rcInstance) return Promise.reject('RC not configured');
-        return window._rcInstance.logOut();
-    };
-
-    window.rcCheckEntitlement = function(customerInfo, entitlementId) {
-        try {
-            var ent = customerInfo.entitlements.active[entitlementId];
-            return ent ? true : false;
-        } catch(e) { return false; }
-    };
-
-    window.rcGetProductId = function(customerInfo, entitlementId) {
-        try {
-            var ent = customerInfo.entitlements.active[entitlementId];
-            return ent ? (ent.productIdentifier || '') : '';
-        } catch(e) { return ''; }
-    };
-
-    window.rcGetExpiration = function(customerInfo, entitlementId) {
-        try {
-            var ent = customerInfo.entitlements.active[entitlementId];
-            if (ent && ent.expirationDate) return new Date(ent.expirationDate).getTime();
-            return 0;
-        } catch(e) { return 0; }
-    };
+    /* ── Init ── */
+    applyLang(detectLang());
+})();
 </script>
 </body>
 </html>
