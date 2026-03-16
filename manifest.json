@@ -1,0 +1,57 @@
+{
+  "name": "Snake Measurer",
+  "short_name": "Snake Measurer",
+  "description": "Measure snake length from photos using reference objects. Accurate, easy-to-use tool for reptile enthusiasts.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#007AFF",
+  "background_color": "#1c1c1e",
+  "categories": ["productivity", "utilities", "lifestyle"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer",
+      "id": "app.serpwidgets.snakemeasurer"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/snake-measurer/id000000000"
+    }
+  ],
+  "prefer_related_applications": true
+}
