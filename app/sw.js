@@ -2,9 +2,9 @@
 // Cache-first strategy for WASM/JS assets, network-first for HTML
 // Auto-updates when new version is deployed
 
-var CACHE_VERSION = 'mncheu3a' === '%%' + 'BUILD_TS' + '%%'
+var CACHE_VERSION = 'mnddd8d6' === '%%' + 'BUILD_TS' + '%%'
     ? 'dev-' + Date.now()   // dev-server: unique on every SW install
-    : 'mncheu3a';       // production: stamped by Gradle
+    : 'mnddd8d6';       // production: stamped by Gradle
 var CACHE_NAME = 'snake-measurer-' + CACHE_VERSION;
 
 // Assets cached on install (shell)

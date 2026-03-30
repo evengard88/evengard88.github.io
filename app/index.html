@@ -549,7 +549,7 @@
         function onAllLoaded() {
             var firebaseConfig = {
                 apiKey: "AIzaSyARDge4x1EEv5W1jJ15QdO5OW2RLLHNLqc",
-                authDomain: "snakemeasurer.firebaseapp.com",
+                authDomain: "snakemeasurer.com",
                 projectId: "snakemeasurer",
                 storageBucket: "snakemeasurer.firebasestorage.app",
                 messagingSenderId: "223904200399",
@@ -564,6 +564,10 @@
             window.firebaseAuth = firebase.auth();
             window.firebaseAuth.onAuthStateChanged(function(user) {
                 window.currentFirebaseUser = user;
+                // Notify Kotlin side about auth state change (session restore after page reload)
+                if (typeof window._onAuthStateChangedKotlin === 'function') {
+                    window._onAuthStateChangedKotlin(user);
+                }
             });
             window._firebaseAuthReady = true;
 
