@@ -61,8 +61,8 @@
             s.crossOrigin = 'anonymous';
             s.onload = function() {
                 Sentry.init({
-                    dsn: 'https://YOUR_GLITCHTIP_KEY@snakemeasurer.app/glitchtip/1',
-                    environment: location.hostname === 'snakemeasurer.app' ? 'production' : 'staging',
+                    dsn: 'https://YOUR_GLITCHTIP_KEY@snakemeasurer.com/glitchtip/1',
+                    environment: location.hostname === 'snakemeasurer.com' ? 'production' : 'staging',
                     release: 'snake-measurer-web@0.10.0',
                     tracesSampleRate: 0.2,
                     allowUrls: [/snakemeasurer\.app/],
@@ -317,6 +317,7 @@
 (function() {
     var overlay, form, emailInput, passwordInput, titleEl, submitBtn, toggleLink, forgotLink, closeBtn, errorDiv;
     var isCreate = false;
+    var isForgot = false;
     var built = false;
 
     function buildForm() {
@@ -360,6 +361,17 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             var email = emailInput.value;
+            if (isForgot) {
+                if (email && window._nativeLoginOnForgotPassword) {
+                    window._nativeLoginOnForgotPassword(email);
+                    errorDiv.style.color = '#34C759';
+                    errorDiv.style.background = 'transparent';
+                    errorDiv.textContent = 'If an account exists for ' + email + ', a reset link has been sent. Check your inbox and spam folder.';
+                    errorDiv.style.display = 'block';
+                    setTimeout(function() { setForgotMode(false); }, 3000);
+                }
+                return;
+            }
             var password = passwordInput.value;
             if (email && password) {
                 if (isCreate && window._nativeLoginOnCreateAccount) {
@@ -373,15 +385,16 @@
         toggleLink.addEventListener('click', function(e) {
             e.preventDefault();
             errorDiv.style.display = 'none';
-            updateMode(!isCreate);
+            if (isForgot) {
+                setForgotMode(false);
+            } else {
+                updateMode(!isCreate);
+            }
         });
 
         forgotLink.addEventListener('click', function(e) {
             e.preventDefault();
-            var email = emailInput.value;
-            if (window._nativeLoginOnForgotPassword) {
-                window._nativeLoginOnForgotPassword(email);
-            }
+            setForgotMode(true);
         });
 
         closeBtn.addEventListener('click', function() {
@@ -397,10 +410,30 @@
         });
     }
 
+    function setForgotMode(forgot) {
+        isForgot = forgot;
+        errorDiv.style.display = 'none';
+        if (forgot) {
+            titleEl.textContent = 'Reset Password';
+            submitBtn.textContent = 'Send Reset Link';
+            passwordInput.style.display = 'none';
+            passwordInput.removeAttribute('required');
+            forgotLink.style.display = 'none';
+            toggleLink.textContent = 'Back to Sign In';
+        } else {
+            passwordInput.style.display = 'block';
+            passwordInput.setAttribute('required', '');
+            updateMode(isCreate);
+        }
+    }
+
     function updateMode(createMode) {
         isCreate = createMode;
+        isForgot = false;
         titleEl.textContent = isCreate ? 'Create Account' : 'Sign In';
         submitBtn.textContent = isCreate ? 'Create Account' : 'Sign In';
+        passwordInput.style.display = 'block';
+        passwordInput.setAttribute('required', '');
         passwordInput.autocomplete = isCreate ? 'new-password' : 'current-password';
         toggleLink.textContent = isCreate ? 'Already have an account? Sign in' : 'No account? Create one';
         forgotLink.style.display = isCreate ? 'none' : '';
