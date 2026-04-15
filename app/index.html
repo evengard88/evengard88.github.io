@@ -109,7 +109,7 @@
         "softwareVersion": "1.0.0",
         "screenshot": "https://snakemeasurer.com/og-image.png",
         "downloadUrl": [
-            "https://apps.apple.com/app/snake-measurer/id000000000",
+            "https://apps.apple.com/app/snake-measurer/id6760619393",
             "https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer"
         ]
     }
@@ -261,7 +261,7 @@
     var isDark = document.documentElement.classList.contains('theme-dark');
 
     var playStoreUrl = 'https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer';
-    var appStoreUrl = 'https://apps.apple.com/app/snake-measurer/id000000000';
+    var appStoreUrl = 'https://apps.apple.com/app/snake-measurer/id6760619393';
 
     // Try to open in system browser (works in Telegram, some other in-app browsers)
     var currentUrl = window.location.href;
@@ -277,10 +277,24 @@
     var btnSecondaryColor = isDark ? '#f2f2f7' : '#1c1c1e';
 
     var storeButton = '';
+    var qrSection = '';
     if (isAndroid) {
         storeButton = '<a href="' + playStoreUrl + '" style="display:block;width:100%;max-width:280px;padding:14px 20px;background:' + btnBg + ';color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;text-align:center;box-sizing:border-box;">Download from Google Play</a>';
     } else if (isIOS) {
         storeButton = '<a href="' + appStoreUrl + '" style="display:block;width:100%;max-width:280px;padding:14px 20px;background:' + btnBg + ';color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;text-align:center;box-sizing:border-box;">Download from App Store</a>';
+    } else {
+        // Desktop — show QR codes for both stores
+        qrSection =
+            '<div style="display:flex;gap:24px;justify-content:center;margin-top:8px;">' +
+                '<div style="text-align:center;">' +
+                    '<a href="' + appStoreUrl + '" target="_blank" rel="noopener"><img src="qr-appstore.png" alt="App Store QR" style="width:140px;height:140px;border-radius:12px;" /></a>' +
+                    '<p style="font-size:12px;color:' + subtitleColor + ';margin:8px 0 0;">App Store</p>' +
+                '</div>' +
+                '<div style="text-align:center;">' +
+                    '<a href="' + playStoreUrl + '" target="_blank" rel="noopener"><img src="qr-googleplay.png" alt="Google Play QR" style="width:140px;height:140px;border-radius:12px;" /></a>' +
+                    '<p style="font-size:12px;color:' + subtitleColor + ';margin:8px 0 0;">Google Play</p>' +
+                '</div>' +
+            '</div>';
     }
 
     var openBrowserButton = '<a href="' + openInBrowserUrl + '" style="display:block;width:100%;max-width:280px;padding:14px 20px;background:' + btnSecondaryBg + ';color:' + btnSecondaryColor + ';border:none;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;text-align:center;box-sizing:border-box;">'
@@ -297,6 +311,7 @@
                 storeButton +
                 openBrowserButton +
             '</div>' +
+            qrSection +
         '</div>';
 })();
 </script>
