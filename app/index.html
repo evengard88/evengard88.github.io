@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+resources/index.html<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,11 +61,11 @@
             s.crossOrigin = 'anonymous';
             s.onload = function() {
                 Sentry.init({
-                    dsn: 'https://YOUR_GLITCHTIP_KEY@api.serpwidgets.app/glitchtip/1',
+                    dsn: 'https://84b2ee3889aa48a793d80b555a37b11b@api.serpwidgets.app/glitchtip/2',
                     environment: location.hostname === 'snakemeasurer.com' ? 'production' : 'staging',
                     release: 'snake-measurer-web@0.10.0',
                     tracesSampleRate: 0.2,
-                    allowUrls: [/snakemeasurer\.app/],
+                    allowUrls: [/snakemeasurer\.com/],
                     ignoreErrors: [
                         'ResizeObserver loop',
                         'Non-Error promise rejection',
