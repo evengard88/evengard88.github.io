@@ -734,6 +734,77 @@
             return 0;
         } catch(e) { return 0; }
     };
+
+    // CSS keyframes for the loading spinner shown before RC paywall renders.
+    // Inject once on first paywall open (idempotent).
+    window._rcInstallSpinnerStyles = function() {
+        if (document.getElementById('rc-paywall-spinner-styles')) return;
+        var style = document.createElement('style');
+        style.id = 'rc-paywall-spinner-styles';
+        style.textContent =
+            '@keyframes rc-spin { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }' +
+            '.rc-paywall-spinner { width:48px;height:48px;border:4px solid rgba(255,255,255,0.2);border-top-color:#FFD700;border-radius:50%;animation:rc-spin 0.9s linear infinite; }';
+        document.head.appendChild(style);
+    };
+
+    // Present RC's hosted paywall in a fullscreen overlay. Shows a spinner
+    // while RC paywall content loads. Resolves with
+    // { success: bool, isPremium: bool, productId: string, expirationMs: number, dismissed: bool, error: string }.
+    // Cleans up the DOM container regardless of outcome.
+    window.rcPresentPaywall = function() {
+        return new Promise(function(resolve) {
+            if (!window._rcInstance) { resolve({ success: false, error: 'RC not configured' }); return; }
+            try {
+                window._rcInstallSpinnerStyles();
+
+                // Tear down stale container if any
+                var existing = document.getElementById('rc-paywall-container');
+                if (existing) existing.remove();
+
+                var container = document.createElement('div');
+                container.id = 'rc-paywall-container';
+                container.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;overflow:auto;';
+
+                // Spinner shown while RC paywall content loads. Replaced by RC
+                // when its DOM mounts; if RC fails before mount, we remove it.
+                var spinner = document.createElement('div');
+                spinner.className = 'rc-paywall-spinner';
+                spinner.id = 'rc-paywall-spinner';
+                container.appendChild(spinner);
+
+                document.body.appendChild(container);
+
+                var cleanup = function() {
+                    var c = document.getElementById('rc-paywall-container');
+                    if (c) c.remove();
+                };
+
+                window._rcInstance.presentPaywall({ htmlTarget: container })
+                    .then(function(purchaseResult) {
+                        cleanup();
+                        try {
+                            var ci = purchaseResult.customerInfo;
+                            var isPremium = window.rcCheckEntitlement(ci, 'premium');
+                            var productId = window.rcGetProductId(ci, 'premium');
+                            var expMs = window.rcGetExpiration(ci, 'premium');
+                            resolve({ success: true, isPremium: isPremium, productId: productId, expirationMs: expMs, dismissed: false });
+                        } catch (parseErr) {
+                            resolve({ success: true, isPremium: false, dismissed: false, error: parseErr && parseErr.message });
+                        }
+                    })
+                    .catch(function(err) {
+                        cleanup();
+                        var msg = (err && err.message) || String(err) || 'unknown';
+                        var dismissed = /cancel|close|dismiss|user_cancel/i.test(msg);
+                        resolve({ success: false, dismissed: dismissed, error: msg });
+                    });
+            } catch (e) {
+                var c2 = document.getElementById('rc-paywall-container');
+                if (c2) c2.remove();
+                resolve({ success: false, error: (e && e.message) || 'rcPresentPaywall threw' });
+            }
+        });
+    };
 </script>
 </body>
 </html>
