@@ -1,10 +1,12 @@
 // Snake Measurer Service Worker
-// Cache-first strategy for WASM/JS assets, network-first for HTML
+// Cache-first for content-hashed WASM/JS chunks (immutable); network-first for the
+// app shell (index.html, composeApp.js, CSS) so a new deploy is picked up immediately
+// and the shell never references chunk/wasm hashes that were already replaced on the server.
 // Auto-updates when new version is deployed
 
-var CACHE_VERSION = 'mqcf87ts' === '%%' + 'BUILD_TS' + '%%'
+var CACHE_VERSION = 'mqhdi7f3' === '%%' + 'BUILD_TS' + '%%'
     ? 'dev-' + Date.now()   // dev-server: unique on every SW install
-    : 'mqcf87ts';       // production: stamped by Gradle
+    : 'mqhdi7f3';       // production: stamped by Gradle
 var CACHE_NAME = 'snake-measurer-' + CACHE_VERSION;
 
 // Assets cached on install (shell)
@@ -24,7 +26,7 @@ function isCacheFirstAsset(url) {
         || path.endsWith('.mjs');
 }
 
-// Patterns for stale-while-revalidate (app shell)
+// Patterns for network-first (non-hashed app shell — same filename changes each deploy)
 function isAppShellAsset(url) {
     var path = url.pathname;
     return path.endsWith('.css')
@@ -102,28 +104,28 @@ self.addEventListener('fetch', function(event) {
         return;
     }
 
-    // 2. App shell (HTML, CSS, composeApp.js) → stale-while-revalidate
-    //    Serve from cache immediately, update cache in background
+    // 2. App shell (HTML, /, composeApp.js, CSS) → network-first
+    //    These are NOT content-hashed: a new deploy changes their contents but keeps the
+    //    same filename. Serving a stale shell makes it reference chunk/wasm hashes that were
+    //    already replaced on the server → 404 (ChunkLoadError / "WebAssembly compile: HTTP
+    //    status not ok"). So always fetch fresh; fall back to cache only when offline.
+    //    The big content-hashed assets (.wasm, chunked .js) stay cache-first above, so this
+    //    costs only a few KB per open and never re-downloads the wasm.
     if (isAppShellAsset(url)) {
         event.respondWith(
-            caches.match(event.request).then(function(cached) {
-                var fetchPromise = fetch(event.request).then(function(response) {
-                    if (response.ok && response.type !== 'opaque') {
-                        var clone = response.clone();
-                        caches.open(CACHE_NAME).then(function(cache) {
-                            cache.put(event.request, clone).catch(function(err) {
-                                console.warn('Cache put failed:', event.request.url, err);
-                            });
+            fetch(event.request).then(function(response) {
+                if (response.ok && response.type !== 'opaque') {
+                    var clone = response.clone();
+                    caches.open(CACHE_NAME).then(function(cache) {
+                        cache.put(event.request, clone).catch(function(err) {
+                            console.warn('Cache put failed:', event.request.url, err);
                         });
-                    }
-                    return response;
-                }).catch(function() {
-                    // Offline — cached version is our only option
-                    return cached;
-                });
-
-                // Return cached immediately if available, otherwise wait for network
-                return cached || fetchPromise;
+                    });
+                }
+                return response;
+            }).catch(function() {
+                // Offline — fall back to the cached shell
+                return caches.match(event.request);
             })
         );
         return;
