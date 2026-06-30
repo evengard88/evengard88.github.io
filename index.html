@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Measurer - Measure Snake Length from Photos</title>
-    <meta name="description" content="Measure snake length accurately from photos using reference objects. Free, easy-to-use tool for reptile enthusiasts, breeders, and researchers.">
-    <meta name="keywords" content="snake measurer, measure snake length, snake length from photo, reptile measurement tool, snake size calculator, ball python length, boa constrictor size, corn snake measurement, reference object measurement, pet snake growth tracker">
+    <meta name="description" content="Measure snake length from a photo using reference objects, auto-detect, and track each snake's growth over time. Free reptile measurement tool with cloud sync, multiple profiles, and growth charts.">
+    <meta name="keywords" content="snake measurer, measure snake length, snake length from photo, reference object measurement, reptile measurement tool, snake size calculator, ball python length, boa constrictor size, corn snake measurement, snake growth tracker, snake growth chart, multiple snake profiles, AI snake detection, pet snake growth tracker">
     <meta name="author" content="SerpWidgets">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://snakemeasurer.com/">
@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://snakemeasurer.com/">
     <meta property="og:title" content="Snake Measurer - Measure Snake Length from Photos">
-    <meta property="og:description" content="Measure snake length accurately from photos using reference objects. Free tool for reptile enthusiasts.">
+    <meta property="og:description" content="Measure snake length from photos, auto-detect with AI, and track growth over time. Free, with cloud sync, multiple profiles, and growth charts.">
     <meta property="og:image" content="https://snakemeasurer.com/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -29,11 +29,17 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="pt_BR">
     <meta property="og:locale:alternate" content="it_IT">
+    <meta property="og:locale:alternate" content="uk_UA">
+    <meta property="og:locale:alternate" content="nl_NL">
+    <meta property="og:locale:alternate" content="pl_PL">
+    <meta property="og:locale:alternate" content="ja_JP">
+    <meta property="og:locale:alternate" content="ko_KR">
+    <meta property="og:locale:alternate" content="ar_AR">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Snake Measurer - Measure Snake Length from Photos">
-    <meta name="twitter:description" content="Measure snake length accurately from photos using reference objects.">
+    <meta name="twitter:description" content="Measure snake length from photos, auto-detect with AI, and track growth over time.">
     <meta name="twitter:image" content="https://snakemeasurer.com/og-image.png">
 
     <!-- hreflang — single page with JS switching; x-default for all -->
@@ -45,6 +51,12 @@
     <link rel="alternate" hreflang="de" href="https://snakemeasurer.com/">
     <link rel="alternate" hreflang="pt" href="https://snakemeasurer.com/">
     <link rel="alternate" hreflang="it" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="uk" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="nl" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="pl" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="ja" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="ko" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="ar" href="https://snakemeasurer.com/">
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -59,17 +71,17 @@
         "@type": "WebApplication",
         "name": "Snake Measurer",
         "alternateName": ["Измеритель змей", "Medidor de Serpientes", "Mesureur de Serpents", "Schlangenmesser", "Medidor de Cobras", "Misuratore di Serpenti"],
-        "description": "Measure snake length accurately from photos using reference objects. Free tool for reptile enthusiasts, breeders, and researchers.",
+        "description": "Measure snake length from a photo, auto-detect with AI, and track each snake's growth over time. Free tool for reptile enthusiasts, breeders, and researchers, with cloud sync, multiple profiles, and growth charts.",
         "url": "https://snakemeasurer.com/",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
         "browserRequirements": "Requires JavaScript and WebAssembly support.",
-        "softwareVersion": "1.0.0",
+        "softwareVersion": "1.6.0",
         "inLanguage": ["en", "ru", "es", "fr", "de", "pt", "it"],
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "author": { "@type": "Organization", "name": "SerpWidgets", "url": "https://serpwidgets.app" },
         "screenshot": "https://snakemeasurer.com/og-image.png",
-        "featureList": "Measure snake length from photos, Multiple measurement units (cm/mm/m/in/ft), Reference object calibration, Measurement history, Works offline, Dark mode"
+        "featureList": "Measure snake length from photos, AI auto-detect of snake and reference, Growth charts over time, Multiple snake profiles, Cloud sync, Multiple measurement units (cm/mm/m/in/ft), CSV and PNG export, Works offline, Dark mode"
     }
     </script>
 
@@ -84,7 +96,7 @@
                 "name": "How does Snake Measurer work?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Upload a photo of your snake with a reference object (ruler, credit card, etc.). Mark the reference, enter its size, then trace along your snake's body. The app uses the reference scale to calculate the real length."
+                    "text": "Upload a photo of your snake with a reference object (ruler, card, etc.). Mark the reference, enter its size, then trace along your snake's body. The app uses the reference scale to calculate the real length."
                 }
             },
             {
@@ -92,7 +104,7 @@
                 "name": "What can I use as a reference object?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Any object with a known size: a ruler, credit card (85.6 mm), coin, or anything you can measure. Place it next to your snake in the photo."
+                    "text": "Any object with a known size: a ruler, a card (85.6 mm), coin, or anything you can measure. Place it next to your snake in the photo."
                 }
             },
             {
@@ -108,7 +120,7 @@
                 "name": "Is Snake Measurer free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes! Snake Measurer is free with all core features including measuring, multiple units, and offline support. Premium options are available for cloud sync and unlimited history."
+                    "text": "Yes! The free version includes measuring, growth charts, CSV export, and cloud sync. Premium unlocks unlimited saved measurements, multiple snake profiles, and AI auto-detect."
                 }
             }
         ]
@@ -134,6 +146,7 @@
             background: var(--bg);
             -webkit-font-smoothing: antialiased;
             transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
         }
         a { color: var(--accent); text-decoration: none; }
         a:hover { text-decoration: underline; }
@@ -204,6 +217,9 @@
             transition: background 0.2s; text-decoration: none;
         }
         .header-cta:hover { background: var(--accent-h); text-decoration: none; }
+        .header-link { font-size: 14px; font-weight: 600; color: var(--text-sec); white-space: nowrap; }
+        .header-link:hover { color: var(--accent); text-decoration: none; }
+        @media (max-width: 600px) { .header-link { display: none; } }
 
         /* ── Hero ── */
         .hero {
@@ -233,6 +249,77 @@
         .hero-cta svg { width: 20px; height: 20px; }
         .hero-stores { margin-top: 20px; font-size: 14px; color: var(--text-sec); position: relative; }
         .hero-stores a { color: var(--accent2); font-weight: 600; }
+
+        /* ── Hero layout (copy + phone) ── */
+        .hero-grid { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 44px; }
+        .hero-copy { position: relative; z-index: 1; max-width: 100%; min-width: 0; }
+        .hero-visual { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; max-width: 100%; }
+        .phone-mock {
+            width: 216px; max-width: 62vw; aspect-ratio: 720 / 1516; flex: 0 0 auto;
+            padding: 9px; border-radius: 36px;
+            background: linear-gradient(160deg, #3a3a3e 0%, #1c1c1e 58%, #2a2a2e 100%);
+            box-shadow: 0 32px 64px -24px rgba(0,0,0,0.5), inset 0 0 0 1.5px rgba(255,255,255,0.06);
+        }
+        .phone-mock img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; border-radius: 28px; }
+        /* Mobile/narrow hero: swipeable snake carousel instead of the portrait phone mockup */
+        .hero-carousel-wrap { display: none; }
+        @media (max-width: 879px) {
+            .phone-mock { display: none; }
+            .hero-carousel-wrap { display: block; width: 100%; }
+            .hero-carousel { display: flex; align-items: center; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            .hero-carousel::-webkit-scrollbar { display: none; }
+            .hero-carousel img { flex: 0 0 100%; width: 100%; height: auto; display: block; scroll-snap-align: center; }
+            .hero-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+            .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-sec); opacity: 0.4; border: none; padding: 0; cursor: pointer; transition: all 0.25s; }
+            .hero-dot.active { opacity: 1; background: var(--accent); width: 22px; border-radius: 4px; }
+            .hero-actions { flex-direction: column; align-items: stretch; }
+            .hero-actions .hero-cta { width: 100%; justify-content: center; }
+            .store-badges { flex-direction: row; gap: 10px; }
+            .store-badge { flex: 1; min-width: 0; width: auto; }
+        }
+        @media (min-width: 880px) {
+            .hero { padding: 64px 24px 60px; }
+            .hero-grid { flex-direction: row; justify-content: space-between; align-items: center; gap: 48px; text-align: left; }
+            .hero-copy { flex: 1 1 0; max-width: 540px; }
+            .hero-copy .hero-icon { margin-left: 0; }
+            .hero-grid .hero p { margin-left: 0; margin-right: 0; max-width: 520px; }
+            .hero-visual { flex: 0 0 auto; }
+            .hero h1 { font-size: 44px; }
+        }
+
+        /* ── Store badges ── */
+        .store-badges { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; justify-content: center; }
+        @media (min-width: 880px) { .store-badges { justify-content: flex-start; } }
+        .store-badge {
+            display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+            flex: 1 1 0; min-width: 0;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 9px 15px; color: var(--text);
+            transition: transform 0.15s, border-color 0.2s;
+        }
+        .store-badge:hover { transform: translateY(-1px); border-color: var(--accent); text-decoration: none; }
+        .store-badge svg { width: 22px; height: 22px; flex-shrink: 0; }
+        .store-badge small { display: block; font-size: 11px; font-weight: 500; color: var(--text-sec); line-height: 1.1; }
+        .store-badge b { font-weight: 700; font-size: 14px; line-height: 1.15; }
+
+        /* ── Hero actions: Open App + store badges in one horizontal row ── */
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; justify-content: center; margin-top: 28px; }
+        @media (min-width: 880px) { .hero-actions { justify-content: flex-start; } .hero-actions .store-badges { flex: 1; } }
+        .hero-actions .hero-cta { margin: 0; }
+        .hero-actions .store-badges { margin-top: 0; align-items: stretch; }
+
+        /* ── Install QR (desktop only — scan to hand off to a phone) ── */
+        .hero-qr { display: none; }
+        @media (min-width: 880px) {
+            .hero-qr { display: flex; align-items: center; gap: 14px; margin-top: 22px; }
+            .hero-qr img { width: 108px; height: 108px; border-radius: 14px; background: #fff; padding: 9px; box-sizing: content-box; }
+            .hero-qr span { font-size: 13px; font-weight: 600; color: var(--text-sec); line-height: 1.4; max-width: 150px; }
+        }
+
+        /* ── Scroll reveal ── */
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
         /* ── Section shared ── */
         section { padding: 64px 0; }
@@ -275,6 +362,11 @@
             background: var(--icon-bg); margin-bottom: 16px; color: var(--accent);
         }
         .feature-icon svg { width: 24px; height: 24px; }
+        /* Per-card accent colors (blue=reference, purple=snake, green=growth, orange, cyan) */
+        .features-grid .feature-card:nth-child(1) .feature-icon { color: #2E8FFF; background: rgba(46,143,255,0.12); }
+        .features-grid .feature-card:nth-child(3) .feature-icon { color: #34C759; background: rgba(52,199,89,0.13); }
+        .features-grid .feature-card:nth-child(4) .feature-icon { color: #FF9500; background: rgba(255,149,0,0.13); }
+        .features-grid .feature-card:nth-child(5) .feature-icon { color: #32ADE6; background: rgba(50,173,230,0.13); }
         .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
         .feature-card p { font-size: 15px; color: var(--text-sec); line-height: 1.5; }
 
@@ -340,6 +432,7 @@
             <span data-t="app_name">Snake Measurer</span>
         </div>
         <div class="header-actions">
+            <a href="/pricing.html" class="header-link" data-t="pricing">Pricing</a>
             <select class="lang-select" id="langSelect" aria-label="Language">
                 <option value="en">English</option>
                 <option value="ru">Русский</option>
@@ -348,6 +441,12 @@
                 <option value="de">Deutsch</option>
                 <option value="pt">Português</option>
                 <option value="it">Italiano</option>
+                <option value="uk">Українська</option>
+                <option value="nl">Nederlands</option>
+                <option value="pl">Polski</option>
+                <option value="ja">日本語</option>
+                <option value="ko">한국어</option>
+                <option value="ar">العربية</option>
             </select>
             <button class="theme-btn" id="themeBtn" aria-label="Toggle theme"></button>
             <a href="/app/" class="header-cta"><span data-t="nav_cta">Open App</span> &rarr;</a>
@@ -357,19 +456,45 @@
 
 <!-- Hero -->
 <section class="hero">
-    <div class="container">
-        <img class="hero-icon" src="icon-192.png" alt="Snake Measurer" width="88" height="88">
-        <h1 data-t="hero_title">Measure Your Snake's Length from Photos</h1>
-        <p data-t="hero_sub">Accurate measurements using reference objects. Free, easy, works on any device.</p>
-        <a href="/app/" class="hero-cta">
-            <span data-t="hero_cta">Open App</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <p class="hero-stores">
-            <span data-t="hero_also">Also available on</span>
-            <a href="https://apps.apple.com/app/snake-measurer/id6760619393">App Store</a> &middot;
-            <a href="https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer">Google Play</a>
-        </p>
+    <div class="container hero-grid">
+        <div class="hero-copy reveal">
+            <img class="hero-icon" src="icon-192.png" alt="Snake Measurer" width="88" height="88">
+            <h1 data-t="hero_title">Measure Your Snake's Length from Photos</h1>
+            <p data-t="hero_sub">Measure length from a photo, auto-detect with AI, and track every snake's growth over time. Free, and works on any device.</p>
+            <div class="hero-actions">
+            <a href="/app/" class="hero-cta">
+                <span data-t="hero_cta">Open App</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <div class="store-badges">
+                <a class="store-badge" href="https://apps.apple.com/app/snake-measurer/id6760619393" aria-label="Download on the App Store">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.466 2.23-1.22 3.02-.81.86-2.13 1.52-3.23 1.43-.13-1.1.42-2.27 1.16-3.04.82-.86 2.24-1.49 3.29-1.41zM20.6 17.04c-.55 1.27-.82 1.84-1.53 2.97-.99 1.57-2.39 3.53-4.12 3.54-1.54.02-1.94-1-4.03-.99-2.09.01-2.53.99-4.07.97-1.73-.02-3.06-1.79-4.05-3.36-2.77-4.39-3.06-9.54-1.35-12.28 1.21-1.95 3.13-3.09 4.93-3.09 1.84 0 2.99 1.01 4.51 1.01 1.47 0 2.37-1.01 4.5-1.01 1.6 0 3.3.87 4.51 2.38-3.96 2.17-3.31 7.82.27 9.35z"/></svg>
+                    <span><small>Download on the</small><b>App Store</b></span>
+                </a>
+                <a class="store-badge" href="https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer" aria-label="Get it on Google Play">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.06 2.5C3.02 2.62 3 2.75 3 2.9v18.2c0 .15.02.28.06.4L13 12 3.06 2.5zm11.36 8.06 2.7-1.56-9.9-5.66c-.5-.29-.98-.22-1.32-.02l8.52 7.24zm0 2.88-8.52 7.24c.34.2.82.27 1.32-.02l9.9-5.66-2.7-1.56zM20.5 10.8l-2.62-1.5-2.96 1.7 2.96 1.7 2.62-1.5c.66-.38.66-1.32 0-1.7z"/></svg>
+                    <span><small>Get it on</small><b>Google Play</b></span>
+                </a>
+            </div>
+            </div>
+            <div class="hero-qr">
+                <img src="qr-code.png" width="108" height="108" alt="Scan to install Snake Measurer on your phone" loading="lazy">
+                <span>Scan to install<br>on your phone</span>
+            </div>
+        </div>
+        <div class="hero-visual reveal">
+            <div class="phone-mock">
+                <img src="screenshot-measure.jpg" alt="Snake Measurer app tracing a snake's length from a photo next to a reference ruler" width="720" height="1600" loading="eager">
+            </div>
+            <div class="hero-carousel-wrap">
+                <div class="hero-carousel" id="heroCarousel">
+                    <img src="snake-1.webp" alt="A butter corn snake measured along its length with the app" width="1200" height="555" loading="eager">
+                    <img src="snake-2.webp" alt="A corn snake measured along its length with the app" width="1015" height="636" loading="lazy">
+                    <img src="snake-3.webp" alt="A snake measured against a ruler reference with the app" width="1200" height="637" loading="lazy">
+                </div>
+                <div class="hero-dots" id="heroDots"></div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -378,15 +503,15 @@
     <div class="container">
         <h2 class="section-title" data-t="how_title">How It Works</h2>
         <div class="steps-grid">
-            <div class="step">
+            <div class="step reveal">
                 <div class="step-num">1</div>
                 <div class="step-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
                 </div>
                 <h3 data-t="s1_title">Upload a Photo</h3>
-                <p data-t="s1_desc">Take a photo of your snake next to a reference object like a ruler or credit card.</p>
+                <p data-t="s1_desc">Take a photo of your snake next to a reference object like a ruler or a card.</p>
             </div>
-            <div class="step">
+            <div class="step reveal">
                 <div class="step-num">2</div>
                 <div class="step-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="22" height="12" rx="1"/><line x1="4" y1="6" x2="4" y2="10"/><line x1="8" y1="6" x2="8" y2="12"/><line x1="12" y1="6" x2="12" y2="10"/><line x1="16" y1="6" x2="16" y2="12"/><line x1="20" y1="6" x2="20" y2="10"/></svg>
@@ -394,13 +519,13 @@
                 <h3 data-t="s2_title">Set the Reference</h3>
                 <p data-t="s2_desc">Mark two points on the reference object and enter its known size.</p>
             </div>
-            <div class="step">
+            <div class="step reveal">
                 <div class="step-num">3</div>
                 <div class="step-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                 </div>
                 <h3 data-t="s3_title">Measure the Snake</h3>
-                <p data-t="s3_desc">Trace points along your snake's body. The app calculates the real length instantly.</p>
+                <p data-t="s3_desc">Trace points along the body — or let AI auto-detect it. The app calculates the real length instantly.</p>
             </div>
         </div>
     </div>
@@ -411,33 +536,47 @@
     <div class="container">
         <h2 class="section-title" data-t="feat_title">Features</h2>
         <div class="features-grid">
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                 </div>
                 <h3 data-t="f1_title">Precise Measurements</h3>
                 <p data-t="f1_desc">Pixel-accurate calculations based on reference object scale.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><path d="M19 14l.9 2.1L22 17l-2.1.9L19 20l-.9-2.1L16 17l2.1-.9z"/></svg>
+                </div>
+                <h3 data-t="f5_title">AI Auto-Detect</h3>
+                <p data-t="f5_desc">Let AI trace your snake and the reference for you — no careful tapping.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>
+                </div>
+                <h3 data-t="f4_title">Growth Charts</h3>
+                <p data-t="f4_desc">Track length and growth rate over time with clear charts.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3 data-t="f6_title">Multiple Profiles</h3>
+                <p data-t="f6_desc">Keep a separate profile and history for every snake you own.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><polyline points="9.5 14.5 11 16 14.5 12.5"/></svg>
+                </div>
+                <h3 data-t="f3_title">Sync &amp; Offline</h3>
+                <p data-t="f3_desc">Works offline; sign in to back up and sync across your devices.</p>
+            </div>
+            <div class="feature-card reveal">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
                 </div>
                 <h3 data-t="f2_title">Multiple Units</h3>
                 <p data-t="f2_desc">Centimeters, millimeters, meters, inches, or feet — your choice.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><polyline points="9.5 14.5 11 16 14.5 12.5"/></svg>
-                </div>
-                <h3 data-t="f3_title">Works Offline</h3>
-                <p data-t="f3_desc">No internet needed after loading. Your data stays on your device.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <h3 data-t="f4_title">Save &amp; Compare</h3>
-                <p data-t="f4_desc">Save measurements and track your snake's growth over time.</p>
             </div>
         </div>
     </div>
@@ -450,11 +589,11 @@
         <div class="faq-list">
             <div class="faq-item">
                 <button class="faq-q" data-t="q1">How does Snake Measurer work?</button>
-                <div class="faq-a"><p data-t="a1">Upload a photo of your snake with a reference object (ruler, credit card, etc.). Mark the reference, enter its size, then trace along your snake's body. The app uses the reference scale to calculate the real length.</p></div>
+                <div class="faq-a"><p data-t="a1">Upload a photo of your snake with a reference object (ruler, card, etc.). Mark the reference, enter its size, then trace along your snake's body. The app uses the reference scale to calculate the real length.</p></div>
             </div>
             <div class="faq-item">
                 <button class="faq-q" data-t="q2">What can I use as a reference object?</button>
-                <div class="faq-a"><p data-t="a2">Any object with a known size: a ruler, credit card (85.6 mm), coin, or anything you can measure. Place it next to your snake in the photo.</p></div>
+                <div class="faq-a"><p data-t="a2">Any object with a known size: a ruler, a card (85.6 mm), coin, or anything you can measure. Place it next to your snake in the photo.</p></div>
             </div>
             <div class="faq-item">
                 <button class="faq-q" data-t="q3">How accurate is it?</button>
@@ -462,7 +601,7 @@
             </div>
             <div class="faq-item">
                 <button class="faq-q" data-t="q4">Is it free?</button>
-                <div class="faq-a"><p data-t="a4">Yes! Snake Measurer is free with all core features. Premium options are available for users who need cloud sync and unlimited history.</p></div>
+                <div class="faq-a"><p data-t="a4">Yes! The free version includes measuring, growth charts, CSV export, and cloud sync. Premium unlocks unlimited saved measurements, multiple snake profiles, and AI auto-detect.</p></div>
             </div>
         </div>
     </div>
@@ -472,6 +611,7 @@
 <footer>
     <div class="container">
         <div class="footer-links">
+            <a href="/pricing.html" data-t="pricing">Pricing</a>
             <a href="#" id="privacyLink" data-t="privacy">Privacy Policy</a>
             <a href="#" id="termsLink" data-t="terms">Terms of Use</a>
         </div>
@@ -485,37 +625,42 @@
     var L = {
         en: {
             app_name: "Snake Measurer",
-            meta_keywords: "snake measurer, measure snake length, snake length from photo, reptile measurement tool, snake size calculator, ball python length, boa constrictor size, corn snake measurement, reference object measurement, pet snake growth tracker, how to measure a snake, snake length app, reptile care tools",
+            meta_keywords: "snake measurer, measure snake length, snake length from photo, reptile measurement tool, snake size calculator, reference object measurement, ball python length, boa constrictor size, corn snake measurement, snake growth tracker, snake growth chart, multiple snake profiles, AI snake detection, how to measure a snake",
             nav_cta: "Open App",
+            pricing: "Pricing",
             hero_title: "Measure Your Snake's Length from Photos",
-            hero_sub: "Accurate measurements using reference objects. Free, easy, works on any device.",
+            hero_sub: "Measure length from a photo, auto-detect with AI, and track every snake's growth over time. Free, and works on any device.",
             hero_cta: "Open App",
             hero_also: "Also available on",
             how_title: "How It Works",
             s1_title: "Upload a Photo",
-            s1_desc: "Take a photo of your snake next to a reference object like a ruler or credit card.",
+            s1_desc: "Take a photo of your snake next to a reference object like a ruler or a card.",
             s2_title: "Set the Reference",
             s2_desc: "Mark two points on the reference object and enter its known size.",
             s3_title: "Measure the Snake",
-            s3_desc: "Trace points along your snake's body. The app calculates the real length instantly.",
+            s3_desc: "Trace points along the body — or let AI auto-detect it. The app calculates the real length instantly.",
             feat_title: "Features",
             f1_title: "Precise Measurements",
             f1_desc: "Pixel-accurate calculations based on reference object scale.",
             f2_title: "Multiple Units",
             f2_desc: "Centimeters, millimeters, meters, inches, or feet \u2014 your choice.",
-            f3_title: "Works Offline",
-            f3_desc: "No internet needed after loading. Your data stays on your device.",
-            f4_title: "Save & Compare",
-            f4_desc: "Save measurements and track your snake\u2019s growth over time.",
+            f3_title: "Sync & Offline",
+            f3_desc: "Works offline; sign in to back up and sync across your devices.",
+            f4_title: "Growth Charts",
+            f4_desc: "Track length and growth rate over time with clear charts.",
+            f5_title: "AI Auto-Detect",
+            f5_desc: "Let AI trace your snake and the reference for you \u2014 no careful tapping.",
+            f6_title: "Multiple Profiles",
+            f6_desc: "Keep a separate profile and history for every snake you own.",
             faq_title: "Frequently Asked Questions",
             q1: "How does Snake Measurer work?",
-            a1: "Upload a photo of your snake with a reference object (ruler, credit card, etc.). Mark the reference, enter its size, then trace along your snake\u2019s body. The app uses the reference scale to calculate the real length.",
+            a1: "Upload a photo of your snake with a reference object (ruler, card, etc.). Mark the reference, enter its size, then trace along your snake\u2019s body. The app uses the reference scale to calculate the real length.",
             q2: "What can I use as a reference object?",
-            a2: "Any object with a known size: a ruler, credit card (85.6\u00a0mm), coin, or anything you can measure. Place it next to your snake in the photo.",
+            a2: "Any object with a known size: a ruler, a card (85.6\u00a0mm), coin, or anything you can measure. Place it next to your snake in the photo.",
             q3: "How accurate is it?",
             a3: "Accuracy depends on photo quality, reference placement, and tracing precision. For best results, take a top-down photo with the snake fully visible and the reference object nearby.",
             q4: "Is it free?",
-            a4: "Yes! Snake Measurer is free with all core features. Premium options are available for users who need cloud sync and unlimited history.",
+            a4: "Yes! The free version includes measuring, growth charts, CSV export, and cloud sync. Premium unlocks unlimited saved measurements, multiple snake profiles, and AI auto-detect.",
             privacy: "Privacy Policy",
             terms: "Terms of Use"
         },
@@ -523,35 +668,40 @@
             app_name: "\u0418\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0437\u043c\u0435\u0439",
             meta_keywords: "\u0438\u0437\u043c\u0435\u0440\u0438\u0442\u044c \u0434\u043b\u0438\u043d\u0443 \u0437\u043c\u0435\u0438, \u0438\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0437\u043c\u0435\u0439, \u0434\u043b\u0438\u043d\u0430 \u0437\u043c\u0435\u0438 \u043f\u043e \u0444\u043e\u0442\u043e, \u043a\u0430\u043a \u0438\u0437\u043c\u0435\u0440\u0438\u0442\u044c \u0437\u043c\u0435\u044e, \u0440\u0430\u0437\u043c\u0435\u0440 \u0437\u043c\u0435\u0438, \u043f\u0438\u0442\u043e\u043d \u0434\u043b\u0438\u043d\u0430, \u0443\u0434\u0430\u0432 \u0440\u0430\u0437\u043c\u0435\u0440, \u043a\u043e\u0440\u043e\u043b\u0435\u0432\u0441\u043a\u0438\u0439 \u043f\u0438\u0442\u043e\u043d, \u043c\u043e\u043b\u043e\u0447\u043d\u0430\u044f \u0437\u043c\u0435\u044f, \u0440\u043e\u0441\u0442 \u0437\u043c\u0435\u0438, \u0442\u0435\u0440\u0440\u0430\u0440\u0438\u0443\u043c\u043d\u044b\u0435 \u0436\u0438\u0432\u043e\u0442\u043d\u044b\u0435, \u0441\u043e\u0434\u0435\u0440\u0436\u0430\u043d\u0438\u0435 \u0437\u043c\u0435\u0439, \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u0435 \u0440\u0435\u043f\u0442\u0438\u043b\u0438\u0439",
             nav_cta: "\u041e\u0442\u043a\u0440\u044b\u0442\u044c",
+            pricing: "Цены",
             hero_title: "\u0418\u0437\u043c\u0435\u0440\u044f\u0439\u0442\u0435 \u0434\u043b\u0438\u043d\u0443 \u0437\u043c\u0435\u0438 \u043f\u043e \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0438",
-            hero_sub: "\u0422\u043e\u0447\u043d\u044b\u0435 \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e \u044d\u0442\u0430\u043b\u043e\u043d\u043d\u044b\u0445 \u043e\u0431\u044a\u0435\u043a\u0442\u043e\u0432. \u0411\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e, \u043f\u0440\u043e\u0441\u0442\u043e, \u043d\u0430 \u043b\u044e\u0431\u043e\u043c \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u0435.",
+            hero_sub: "Измеряйте длину по фото, распознавайте змею с помощью ИИ и следите за ростом каждой змеи со временем. Бесплатно, на любом устройстве.",
             hero_cta: "\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
             hero_also: "\u0422\u0430\u043a\u0436\u0435 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e \u043d\u0430",
             how_title: "\u041a\u0430\u043a \u044d\u0442\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442",
             s1_title: "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u0435 \u0444\u043e\u0442\u043e",
-            s1_desc: "\u0421\u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0440\u0443\u0439\u0442\u0435 \u0437\u043c\u0435\u044e \u0440\u044f\u0434\u043e\u043c \u0441 \u044d\u0442\u0430\u043b\u043e\u043d\u043d\u044b\u043c \u043e\u0431\u044a\u0435\u043a\u0442\u043e\u043c \u2014 \u043b\u0438\u043d\u0435\u0439\u043a\u043e\u0439 \u0438\u043b\u0438 \u0431\u0430\u043d\u043a\u043e\u0432\u0441\u043a\u043e\u0439 \u043a\u0430\u0440\u0442\u043e\u0439.",
+            s1_desc: "\u0421\u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0440\u0443\u0439\u0442\u0435 \u0437\u043c\u0435\u044e \u0440\u044f\u0434\u043e\u043c \u0441 \u044d\u0442\u0430\u043b\u043e\u043d\u043d\u044b\u043c \u043e\u0431\u044a\u0435\u043a\u0442\u043e\u043c \u2014 \u043b\u0438\u043d\u0435\u0439\u043a\u043e\u0439 \u0438\u043b\u0438 \u043a\u0430\u0440\u0442\u043e\u0439.",
             s2_title: "\u0423\u043a\u0430\u0436\u0438\u0442\u0435 \u044d\u0442\u0430\u043b\u043e\u043d",
             s2_desc: "\u041e\u0442\u043c\u0435\u0442\u044c\u0442\u0435 \u0434\u0432\u0435 \u0442\u043e\u0447\u043a\u0438 \u043d\u0430 \u044d\u0442\u0430\u043b\u043e\u043d\u043d\u043e\u043c \u043e\u0431\u044a\u0435\u043a\u0442\u0435 \u0438 \u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0435\u0433\u043e \u0440\u0430\u0437\u043c\u0435\u0440.",
             s3_title: "\u0418\u0437\u043c\u0435\u0440\u044c\u0442\u0435 \u0437\u043c\u0435\u044e",
-            s3_desc: "\u0420\u0430\u0441\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u0442\u043e\u0447\u043a\u0438 \u0432\u0434\u043e\u043b\u044c \u0442\u0435\u043b\u0430 \u0437\u043c\u0435\u0438. \u041f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u043c\u0433\u043d\u043e\u0432\u0435\u043d\u043d\u043e \u0440\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u0435\u0442 \u0440\u0435\u0430\u043b\u044c\u043d\u0443\u044e \u0434\u043b\u0438\u043d\u0443.",
+            s3_desc: "Расставьте точки вдоль тела — или доверьте это ИИ. Приложение мгновенно рассчитает реальную длину.",
             feat_title: "\u0412\u043e\u0437\u043c\u043e\u0436\u043d\u043e\u0441\u0442\u0438",
             f1_title: "\u0422\u043e\u0447\u043d\u044b\u0435 \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f",
             f1_desc: "\u0420\u0430\u0441\u0447\u0451\u0442\u044b \u0441 \u0442\u043e\u0447\u043d\u043e\u0441\u0442\u044c\u044e \u0434\u043e \u043f\u0438\u043a\u0441\u0435\u043b\u044f \u043d\u0430 \u043e\u0441\u043d\u043e\u0432\u0435 \u043c\u0430\u0441\u0448\u0442\u0430\u0431\u0430 \u044d\u0442\u0430\u043b\u043e\u043d\u0430.",
             f2_title: "\u0420\u0430\u0437\u043d\u044b\u0435 \u0435\u0434\u0438\u043d\u0438\u0446\u044b",
             f2_desc: "\u0421\u0430\u043d\u0442\u0438\u043c\u0435\u0442\u0440\u044b, \u043c\u0438\u043b\u043b\u0438\u043c\u0435\u0442\u0440\u044b, \u043c\u0435\u0442\u0440\u044b, \u0434\u044e\u0439\u043c\u044b \u0438\u043b\u0438 \u0444\u0443\u0442\u044b \u2014 \u043d\u0430 \u0432\u0430\u0448 \u0432\u044b\u0431\u043e\u0440.",
-            f3_title: "\u0420\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u043e\u0444\u043b\u0430\u0439\u043d",
-            f3_desc: "\u0418\u043d\u0442\u0435\u0440\u043d\u0435\u0442 \u043d\u0435 \u043d\u0443\u0436\u0435\u043d \u043f\u043e\u0441\u043b\u0435 \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438. \u0414\u0430\u043d\u043d\u044b\u0435 \u043e\u0441\u0442\u0430\u044e\u0442\u0441\u044f \u043d\u0430 \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u0435.",
-            f4_title: "\u0421\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0435 \u0438 \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435",
-            f4_desc: "\u0421\u043e\u0445\u0440\u0430\u043d\u044f\u0439\u0442\u0435 \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f \u0438 \u043e\u0442\u0441\u043b\u0435\u0436\u0438\u0432\u0430\u0439\u0442\u0435 \u0440\u043e\u0441\u0442 \u0437\u043c\u0435\u0438 \u0441\u043e \u0432\u0440\u0435\u043c\u0435\u043d\u0435\u043c.",
+            f3_title: "Синхронизация и офлайн",
+            f3_desc: "Работает офлайн; войдите, чтобы создать резервную копию и синхронизировать данные на всех устройствах.",
+            f4_title: "Графики роста",
+            f4_desc: "Отслеживайте длину и скорость роста со временем на наглядных графиках.",
+            f5_title: "Распознавание с ИИ",
+            f5_desc: "Позвольте ИИ автоматически отметить змею и эталон — без кропотливых нажатий.",
+            f6_title: "Несколько профилей",
+            f6_desc: "Ведите отдельный профиль и историю для каждой вашей змеи.",
             faq_title: "\u0427\u0430\u0441\u0442\u043e \u0437\u0430\u0434\u0430\u0432\u0430\u0435\u043c\u044b\u0435 \u0432\u043e\u043f\u0440\u043e\u0441\u044b",
             q1: "\u041a\u0430\u043a \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u0418\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0437\u043c\u0435\u0439?",
             a1: "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u0435 \u0444\u043e\u0442\u043e \u0437\u043c\u0435\u0438 \u0441 \u044d\u0442\u0430\u043b\u043e\u043d\u043d\u044b\u043c \u043e\u0431\u044a\u0435\u043a\u0442\u043e\u043c (\u043b\u0438\u043d\u0435\u0439\u043a\u0430, \u043a\u0430\u0440\u0442\u0430 \u0438 \u0442.\u0434.). \u041e\u0442\u043c\u0435\u0442\u044c\u0442\u0435 \u044d\u0442\u0430\u043b\u043e\u043d, \u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0440\u0430\u0437\u043c\u0435\u0440, \u0437\u0430\u0442\u0435\u043c \u0440\u0430\u0441\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u0442\u043e\u0447\u043a\u0438 \u0432\u0434\u043e\u043b\u044c \u0442\u0435\u043b\u0430 \u0437\u043c\u0435\u0438. \u041f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u0440\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u0435\u0442 \u0440\u0435\u0430\u043b\u044c\u043d\u0443\u044e \u0434\u043b\u0438\u043d\u0443.",
             q2: "\u0427\u0442\u043e \u043c\u043e\u0436\u043d\u043e \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u0432 \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0435 \u044d\u0442\u0430\u043b\u043e\u043d\u0430?",
-            a2: "\u041b\u044e\u0431\u043e\u0439 \u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u0441 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u043c \u0440\u0430\u0437\u043c\u0435\u0440\u043e\u043c: \u043b\u0438\u043d\u0435\u0439\u043a\u0430, \u0431\u0430\u043d\u043a\u043e\u0432\u0441\u043a\u0430\u044f \u043a\u0430\u0440\u0442\u0430 (85,6\u00a0\u043c\u043c), \u043c\u043e\u043d\u0435\u0442\u0430 \u0438\u043b\u0438 \u043b\u044e\u0431\u043e\u0439 \u0438\u0437\u043c\u0435\u0440\u0438\u043c\u044b\u0439 \u043f\u0440\u0435\u0434\u043c\u0435\u0442. \u041f\u043e\u043b\u043e\u0436\u0438\u0442\u0435 \u0435\u0433\u043e \u0440\u044f\u0434\u043e\u043c \u0441\u043e \u0437\u043c\u0435\u0451\u0439 \u043d\u0430 \u0444\u043e\u0442\u043e.",
+            a2: "\u041b\u044e\u0431\u043e\u0439 \u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u0441 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u043c \u0440\u0430\u0437\u043c\u0435\u0440\u043e\u043c: \u043b\u0438\u043d\u0435\u0439\u043a\u0430, \u043a\u0430\u0440\u0442\u0430 (85,6\u00a0\u043c\u043c), \u043c\u043e\u043d\u0435\u0442\u0430 \u0438\u043b\u0438 \u043b\u044e\u0431\u043e\u0439 \u0438\u0437\u043c\u0435\u0440\u0438\u043c\u044b\u0439 \u043f\u0440\u0435\u0434\u043c\u0435\u0442. \u041f\u043e\u043b\u043e\u0436\u0438\u0442\u0435 \u0435\u0433\u043e \u0440\u044f\u0434\u043e\u043c \u0441\u043e \u0437\u043c\u0435\u0451\u0439 \u043d\u0430 \u0444\u043e\u0442\u043e.",
             q3: "\u041d\u0430\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u044d\u0442\u043e \u0442\u043e\u0447\u043d\u043e?",
             a3: "\u0422\u043e\u0447\u043d\u043e\u0441\u0442\u044c \u0437\u0430\u0432\u0438\u0441\u0438\u0442 \u043e\u0442 \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0430 \u0444\u043e\u0442\u043e, \u0440\u0430\u0441\u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0438\u044f \u044d\u0442\u0430\u043b\u043e\u043d\u0430 \u0438 \u0442\u043e\u0447\u043d\u043e\u0441\u0442\u0438 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u0438. \u0414\u043b\u044f \u043b\u0443\u0447\u0448\u0438\u0445 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432 \u0441\u0434\u0435\u043b\u0430\u0439\u0442\u0435 \u0444\u043e\u0442\u043e \u0441\u0432\u0435\u0440\u0445\u0443 \u0441 \u043f\u043e\u043b\u043d\u043e\u0441\u0442\u044c\u044e \u0432\u0438\u0434\u0438\u043c\u043e\u0439 \u0437\u043c\u0435\u0451\u0439.",
             q4: "\u042d\u0442\u043e \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e?",
-            a4: "\u0414\u0430! \u0418\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0437\u043c\u0435\u0439 \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u0435\u043d \u0441\u043e \u0432\u0441\u0435\u043c\u0438 \u043e\u0441\u043d\u043e\u0432\u043d\u044b\u043c\u0438 \u0444\u0443\u043d\u043a\u0446\u0438\u044f\u043c\u0438. \u041f\u0440\u0435\u043c\u0438\u0443\u043c-\u043e\u043f\u0446\u0438\u0438 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b \u0434\u043b\u044f \u043e\u0431\u043b\u0430\u0447\u043d\u043e\u0439 \u0441\u0438\u043d\u0445\u0440\u043e\u043d\u0438\u0437\u0430\u0446\u0438\u0438 \u0438 \u043d\u0435\u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0439 \u0438\u0441\u0442\u043e\u0440\u0438\u0438.",
+            a4: "Да! Бесплатная версия включает измерения, графики роста, экспорт в CSV и облачную синхронизацию. Премиум открывает неограниченное число сохранённых измерений, несколько профилей змей и распознавание с ИИ.",
             privacy: "\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438",
             terms: "\u0423\u0441\u043b\u043e\u0432\u0438\u044f \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u044f"
         },
@@ -559,8 +709,9 @@
             app_name: "Medidor de Serpientes",
             meta_keywords: "medir serpiente, medidor de serpientes, longitud de serpiente por foto, medir largo de serpiente, tama\u00f1o de serpiente, pit\u00f3n bola longitud, boa constrictor tama\u00f1o, serpiente del ma\u00edz, herramienta medici\u00f3n reptiles, crecimiento serpiente mascota, c\u00f3mo medir una serpiente, cuidado de reptiles",
             nav_cta: "Abrir",
+            pricing: "Precios",
             hero_title: "Mide la longitud de tu serpiente con fotos",
-            hero_sub: "Mediciones precisas con objetos de referencia. Gratis, f\u00e1cil, en cualquier dispositivo.",
+            hero_sub: "Mide la longitud desde una foto, detecta con IA y sigue el crecimiento de cada serpiente con el tiempo. Gratis y en cualquier dispositivo.",
             hero_cta: "Abrir aplicaci\u00f3n",
             hero_also: "Tambi\u00e9n disponible en",
             how_title: "C\u00f3mo funciona",
@@ -569,29 +720,34 @@
             s2_title: "Establece la referencia",
             s2_desc: "Marca dos puntos en el objeto de referencia e ingresa su tama\u00f1o conocido.",
             s3_title: "Mide la serpiente",
-            s3_desc: "Traza puntos a lo largo del cuerpo. La app calcula la longitud real al instante.",
+            s3_desc: "Traza puntos a lo largo del cuerpo — o deja que la IA lo detecte. La app calcula la longitud real al instante.",
             feat_title: "Caracter\u00edsticas",
             f1_title: "Mediciones precisas", f1_desc: "C\u00e1lculos precisos basados en la escala del objeto de referencia.",
             f2_title: "M\u00faltiples unidades", f2_desc: "Cent\u00edmetros, mil\u00edmetros, metros, pulgadas o pies \u2014 t\u00fa eliges.",
-            f3_title: "Funciona sin internet", f3_desc: "Sin internet despu\u00e9s de cargar. Tus datos permanecen en tu dispositivo.",
-            f4_title: "Guardar y comparar", f4_desc: "Guarda mediciones y sigue el crecimiento de tu serpiente.",
+            f3_title: "Sincronización y sin conexión", f3_desc: "Funciona sin conexión; inicia sesión para hacer copias de seguridad y sincronizar entre tus dispositivos.",
+            f4_title: "Gráficos de crecimiento", f4_desc: "Sigue la longitud y el ritmo de crecimiento con el tiempo mediante gráficos claros.",
+            f5_title: "Detección con IA",
+            f5_desc: "Deja que la IA trace tu serpiente y la referencia por ti — sin toques precisos.",
+            f6_title: "Múltiples perfiles",
+            f6_desc: "Mantén un perfil e historial separados para cada serpiente que tengas.",
             faq_title: "Preguntas frecuentes",
             q1: "\u00bfC\u00f3mo funciona Medidor de Serpientes?",
             a1: "Sube una foto de tu serpiente con un objeto de referencia (regla, tarjeta, etc.). Marca la referencia, ingresa su tama\u00f1o, luego traza el cuerpo. La app usa la escala para calcular la longitud real.",
             q2: "\u00bfQu\u00e9 puedo usar como objeto de referencia?",
-            a2: "Cualquier objeto con tama\u00f1o conocido: regla, tarjeta bancaria (85,6\u00a0mm), moneda o cualquier cosa medible. Col\u00f3calo junto a tu serpiente.",
+            a2: "Cualquier objeto con tama\u00f1o conocido: regla, tarjeta (85,6\u00a0mm), moneda o cualquier cosa medible. Col\u00f3calo junto a tu serpiente.",
             q3: "\u00bfQu\u00e9 tan preciso es?",
             a3: "La precisi\u00f3n depende de la calidad de la foto, la colocaci\u00f3n de la referencia y la precisi\u00f3n del trazado. Para mejores resultados, toma una foto desde arriba.",
             q4: "\u00bfEs gratis?",
-            a4: "\u00a1S\u00ed! Medidor de Serpientes es gratis con todas las funciones principales. Opciones premium disponibles para sincronizaci\u00f3n en la nube e historial ilimitado.",
+            a4: "¡Sí! La versión gratuita incluye medición, gráficos de crecimiento, exportación CSV y sincronización en la nube. Premium desbloquea mediciones guardadas ilimitadas, múltiples perfiles de serpientes y detección con IA.",
             privacy: "Pol\u00edtica de privacidad", terms: "T\u00e9rminos de uso"
         },
         fr: {
             app_name: "Mesureur de Serpents",
             meta_keywords: "mesurer serpent, mesureur de serpents, longueur serpent photo, taille du serpent, python royal longueur, boa constrictor taille, serpent des bl\u00e9s, outil mesure reptile, croissance serpent, comment mesurer un serpent, application serpent, soins reptiles, terrariophilie",
             nav_cta: "Ouvrir",
+            pricing: "Tarifs",
             hero_title: "Mesurez votre serpent \u00e0 partir de photos",
-            hero_sub: "Mesures pr\u00e9cises avec des objets de r\u00e9f\u00e9rence. Gratuit, simple, sur tout appareil.",
+            hero_sub: "Mesurez la longueur à partir d’une photo, détectez avec l’IA et suivez la croissance de chaque serpent dans le temps. Gratuit, sur tout appareil.",
             hero_cta: "Ouvrir l\u2019application",
             hero_also: "\u00c9galement disponible sur",
             how_title: "Comment \u00e7a marche",
@@ -600,60 +756,70 @@
             s2_title: "D\u00e9finir la r\u00e9f\u00e9rence",
             s2_desc: "Marquez deux points sur l\u2019objet de r\u00e9f\u00e9rence et entrez sa taille connue.",
             s3_title: "Mesurez le serpent",
-            s3_desc: "Tracez des points le long du corps. L\u2019appli calcule la longueur r\u00e9elle instantan\u00e9ment.",
+            s3_desc: "Tracez des points le long du corps — ou laissez l’IA le détecter. L’appli calcule la longueur réelle instantanément.",
             feat_title: "Fonctionnalit\u00e9s",
             f1_title: "Mesures pr\u00e9cises", f1_desc: "Calculs pr\u00e9cis bas\u00e9s sur l\u2019\u00e9chelle de l\u2019objet de r\u00e9f\u00e9rence.",
             f2_title: "Plusieurs unit\u00e9s", f2_desc: "Centim\u00e8tres, millim\u00e8tres, m\u00e8tres, pouces ou pieds \u2014 \u00e0 vous de choisir.",
-            f3_title: "Fonctionne hors ligne", f3_desc: "Pas d\u2019internet n\u00e9cessaire apr\u00e8s le chargement. Vos donn\u00e9es restent sur votre appareil.",
-            f4_title: "Enregistrer et comparer", f4_desc: "Enregistrez les mesures et suivez la croissance de votre serpent.",
+            f3_title: "Synchronisation et hors ligne", f3_desc: "Fonctionne hors ligne ; connectez-vous pour sauvegarder et synchroniser sur tous vos appareils.",
+            f4_title: "Courbes de croissance", f4_desc: "Suivez la longueur et le rythme de croissance dans le temps avec des graphiques clairs.",
+            f5_title: "Détection par IA",
+            f5_desc: "Laissez l’IA tracer votre serpent et la référence à votre place — sans pointer avec précision.",
+            f6_title: "Profils multiples",
+            f6_desc: "Conservez un profil et un historique distincts pour chaque serpent que vous possédez.",
             faq_title: "Questions fr\u00e9quentes",
             q1: "Comment fonctionne Mesureur de Serpents\u00a0?",
             a1: "Chargez une photo avec un objet de r\u00e9f\u00e9rence (r\u00e8gle, carte, etc.). Marquez la r\u00e9f\u00e9rence, entrez sa taille, puis tracez le corps. L\u2019appli calcule la longueur r\u00e9elle.",
             q2: "Que puis-je utiliser comme r\u00e9f\u00e9rence\u00a0?",
-            a2: "Tout objet de taille connue\u00a0: r\u00e8gle, carte bancaire (85,6\u00a0mm), pi\u00e8ce de monnaie. Placez-le \u00e0 c\u00f4t\u00e9 de votre serpent.",
+            a2: "Tout objet de taille connue\u00a0: r\u00e8gle, carte (85,6\u00a0mm), pi\u00e8ce de monnaie. Placez-le \u00e0 c\u00f4t\u00e9 de votre serpent.",
             q3: "Quelle est la pr\u00e9cision\u00a0?",
             a3: "La pr\u00e9cision d\u00e9pend de la qualit\u00e9 de la photo, du placement de la r\u00e9f\u00e9rence et du trac\u00e9. Pour de meilleurs r\u00e9sultats, prenez une photo du dessus.",
             q4: "Est-ce gratuit\u00a0?",
-            a4: "Oui\u00a0! Mesureur de Serpents est gratuit avec toutes les fonctions principales. Options premium pour la synchronisation cloud et l\u2019historique illimit\u00e9.",
+            a4: "Oui ! La version gratuite inclut la mesure, les courbes de croissance, l’export CSV et la synchronisation cloud. Premium débloque les mesures enregistrées illimitées, plusieurs profils de serpents et la détection par IA.",
             privacy: "Politique de confidentialit\u00e9", terms: "Conditions d\u2019utilisation"
         },
         de: {
             app_name: "Schlangenmesser",
             meta_keywords: "Schlange messen, Schlangenmesser, Schlangenl\u00e4nge Foto, Schlange vermessen, K\u00f6nigspython L\u00e4nge, Boa Constrictor Gr\u00f6\u00dfe, Kornnatter messen, Reptilien Messwerkzeug, Schlangenwachstum, wie Schlange messen, Reptilienpflege, Terrarienhaltung, Schlangen App",
             nav_cta: "\u00d6ffnen",
+            pricing: "Preise",
             hero_title: "Messen Sie Ihre Schlange anhand von Fotos",
-            hero_sub: "Pr\u00e4zise Messungen mit Referenzobjekten. Kostenlos, einfach, auf jedem Ger\u00e4t.",
+            hero_sub: "Messen Sie die Länge anhand eines Fotos, erkennen Sie sie per KI und verfolgen Sie das Wachstum jeder Schlange über die Zeit. Kostenlos, auf jedem Gerät.",
             hero_cta: "App \u00f6ffnen",
             hero_also: "Auch verf\u00fcgbar auf",
             how_title: "So funktioniert\u2019s",
             s1_title: "Foto hochladen",
-            s1_desc: "Fotografieren Sie Ihre Schlange neben einem Referenzobjekt wie einem Lineal oder einer Kreditkarte.",
+            s1_desc: "Fotografieren Sie Ihre Schlange neben einem Referenzobjekt wie einem Lineal oder einer Karte.",
             s2_title: "Referenz festlegen",
             s2_desc: "Markieren Sie zwei Punkte am Referenzobjekt und geben Sie seine bekannte Gr\u00f6\u00dfe ein.",
             s3_title: "Schlange messen",
-            s3_desc: "Setzen Sie Punkte entlang des K\u00f6rpers. Die App berechnet sofort die echte L\u00e4nge.",
+            s3_desc: "Setzen Sie Punkte entlang des Körpers — oder lassen Sie die KI sie automatisch erkennen. Die App berechnet sofort die echte Länge.",
             feat_title: "Funktionen",
             f1_title: "Pr\u00e4zise Messungen", f1_desc: "Pixelgenaue Berechnungen basierend auf der Referenzobjekt-Skala.",
             f2_title: "Mehrere Einheiten", f2_desc: "Zentimeter, Millimeter, Meter, Zoll oder Fu\u00df \u2014 Ihre Wahl.",
-            f3_title: "Funktioniert offline", f3_desc: "Nach dem Laden kein Internet n\u00f6tig. Ihre Daten bleiben auf Ihrem Ger\u00e4t.",
-            f4_title: "Speichern & Vergleichen", f4_desc: "Speichern Sie Messungen und verfolgen Sie das Wachstum Ihrer Schlange.",
+            f3_title: "Synchronisierung & Offline", f3_desc: "Funktioniert offline; melden Sie sich an, um zu sichern und über Ihre Geräte zu synchronisieren.",
+            f4_title: "Wachstumsdiagramme", f4_desc: "Verfolgen Sie Länge und Wachstumsrate über die Zeit mit übersichtlichen Diagrammen.",
+            f5_title: "KI-Auto-Erkennung",
+            f5_desc: "Lassen Sie die KI Ihre Schlange und das Referenzobjekt für Sie nachzeichnen — ohne genaues Tippen.",
+            f6_title: "Mehrere Profile",
+            f6_desc: "Führen Sie für jede Ihrer Schlangen ein eigenes Profil und einen eigenen Verlauf.",
             faq_title: "H\u00e4ufige Fragen",
             q1: "Wie funktioniert Schlangenmesser?",
-            a1: "Laden Sie ein Foto mit einem Referenzobjekt (Lineal, Kreditkarte usw.) hoch. Markieren Sie die Referenz, geben Sie die Gr\u00f6\u00dfe ein und zeichnen Sie entlang des K\u00f6rpers. Die App berechnet die echte L\u00e4nge.",
+            a1: "Laden Sie ein Foto mit einem Referenzobjekt (Lineal, Karte usw.) hoch. Markieren Sie die Referenz, geben Sie die Gr\u00f6\u00dfe ein und zeichnen Sie entlang des K\u00f6rpers. Die App berechnet die echte L\u00e4nge.",
             q2: "Was kann ich als Referenzobjekt verwenden?",
-            a2: "Jedes Objekt mit bekannter Gr\u00f6\u00dfe: Lineal, Kreditkarte (85,6\u00a0mm), M\u00fcnze oder alles Messbare. Legen Sie es neben Ihre Schlange.",
+            a2: "Jedes Objekt mit bekannter Gr\u00f6\u00dfe: Lineal, Karte (85,6\u00a0mm), M\u00fcnze oder alles Messbare. Legen Sie es neben Ihre Schlange.",
             q3: "Wie genau ist es?",
             a3: "Die Genauigkeit h\u00e4ngt von der Fotoqualit\u00e4t, der Referenzplatzierung und der Zeichengenauigkeit ab. Fotografieren Sie von oben f\u00fcr beste Ergebnisse.",
             q4: "Ist es kostenlos?",
-            a4: "Ja! Schlangenmesser ist kostenlos mit allen Kernfunktionen. Premium-Optionen f\u00fcr Cloud-Sync und unbegrenzten Verlauf verf\u00fcgbar.",
+            a4: "Ja! Die kostenlose Version umfasst Messen, Wachstumsdiagramme, CSV-Export und Cloud-Sync. Premium schaltet unbegrenzt gespeicherte Messungen, mehrere Schlangenprofile und KI-Auto-Erkennung frei.",
             privacy: "Datenschutz", terms: "Nutzungsbedingungen"
         },
         pt: {
             app_name: "Medidor de Cobras",
             meta_keywords: "medir cobra, medidor de cobras, comprimento cobra foto, tamanho de cobra, p\u00edton-real comprimento, jiboia tamanho, cobra do milho, ferramenta medi\u00e7\u00e3o r\u00e9pteis, crescimento cobra, como medir uma cobra, cuidados r\u00e9pteis, app serpentes",
             nav_cta: "Abrir",
+            pricing: "Preços",
             hero_title: "Me\u00e7a o comprimento da sua cobra com fotos",
-            hero_sub: "Medi\u00e7\u00f5es precisas com objetos de refer\u00eancia. Gr\u00e1tis, f\u00e1cil, em qualquer dispositivo.",
+            hero_sub: "Meça o comprimento a partir de uma foto, detecte com IA e acompanhe o crescimento de cada cobra ao longo do tempo. Grátis, em qualquer dispositivo.",
             hero_cta: "Abrir aplicativo",
             hero_also: "Tamb\u00e9m dispon\u00edvel no",
             how_title: "Como funciona",
@@ -662,29 +828,34 @@
             s2_title: "Defina a refer\u00eancia",
             s2_desc: "Marque dois pontos no objeto de refer\u00eancia e insira seu tamanho conhecido.",
             s3_title: "Me\u00e7a a cobra",
-            s3_desc: "Trace pontos ao longo do corpo. O app calcula o comprimento real instantaneamente.",
+            s3_desc: "Trace pontos ao longo do corpo — ou deixe a IA detectar automaticamente. O app calcula o comprimento real instantaneamente.",
             feat_title: "Recursos",
             f1_title: "Medi\u00e7\u00f5es precisas", f1_desc: "C\u00e1lculos precisos baseados na escala do objeto de refer\u00eancia.",
             f2_title: "M\u00faltiplas unidades", f2_desc: "Cent\u00edmetros, mil\u00edmetros, metros, polegadas ou p\u00e9s \u2014 voc\u00ea escolhe.",
-            f3_title: "Funciona offline", f3_desc: "Sem internet ap\u00f3s o carregamento. Seus dados ficam no seu dispositivo.",
-            f4_title: "Salvar e comparar", f4_desc: "Salve medi\u00e7\u00f5es e acompanhe o crescimento da sua cobra.",
+            f3_title: "Sincronização e offline", f3_desc: "Funciona offline; faça login para fazer backup e sincronizar entre seus dispositivos.",
+            f4_title: "Gráficos de crescimento", f4_desc: "Acompanhe o comprimento e a taxa de crescimento ao longo do tempo com gráficos claros.",
+            f5_title: "Detecção por IA",
+            f5_desc: "Deixe a IA traçar sua cobra e a referência para você — sem toques precisos.",
+            f6_title: "Múltiplos perfis",
+            f6_desc: "Mantenha um perfil e histórico separados para cada cobra que você tem.",
             faq_title: "Perguntas frequentes",
             q1: "Como funciona o Medidor de Cobras?",
             a1: "Envie uma foto com um objeto de refer\u00eancia (r\u00e9gua, cart\u00e3o, etc.). Marque a refer\u00eancia, insira o tamanho, depois trace o corpo. O app calcula o comprimento real.",
             q2: "O que posso usar como refer\u00eancia?",
-            a2: "Qualquer objeto com tamanho conhecido: r\u00e9gua, cart\u00e3o banc\u00e1rio (85,6\u00a0mm), moeda ou qualquer coisa mensur\u00e1vel.",
+            a2: "Qualquer objeto com tamanho conhecido: r\u00e9gua, cart\u00e3o (85,6\u00a0mm), moeda ou qualquer coisa mensur\u00e1vel.",
             q3: "Qu\u00e3o preciso \u00e9?",
             a3: "A precis\u00e3o depende da qualidade da foto, posicionamento da refer\u00eancia e precis\u00e3o do tra\u00e7ado. Tire uma foto de cima para melhores resultados.",
             q4: "\u00c9 gratuito?",
-            a4: "Sim! Medidor de Cobras \u00e9 gratuito com todos os recursos principais. Op\u00e7\u00f5es premium para sincroniza\u00e7\u00e3o na nuvem e hist\u00f3rico ilimitado.",
+            a4: "Sim! A versão gratuita inclui medição, gráficos de crescimento, exportação CSV e sincronização na nuvem. O Premium libera medições salvas ilimitadas, múltiplos perfis de cobras e detecção por IA.",
             privacy: "Pol\u00edtica de privacidade", terms: "Termos de uso"
         },
         it: {
             app_name: "Misuratore di Serpenti",
             meta_keywords: "misurare serpente, misuratore di serpenti, lunghezza serpente foto, dimensioni serpente, pitone reale lunghezza, boa constrictor dimensioni, serpente del grano, strumento misurazione rettili, crescita serpente, come misurare un serpente, cura rettili, terrariofilia, app serpenti",
             nav_cta: "Apri",
+            pricing: "Prezzi",
             hero_title: "Misura la lunghezza del tuo serpente dalle foto",
-            hero_sub: "Misurazioni precise con oggetti di riferimento. Gratuito, semplice, su qualsiasi dispositivo.",
+            hero_sub: "Misura la lunghezza da una foto, rileva con l’IA e monitora la crescita di ogni serpente nel tempo. Gratis, su qualsiasi dispositivo.",
             hero_cta: "Apri l\u2019app",
             hero_also: "Disponibile anche su",
             how_title: "Come funziona",
@@ -693,27 +864,277 @@
             s2_title: "Imposta il riferimento",
             s2_desc: "Segna due punti sull\u2019oggetto di riferimento e inserisci la dimensione nota.",
             s3_title: "Misura il serpente",
-            s3_desc: "Traccia punti lungo il corpo. L\u2019app calcola la lunghezza reale istantaneamente.",
+            s3_desc: "Traccia punti lungo il corpo — o lascia che l’IA lo rilevi automaticamente. L’app calcola la lunghezza reale all’istante.",
             feat_title: "Funzionalit\u00e0",
             f1_title: "Misurazioni precise", f1_desc: "Calcoli precisi basati sulla scala dell\u2019oggetto di riferimento.",
             f2_title: "Pi\u00f9 unit\u00e0", f2_desc: "Centimetri, millimetri, metri, pollici o piedi \u2014 a tua scelta.",
-            f3_title: "Funziona offline", f3_desc: "Nessuna connessione necessaria dopo il caricamento. I tuoi dati restano sul dispositivo.",
-            f4_title: "Salva e confronta", f4_desc: "Salva le misurazioni e monitora la crescita del tuo serpente.",
+            f3_title: "Sincronizzazione e offline", f3_desc: "Funziona offline; accedi per eseguire il backup e sincronizzare su tutti i tuoi dispositivi.",
+            f4_title: "Grafici di crescita", f4_desc: "Monitora la lunghezza e il tasso di crescita nel tempo con grafici chiari.",
+            f5_title: "Rilevamento con IA",
+            f5_desc: "Lascia che l’IA tracci il tuo serpente e il riferimento al posto tuo — senza tocchi precisi.",
+            f6_title: "Profili multipli",
+            f6_desc: "Mantieni un profilo e una cronologia separati per ogni serpente che possiedi.",
             faq_title: "Domande frequenti",
             q1: "Come funziona Misuratore di Serpenti?",
             a1: "Carica una foto con un oggetto di riferimento (righello, carta, ecc.). Segna il riferimento, inserisci la dimensione, poi traccia il corpo. L\u2019app calcola la lunghezza reale.",
             q2: "Cosa posso usare come riferimento?",
-            a2: "Qualsiasi oggetto di dimensioni note: righello, carta di credito (85,6\u00a0mm), moneta o qualsiasi cosa misurabile.",
+            a2: "Qualsiasi oggetto di dimensioni note: righello, carta (85,6\u00a0mm), moneta o qualsiasi cosa misurabile.",
             q3: "Quanto \u00e8 preciso?",
             a3: "La precisione dipende dalla qualit\u00e0 della foto, dal posizionamento del riferimento e dalla precisione del tracciamento. Scatta dall\u2019alto per risultati migliori.",
             q4: "\u00c8 gratuito?",
-            a4: "S\u00ec! Misuratore di Serpenti \u00e8 gratuito con tutte le funzionalit\u00e0 principali. Opzioni premium per sincronizzazione cloud e cronologia illimitata.",
+            a4: "Sì! La versione gratuita include misurazione, grafici di crescita, esportazione CSV e sincronizzazione cloud. Premium sblocca misurazioni salvate illimitate, più profili di serpenti e rilevamento con IA.",
             privacy: "Privacy Policy", terms: "Termini di utilizzo"
+        },
+        uk: {
+            app_name: "Вимірювач змій",
+            meta_keywords: "виміряти довжину змії, вимірювач змій, довжина змії за фото, як виміряти змію, розмір змії, королівський пітон довжина, удав розмір, маїсовий полоз, інструмент вимірювання рептилій, ріст змії, відстеження росту, утримання рептилій, догляд за зміями",
+            nav_cta: "Відкрити",
+            pricing: "Ціни",
+            hero_title: "Вимірюйте довжину змії за фотографіями",
+            hero_sub: "Вимірюйте довжину за фото, розпізнавайте змію за допомогою ШІ та відстежуйте ріст кожної змії з часом. Безкоштовно та на будь-якому пристрої.",
+            hero_cta: "Відкрити застосунок",
+            hero_also: "Також доступно на",
+            how_title: "Як це працює",
+            s1_title: "Завантажте фото",
+            s1_desc: "Сфотографуйте змію поруч з еталонним об’єктом — лінійкою або карткою.",
+            s2_title: "Задайте еталон",
+            s2_desc: "Позначте дві точки на еталонному об’єкті та введіть його відомий розмір.",
+            s3_title: "Виміряйте змію",
+            s3_desc: "Розставте точки вздовж тіла — або довіртеся ШІ. Застосунок миттєво обчислить реальну довжину.",
+            feat_title: "Можливості",
+            f1_title: "Точні вимірювання",
+            f1_desc: "Розрахунки з точністю до пікселя на основі масштабу еталона.",
+            f2_title: "Різні одиниці",
+            f2_desc: "Сантиметри, міліметри, метри, дюйми або фути — на ваш вибір.",
+            f3_title: "Синхронізація та офлайн",
+            f3_desc: "Працює офлайн; увійдіть, щоб створити резервну копію та синхронізувати дані між пристроями.",
+            f4_title: "Графіки росту",
+            f4_desc: "Відстежуйте довжину та темп росту з часом за допомогою наочних графіків.",
+            f5_title: "Автовизначення ШІ",
+            f5_desc: "Дозвольте ШІ автоматично окреслити змію та еталон — без копіткого натискання.",
+            f6_title: "Кілька профілів",
+            f6_desc: "Ведіть окремий профіль та історію для кожної своєї змії.",
+            faq_title: "Поширені запитання",
+            q1: "Як працює Вимірювач змій?",
+            a1: "Завантажте фото змії з еталонним об’єктом (лінійка, картка тощо). Позначте еталон, введіть розмір, а потім розставте точки вздовж тіла. Застосунок обчислить реальну довжину.",
+            q2: "Що можна використати як еталон?",
+            a2: "Будь-який предмет відомого розміру: лінійка, картка (85,6 мм), монета або будь-що вимірне. Покладіть його поруч зі змією на фото.",
+            q3: "Наскільки це точно?",
+            a3: "Точність залежить від якості фото, розташування еталона та точності розмітки. Для найкращого результату фотографуйте згори, щоб змія була повністю видима.",
+            q4: "Це безкоштовно?",
+            a4: "Так! Безкоштовна версія включає вимірювання, графіки росту, експорт у CSV та хмарну синхронізацію. Преміум відкриває необмежену кількість збережених вимірювань, кілька профілів змій та автовизначення ШІ.",
+            privacy: "Політика конфіденційності",
+            terms: "Умови використання"
+        },
+        nl: {
+            app_name: "Slangenmeter",
+            meta_keywords: "slang meten, slangenmeter, lengte slang via foto, hoe meet je een slang, grootte slang, koningspython lengte, boa constrictor grootte, korenslang meten, meetinstrument reptielen, groei slang volgen, reptielenverzorging, slangen app",
+            nav_cta: "Openen",
+            pricing: "Prijzen",
+            hero_title: "Meet de lengte van je slang met foto’s",
+            hero_sub: "Meet de lengte vanaf een foto, herken automatisch met AI en volg de groei van elke slang in de tijd. Gratis en werkt op elk apparaat.",
+            hero_cta: "App openen",
+            hero_also: "Ook beschikbaar op",
+            how_title: "Hoe het werkt",
+            s1_title: "Upload een foto",
+            s1_desc: "Maak een foto van je slang naast een referentieobject zoals een liniaal of een pasje.",
+            s2_title: "Stel de referentie in",
+            s2_desc: "Markeer twee punten op het referentieobject en voer de bekende grootte in.",
+            s3_title: "Meet de slang",
+            s3_desc: "Zet punten langs het lichaam — of laat AI het automatisch herkennen. De app berekent direct de echte lengte.",
+            feat_title: "Functies",
+            f1_title: "Nauwkeurige metingen",
+            f1_desc: "Pixelnauwkeurige berekeningen op basis van de schaal van het referentieobject.",
+            f2_title: "Meerdere eenheden",
+            f2_desc: "Centimeters, millimeters, meters, inches of voet — jouw keuze.",
+            f3_title: "Synchronisatie en offline",
+            f3_desc: "Werkt offline; log in om een back-up te maken en te synchroniseren tussen je apparaten.",
+            f4_title: "Groeigrafieken",
+            f4_desc: "Volg lengte en groeisnelheid in de tijd met overzichtelijke grafieken.",
+            f5_title: "AI-herkenning",
+            f5_desc: "Laat AI je slang en de referentie voor je natekenen — zonder precies te tikken.",
+            f6_title: "Meerdere profielen",
+            f6_desc: "Houd een apart profiel en geschiedenis bij voor elke slang die je hebt.",
+            faq_title: "Veelgestelde vragen",
+            q1: "Hoe werkt Slangenmeter?",
+            a1: "Upload een foto van je slang met een referentieobject (liniaal, pasje, enz.). Markeer de referentie, voer de grootte in en zet punten langs het lichaam. De app berekent de echte lengte.",
+            q2: "Wat kan ik als referentieobject gebruiken?",
+            a2: "Elk object met een bekende grootte: een liniaal, een pasje (85,6 mm), een munt of iets anders dat je kunt meten. Leg het naast je slang op de foto.",
+            q3: "Hoe nauwkeurig is het?",
+            a3: "De nauwkeurigheid hangt af van de fotokwaliteit, de plaatsing van de referentie en de precisie van het natekenen. Maak voor het beste resultaat een foto van bovenaf met de slang volledig zichtbaar.",
+            q4: "Is het gratis?",
+            a4: "Ja! De gratis versie omvat meten, groeigrafieken, CSV-export en cloudsynchronisatie. Premium ontgrendelt onbeperkt opgeslagen metingen, meerdere slangenprofielen en AI-herkenning.",
+            privacy: "Privacybeleid",
+            terms: "Gebruiksvoorwaarden"
+        },
+        pl: {
+            app_name: "Miernik węży",
+            meta_keywords: "pomiar węża, miernik węży, długość węża ze zdjęcia, jak zmierzyć węża, rozmiar węża, pyton królewski długość, boa dusiciel rozmiar, wąż zbożowy, narzędzie do pomiaru gadów, śledzenie wzrostu węża, hodowla gadów, opieka nad wężami",
+            nav_cta: "Otwórz",
+            pricing: "Cennik",
+            hero_title: "Zmierz długość swojego węża na podstawie zdjęć",
+            hero_sub: "Zmierz długość ze zdjęcia, wykryj automatycznie dzięki AI i śledź wzrost każdego węża w czasie. Za darmo i na każdym urządzeniu.",
+            hero_cta: "Otwórz aplikację",
+            hero_also: "Dostępne także w",
+            how_title: "Jak to działa",
+            s1_title: "Prześlij zdjęcie",
+            s1_desc: "Zrób zdjęcie węża obok obiektu odniesienia, takiego jak linijka lub karta.",
+            s2_title: "Ustaw odniesienie",
+            s2_desc: "Zaznacz dwa punkty na obiekcie odniesienia i wpisz jego znany rozmiar.",
+            s3_title: "Zmierz węża",
+            s3_desc: "Rozstaw punkty wzdłuż ciała — albo pozwól AI wykryć go automatycznie. Aplikacja od razu obliczy rzeczywistą długość.",
+            feat_title: "Funkcje",
+            f1_title: "Precyzyjne pomiary",
+            f1_desc: "Obliczenia z dokładnością do piksela na podstawie skali obiektu odniesienia.",
+            f2_title: "Wiele jednostek",
+            f2_desc: "Centymetry, milimetry, metry, cale lub stopy — Twój wybór.",
+            f3_title: "Synchronizacja i tryb offline",
+            f3_desc: "Działa offline; zaloguj się, aby tworzyć kopie zapasowe i synchronizować dane między urządzeniami.",
+            f4_title: "Wykresy wzrostu",
+            f4_desc: "Śledź długość i tempo wzrostu w czasie dzięki czytelnym wykresom.",
+            f5_title: "Automatyczne wykrywanie AI",
+            f5_desc: "Pozwól AI samodzielnie obrysować węża i obiekt odniesienia — bez żmudnego stukania.",
+            f6_title: "Wiele profili",
+            f6_desc: "Prowadź osobny profil i historię dla każdego swojego węża.",
+            faq_title: "Najczęściej zadawane pytania",
+            q1: "Jak działa Miernik węży?",
+            a1: "Prześlij zdjęcie węża z obiektem odniesienia (linijka, karta itp.). Zaznacz odniesienie, wpisz rozmiar, a następnie rozstaw punkty wzdłuż ciała. Aplikacja obliczy rzeczywistą długość.",
+            q2: "Czego mogę użyć jako obiektu odniesienia?",
+            a2: "Dowolnego przedmiotu o znanym rozmiarze: linijki, karty (85,6 mm), monety lub czegokolwiek, co da się zmierzyć. Połóż go obok węża na zdjęciu.",
+            q3: "Jak dokładny jest pomiar?",
+            a3: "Dokładność zależy od jakości zdjęcia, ułożenia odniesienia i precyzji obrysu. Aby uzyskać najlepszy efekt, zrób zdjęcie z góry, z wężem w całości widocznym.",
+            q4: "Czy to za darmo?",
+            a4: "Tak! Darmowa wersja obejmuje pomiary, wykresy wzrostu, eksport do CSV i synchronizację w chmurze. Premium odblokowuje nieograniczoną liczbę zapisanych pomiarów, wiele profili węży i automatyczne wykrywanie AI.",
+            privacy: "Polityka prywatności",
+            terms: "Warunki użytkowania"
+        },
+        ja: {
+            app_name: "ヘビ計測",
+            meta_keywords: "ヘビ 測定, ヘビ 長さ 写真, ヘビのサイズ, ヘビの計測アプリ, ボールパイソン 長さ, ボアコンストリクター サイズ, コーンスネーク 測定, 爬虫類 計測ツール, ヘビ 成長記録, ヘビの飼育, 爬虫類 飼育, ヘビ 長さ 測り方",
+            nav_cta: "開く",
+            pricing: "料金",
+            hero_title: "写真からヘビの長さを測定",
+            hero_sub: "写真から長さを測定し、AIで自動検出して、各ヘビの成長を記録できます。無料で、どんなデバイスでも使えます。",
+            hero_cta: "アプリを開く",
+            hero_also: "こちらでも入手可能",
+            how_title: "使い方",
+            s1_title: "写真をアップロード",
+            s1_desc: "定規やカードなどの基準物の隣にヘビを置いて写真を撮ります。",
+            s2_title: "基準を設定",
+            s2_desc: "基準物に2点をマークし、その既知のサイズを入力します。",
+            s3_title: "ヘビを測定",
+            s3_desc: "体に沿って点を打つか、AIに自動検出させましょう。アプリが実際の長さを瞬時に計算します。",
+            feat_title: "機能",
+            f1_title: "正確な測定",
+            f1_desc: "基準物のスケールに基づくピクセル単位の正確な計算。",
+            f2_title: "複数の単位",
+            f2_desc: "センチ、ミリ、メートル、インチ、フィート — お好みで。",
+            f3_title: "同期とオフライン",
+            f3_desc: "オフラインでも動作。サインインすればバックアップして複数のデバイスで同期できます。",
+            f4_title: "成長グラフ",
+            f4_desc: "長さと成長速度を、見やすいグラフで時系列に記録。",
+            f5_title: "AI自動検出",
+            f5_desc: "AIがヘビと基準物を自動でなぞります — 細かいタップは不要。",
+            f6_title: "複数プロフィール",
+            f6_desc: "飼っているヘビごとに、別々のプロフィールと履歴を管理。",
+            faq_title: "よくある質問",
+            q1: "ヘビ計測はどのように機能しますか？",
+            a1: "基準物（定規、カードなど）と一緒にヘビの写真をアップロードします。基準をマークしてサイズを入力し、体に沿って点を打ちます。アプリが基準のスケールから実際の長さを計算します。",
+            q2: "基準物には何を使えますか？",
+            a2: "サイズがわかるものなら何でも使えます：定規、カード（85.6 mm）、コイン、または測れるもの。写真でヘビの隣に置いてください。",
+            q3: "精度はどのくらいですか？",
+            a3: "精度は写真の品質、基準の配置、なぞる正確さによって変わります。最良の結果を得るには、ヘビ全体が写るように真上から撮影してください。",
+            q4: "無料ですか？",
+            a4: "はい！無料版には測定、成長グラフ、CSVエクスポート、クラウド同期が含まれます。プレミアムでは、保存できる測定が無制限になり、複数のヘビのプロフィールとAI自動検出が使えます。",
+            privacy: "プライバシーポリシー",
+            terms: "利用規約"
+        },
+        ko: {
+            app_name: "뱀 측정기",
+            meta_keywords: "뱀 측정, 뱀 길이 측정, 사진으로 뱀 길이, 뱀 크기, 볼파이톤 길이, 보아뱀 크기, 콘스네이크 측정, 파충류 측정 도구, 뱀 성장 기록, 파충류 사육, 뱀 관리 앱, 뱀 길이 재는 법",
+            nav_cta: "열기",
+            pricing: "가격",
+            hero_title: "사진으로 뱀의 길이를 측정하세요",
+            hero_sub: "사진으로 길이를 측정하고, AI로 자동 인식하며, 각 뱀의 성장을 시간에 따라 기록하세요. 무료이며 모든 기기에서 작동합니다.",
+            hero_cta: "앱 열기",
+            hero_also: "다음에서도 이용 가능",
+            how_title: "사용 방법",
+            s1_title: "사진 업로드",
+            s1_desc: "자나 카드 같은 기준 물체 옆에 뱀을 두고 사진을 찍으세요.",
+            s2_title: "기준 설정",
+            s2_desc: "기준 물체에 두 점을 표시하고 알고 있는 크기를 입력하세요.",
+            s3_title: "뱀 측정",
+            s3_desc: "몸을 따라 점을 찍거나 AI가 자동으로 인식하게 하세요. 앱이 실제 길이를 즉시 계산합니다.",
+            feat_title: "기능",
+            f1_title: "정확한 측정",
+            f1_desc: "기준 물체의 비율을 바탕으로 한 픽셀 단위의 정확한 계산.",
+            f2_title: "다양한 단위",
+            f2_desc: "센티미터, 밀리미터, 미터, 인치 또는 피트 — 원하는 대로.",
+            f3_title: "동기화 및 오프라인",
+            f3_desc: "오프라인에서 작동하며, 로그인하면 백업하고 여러 기기에서 동기화할 수 있습니다.",
+            f4_title: "성장 그래프",
+            f4_desc: "길이와 성장 속도를 명확한 그래프로 시간에 따라 추적하세요.",
+            f5_title: "AI 자동 인식",
+            f5_desc: "AI가 뱀과 기준 물체를 대신 따라 그려 줍니다 — 일일이 탭할 필요 없이.",
+            f6_title: "여러 프로필",
+            f6_desc: "기르는 뱀마다 별도의 프로필과 기록을 관리하세요.",
+            faq_title: "자주 묻는 질문",
+            q1: "뱀 측정기는 어떻게 작동하나요?",
+            a1: "기준 물체(자, 카드 등)와 함께 뱀 사진을 업로드하세요. 기준을 표시하고 크기를 입력한 뒤 몸을 따라 점을 찍으세요. 앱이 기준 비율로 실제 길이를 계산합니다.",
+            q2: "기준 물체로 무엇을 사용할 수 있나요?",
+            a2: "크기를 아는 물체라면 무엇이든 가능합니다: 자, 카드(85.6 mm), 동전 등 측정 가능한 것. 사진에서 뱀 옆에 두세요.",
+            q3: "정확도는 어느 정도인가요?",
+            a3: "정확도는 사진 품질, 기준 배치, 따라 그리는 정밀도에 따라 달라집니다. 가장 좋은 결과를 얻으려면 뱀 전체가 보이도록 위에서 촬영하세요.",
+            q4: "무료인가요?",
+            a4: "네! 무료 버전에는 측정, 성장 그래프, CSV 내보내기, 클라우드 동기화가 포함됩니다. 프리미엄은 무제한 저장 측정, 여러 뱀 프로필, AI 자동 인식을 잠금 해제합니다.",
+            privacy: "개인정보 처리방침",
+            terms: "이용약관"
+        },
+        ar: {
+            app_name: "مقياس الثعابين",
+            meta_keywords: "قياس الثعبان, قياس طول الثعبان, طول الثعبان من صورة, كيفية قياس ثعبان, حجم الثعبان, طول بايثون الكرة, حجم البوا العاصرة, ثعبان الذرة, أداة قياس الزواحف, تتبع نمو الثعبان, تربية الزواحف, العناية بالثعابين",
+            nav_cta: "فتح",
+            pricing: "الأسعار",
+            hero_title: "قِس طول ثعبانك من الصور",
+            hero_sub: "قِس الطول من صورة، واكتشفه تلقائيًا بالذكاء الاصطناعي، وتتبّع نمو كل ثعبان مع مرور الوقت. مجاني ويعمل على أي جهاز.",
+            hero_cta: "افتح التطبيق",
+            hero_also: "متوفر أيضًا على",
+            how_title: "كيف يعمل",
+            s1_title: "ارفع صورة",
+            s1_desc: "التقط صورة لثعبانك بجانب جسم مرجعي مثل مسطرة أو بطاقة.",
+            s2_title: "حدّد المرجع",
+            s2_desc: "ضع علامتين على الجسم المرجعي وأدخل حجمه المعروف.",
+            s3_title: "قِس الثعبان",
+            s3_desc: "ضع نقاطًا على طول الجسم — أو دع الذكاء الاصطناعي يكتشفه تلقائيًا. يحسب التطبيق الطول الحقيقي فورًا.",
+            feat_title: "المميزات",
+            f1_title: "قياسات دقيقة",
+            f1_desc: "حسابات دقيقة بدقة البكسل بناءً على مقياس الجسم المرجعي.",
+            f2_title: "وحدات متعددة",
+            f2_desc: "سنتيمترات، مليمترات، أمتار، بوصات أو أقدام — حسب اختيارك.",
+            f3_title: "المزامنة وعدم الاتصال",
+            f3_desc: "يعمل دون اتصال؛ سجّل الدخول لإنشاء نسخة احتياطية والمزامنة بين أجهزتك.",
+            f4_title: "مخططات النمو",
+            f4_desc: "تتبّع الطول ومعدل النمو مع مرور الوقت عبر مخططات واضحة.",
+            f5_title: "كشف تلقائي بالذكاء الاصطناعي",
+            f5_desc: "دع الذكاء الاصطناعي يرسم ثعبانك والمرجع نيابةً عنك — دون نقر دقيق.",
+            f6_title: "ملفات متعددة",
+            f6_desc: "احتفظ بملف وسجل منفصلين لكل ثعبان تملكه.",
+            faq_title: "الأسئلة الشائعة",
+            q1: "كيف يعمل مقياس الثعابين؟",
+            a1: "ارفع صورة لثعبانك مع جسم مرجعي (مسطرة، بطاقة، إلخ). حدّد المرجع، وأدخل حجمه، ثم ضع نقاطًا على طول الجسم. يستخدم التطبيق مقياس المرجع لحساب الطول الحقيقي.",
+            q2: "ما الذي يمكنني استخدامه كجسم مرجعي؟",
+            a2: "أي جسم بحجم معروف: مسطرة، بطاقة (85.6 مم)، عملة معدنية، أو أي شيء يمكن قياسه. ضعه بجانب ثعبانك في الصورة.",
+            q3: "ما مدى دقته؟",
+            a3: "تعتمد الدقة على جودة الصورة، وموضع المرجع، ودقة الرسم. للحصول على أفضل النتائج، التقط صورة من الأعلى مع ظهور الثعبان كاملًا.",
+            q4: "هل هو مجاني؟",
+            a4: "نعم! تتضمن النسخة المجانية القياس، ومخططات النمو، والتصدير إلى CSV، والمزامنة السحابية. يفتح الاشتراك المميز قياسات محفوظة غير محدودة، وملفات متعددة للثعابين، والكشف التلقائي بالذكاء الاصطناعي.",
+            privacy: "سياسة الخصوصية",
+            terms: "شروط الاستخدام"
         }
     };
 
     /* Privacy/terms file suffixes per language */
-    var policySuffix = { en: '', ru: '-ru', es: '-es', fr: '-fr', de: '-de', pt: '-pt', it: '-it' };
+    var policySuffix = { en: '', ru: '-ru', es: '-es', fr: '-fr', de: '-de', pt: '-pt', it: '-it', uk: '-uk', nl: '-nl', pl: '-pl', ja: '-ja', ko: '-ko', ar: '-ar' };
 
     /* ── State ── */
     var lang = 'en';
@@ -738,6 +1159,7 @@
         lang = code;
         localStorage.setItem('landing_lang', code);
         document.documentElement.lang = code;
+        document.documentElement.dir = (code === 'ar') ? 'rtl' : 'ltr';
         location.hash = code === 'en' ? '' : code;
         document.getElementById('langSelect').value = code;
 
@@ -794,9 +1216,65 @@
         });
     }
 
+    /* ── Scroll reveal ── */
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries) {
+            for (var i = 0; i < entries.length; i++) {
+                if (entries[i].isIntersecting) {
+                    entries[i].target.classList.add('in');
+                    io.unobserve(entries[i].target);
+                }
+            }
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        for (var r = 0; r < revealEls.length; r++) io.observe(revealEls[r]);
+    } else {
+        for (var r2 = 0; r2 < revealEls.length; r2++) revealEls[r2].classList.add('in');
+    }
+
     /* ── Init ── */
     applyLang(detectLang());
 })();
+</script>
+<script>
+    // ── Hero snake carousel (mobile): native swipe + auto-advance + dots ──
+    (function () {
+        var car = document.getElementById('heroCarousel');
+        var dotsWrap = document.getElementById('heroDots');
+        if (!car || !dotsWrap) return;
+        var slides = car.querySelectorAll('img');
+        var dots = [];
+        for (var i = 0; i < slides.length; i++) {
+            (function (idx) {
+                var d = document.createElement('button');
+                d.className = 'hero-dot';
+                d.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
+                d.addEventListener('click', function () {
+                    car.scrollTo({ left: idx * car.clientWidth, behavior: 'smooth' });
+                    restart();
+                });
+                dotsWrap.appendChild(d);
+                dots.push(d);
+            })(i);
+        }
+        function current() { return Math.round(car.scrollLeft / car.clientWidth); }
+        function update() {
+            var idx = current();
+            for (var i = 0; i < dots.length; i++) dots[i].classList.toggle('active', i === idx);
+        }
+        car.addEventListener('scroll', update, { passive: true });
+        update();
+        var timer = null;
+        function tick() {
+            var next = (current() + 1) % slides.length;
+            car.scrollTo({ left: next * car.clientWidth, behavior: 'smooth' });
+        }
+        function start() { timer = setInterval(tick, 4500); }
+        function restart() { clearInterval(timer); start(); }
+        car.addEventListener('touchstart', function () { clearInterval(timer); }, { passive: true });
+        car.addEventListener('touchend', restart, { passive: true });
+        start();
+    })();
 </script>
 </body>
 </html>

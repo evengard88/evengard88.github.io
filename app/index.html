@@ -52,6 +52,33 @@
     <!-- RevenueCat Web Billing SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@revenuecat/purchases-js@latest/dist/purchases-js.min.js"></script>
 
+    <!-- TON Connect UI (crypto payment, web only) -->
+    <script src="https://unpkg.com/@tonconnect/ui@2/dist/tonconnect-ui.min.js"></script>
+    <script>
+        window._initTonConnect = function () {
+            try {
+                if (window.tonConnectUI || typeof TON_CONNECT_UI === 'undefined') return;
+                window.tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+                    manifestUrl: location.origin + '/tonconnect-manifest.json'
+                });
+            } catch (e) { console.warn('TON Connect init failed', e); }
+        };
+        // Fire-and-forget: opens the wallet to send `amountNano` to `address`. The server poller
+        // confirms the on-chain transfer by exact amount, so no result handling is needed here.
+        window.tonConnectPay = function (address, amountNano) {
+            try {
+                window._initTonConnect();
+                if (!window.tonConnectUI) return;
+                window.tonConnectUI.sendTransaction({
+                    validUntil: Math.floor(Date.now() / 1000) + 600,
+                    messages: [{ address: address, amount: String(amountNano) }]
+                });
+            } catch (e) { console.warn('tonConnectPay failed', e); }
+        };
+        if (document.readyState !== 'loading') window._initTonConnect();
+        else window.addEventListener('DOMContentLoaded', window._initTonConnect);
+    </script>
+
     <!-- GlitchTip Error Tracking (self-hosted, Sentry-compatible SDK, production only) -->
     <script>
         (function() {
