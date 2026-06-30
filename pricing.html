@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing — Snake Measurer Premium</title>
+    <meta name="description" content="Snake Measurer Premium pricing — yearly and lifetime. Unlock unlimited saved measurements, multiple snake profiles, and AI auto-detect.">
+    <link rel="canonical" href="https://snakemeasurer.com/pricing.html">
+    <meta name="robots" content="index, follow">
+
+    <meta name="theme-color" content="#AF52DE" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#BF5AF2" media="(prefers-color-scheme: dark)">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <style>
+        :root {
+            --bg: #F2F2F7;
+            --bg-card: #FFFFFF;
+            --text: #1C1C1E;
+            --text-sec: #636366;
+            --accent: #AF52DE;
+            --accent-h: #9B3DC8;
+            --accent2: #007AFF;
+            --border: #E5E5EA;
+            --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --highlight-bg: rgba(175, 82, 222, 0.08);
+            --gold: #F4A406;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000000;
+                --bg-card: #1C1C1E;
+                --text: #FFFFFF;
+                --text-sec: #98989F;
+                --accent: #BF5AF2;
+                --accent-h: #D17BF7;
+                --accent2: #0A84FF;
+                --border: #38383A;
+                --card-shadow: 0 1px 3px rgba(0,0,0,0.2);
+                --highlight-bg: rgba(191, 90, 242, 0.12);
+                --gold: #FFB836;
+            }
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--bg); border-bottom: 1px solid var(--border);
+        }
+        .header-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 56px; max-width: 920px; margin: 0 auto; padding: 0 24px;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; color: var(--text); }
+        .logo img { width: 32px; height: 32px; border-radius: 8px; }
+        .nav-links { display: flex; gap: 20px; font-size: 14px; }
+        .nav-links a { color: var(--text-sec); }
+
+        main { max-width: 920px; margin: 0 auto; padding: 48px 24px 80px; }
+        h1 { font-size: 36px; margin: 0 0 12px; letter-spacing: -0.02em; }
+        h2 { font-size: 24px; margin: 48px 0 16px; letter-spacing: -0.01em; }
+        h3 { font-size: 18px; margin: 24px 0 8px; }
+        .subtitle { color: var(--text-sec); font-size: 18px; margin: 0 0 40px; }
+
+        .plans { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 32px 0; }
+        @media (min-width: 720px) { .plans { grid-template-columns: repeat(2, 1fr); max-width: 620px; margin-left: auto; margin-right: auto; } }
+
+        .plan {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 24px; box-shadow: var(--card-shadow);
+            display: flex; flex-direction: column;
+        }
+        .plan.featured {
+            border-color: var(--gold); border-width: 2px;
+            background: linear-gradient(180deg, var(--bg-card) 0%, var(--highlight-bg) 100%);
+            position: relative;
+        }
+        .plan.featured::before {
+            content: "MOST POPULAR";
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            background: var(--gold); color: #000; font-size: 11px; font-weight: 700;
+            padding: 3px 10px; border-radius: 10px; letter-spacing: 0.05em;
+        }
+        .plan-name { font-size: 14px; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.08em; }
+        .plan-price { font-size: 32px; font-weight: 700; margin: 8px 0 4px; }
+        .plan-price-sub { color: var(--text-sec); font-size: 13px; margin-bottom: 16px; min-height: 20px; }
+        .plan-features { list-style: none; padding: 0; margin: 16px 0; font-size: 14px; }
+        .plan-features li { padding: 4px 0; color: var(--text-sec); }
+        .plan-features li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+
+        .features-list { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: var(--card-shadow); }
+        .features-list ul { list-style: none; padding: 0; margin: 0; }
+        .features-list li { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; align-items: start; gap: 12px; }
+        .features-list li:last-child { border-bottom: none; }
+        .features-list .emoji { font-size: 20px; line-height: 1.3; }
+
+        .note { color: var(--text-sec); font-size: 14px; margin: 16px 0; }
+        footer {
+            border-top: 1px solid var(--border); margin-top: 64px; padding: 32px 24px;
+            color: var(--text-sec); font-size: 13px; text-align: center;
+        }
+        footer a { color: var(--text-sec); margin: 0 8px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">
+                <img src="favicon.svg" alt="">
+                <span>Snake Measurer</span>
+            </a>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="/pricing.html">Pricing</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Snake Measurer Premium</h1>
+        <p class="subtitle">Unlock unlimited saved measurements, multiple snake profiles, and AI auto-detect. Growth charts, CSV/PNG export, and cloud sync are free for everyone.</p>
+
+        <div class="plans">
+            <div class="plan featured">
+                <span class="plan-name">Yearly</span>
+                <div class="plan-price">$12.99</div>
+                <div class="plan-price-sub">per year — about $1.08 / month</div>
+                <ul class="plan-features">
+                    <li>14-day free trial</li>
+                    <li>All Premium features</li>
+                    <li>Cancel anytime</li>
+                    <li>Best value for annual users</li>
+                </ul>
+            </div>
+
+            <div class="plan">
+                <span class="plan-name">Lifetime</span>
+                <div class="plan-price">$24.99</div>
+                <div class="plan-price-sub">one-time purchase</div>
+                <ul class="plan-features">
+                    <li>All Premium features forever</li>
+                    <li>No recurring billing</li>
+                    <li>Pay once, use forever</li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="note">Prices in USD. Local currency prices may vary slightly based on App Store, Google Play, and Paddle exchange rates.</p>
+
+        <h2>What's included in Premium</h2>
+        <div class="features-list">
+            <ul>
+                <li><span class="emoji">💾</span><span><strong>Unlimited measurements</strong> — the free version saves up to 30</span></li>
+                <li><span class="emoji">🐍</span><span><strong>Multiple snake profiles</strong> — track several snakes separately (free version: 1 profile)</span></li>
+                <li><span class="emoji">✨</span><span><strong>AI auto-detect</strong> — automatic snake and reference outline detection</span></li>
+            </ul>
+        </div>
+
+        <p class="note">Free for everyone: measuring, growth charts, CSV/PNG export, and cloud sync across devices — no account needed to measure.</p>
+
+        <h2>Cancellation</h2>
+        <p>Subscriptions auto-renew unless cancelled at least 24 hours before the renewal date. The 14-day free trial on the yearly plan converts to a paid subscription if not cancelled before the trial ends.</p>
+        <p>See the <a href="/refund-policy.html">Refund Policy</a> for details on cancellation and refunds.</p>
+
+        <h2>How to cancel</h2>
+        <ul>
+            <li><strong>iOS:</strong> Settings → [your name] → Subscriptions → Snake Measurer Premium → Cancel Subscription</li>
+            <li><strong>Android:</strong> Google Play Store → Profile → Payments &amp; subscriptions → Subscriptions → Snake Measurer Premium → Cancel Subscription</li>
+            <li><strong>Web:</strong> Use the link in your purchase confirmation email, or contact <a href="mailto:support@snakemeasurer.com">support@snakemeasurer.com</a></li>
+        </ul>
+
+        <h2>Support</h2>
+        <p>Questions about pricing or your subscription? Email us at <a href="mailto:support@snakemeasurer.com">support@snakemeasurer.com</a></p>
+    </main>
+
+    <footer>
+        <a href="/">Home</a> · <a href="/pricing.html">Pricing</a> · <a href="/terms.html">Terms</a> · <a href="/privacy-policy.html">Privacy</a> · <a href="/refund-policy.html">Refund Policy</a>
+        <div style="margin-top: 12px;">© 2026 Snake Measurer · <a href="mailto:support@snakemeasurer.com">support@snakemeasurer.com</a></div>
+    </footer>
+</body>
+</html>
