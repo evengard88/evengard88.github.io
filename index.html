@@ -261,14 +261,31 @@
             box-shadow: 0 32px 64px -24px rgba(0,0,0,0.5), inset 0 0 0 1.5px rgba(255,255,255,0.06);
         }
         .phone-mock img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; border-radius: 28px; }
+        /* Desktop: phone mockup — ambient glow + gentle float + slight 3D tilt */
+        @media (min-width: 880px) {
+            .hero-visual { position: relative; }
+            .hero-visual.reveal { opacity: 1; transform: none; } /* the mockup itself handles the entrance on desktop */
+            .hero-visual::before { content: ''; position: absolute; inset: -8% -14%; z-index: 0; pointer-events: none; background: radial-gradient(ellipse at 55% 45%, rgba(124,42,168,0.13), transparent 64%); }
+            /* Entrance: mockup slides in from the right, tilt settles, fades in (one-time, on load) */
+            .phone-mock { position: relative; z-index: 1; transform: perspective(1300px) rotateY(-5deg); animation: phoneReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
+            @keyframes phoneReveal {
+                from { opacity: 0; transform: perspective(1300px) rotateY(-16deg) translateX(70px); }
+                to   { opacity: 1; transform: perspective(1300px) rotateY(-5deg) translateX(0); }
+            }
+        }
+        @media (min-width: 880px) and (prefers-reduced-motion: reduce) {
+            .phone-mock { animation: none; opacity: 1; }
+        }
         /* Mobile/narrow hero: swipeable snake carousel instead of the portrait phone mockup */
         .hero-carousel-wrap { display: none; }
         @media (max-width: 879px) {
             .phone-mock { display: none; }
-            .hero-carousel-wrap { display: block; width: 100%; }
-            .hero-carousel { display: flex; align-items: center; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            .hero-carousel-wrap { display: block; width: 100%; position: relative; }
+            .hero-carousel-wrap::before { content: ''; position: absolute; inset: 6% -4%; z-index: 0; pointer-events: none; background: radial-gradient(ellipse at center, rgba(124,42,168,0.14), transparent 70%); }
+            .hero-carousel { position: relative; z-index: 1; display: flex; align-items: center; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 12px 0 18px; }
             .hero-carousel::-webkit-scrollbar { display: none; }
-            .hero-carousel img { flex: 0 0 100%; width: 100%; height: auto; display: block; scroll-snap-align: center; }
+            .hero-carousel img { flex: 0 0 100%; width: 100%; height: auto; display: block; scroll-snap-align: center; filter: drop-shadow(0 5px 14px rgba(191,90,242,0.20)); animation: heroFloat 7s ease-in-out infinite; }
+            @keyframes heroFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
             .hero-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
             .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-sec); opacity: 0.4; border: none; padding: 0; cursor: pointer; transition: all 0.25s; }
             .hero-dot.active { opacity: 1; background: var(--accent); width: 22px; border-radius: 4px; }
