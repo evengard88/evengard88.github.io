@@ -4,9 +4,9 @@
 // and the shell never references chunk/wasm hashes that were already replaced on the server.
 // Auto-updates when new version is deployed
 
-var CACHE_VERSION = 'mr5kcg18' === '%%' + 'BUILD_TS' + '%%'
+var CACHE_VERSION = 'mr5le81n' === '%%' + 'BUILD_TS' + '%%'
     ? 'dev-' + Date.now()   // dev-server: unique on every SW install
-    : 'mr5kcg18';       // production: stamped by Gradle
+    : 'mr5le81n';       // production: stamped by Gradle
 var CACHE_NAME = 'snake-measurer-' + CACHE_VERSION;
 
 // Assets cached on install (shell)
