@@ -6,15 +6,45 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Get Snake Measurer</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Analytics 4 — COOKIELESS (no cookies → no consent banner). Same stream as the app. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6SQPK4C0V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-L6SQPK4C0V', {
+            client_storage: 'none',
+            anonymize_ip: true,
+            allow_google_signals: false,
+            allow_ad_personalization_signals: false
+        });
+    </script>
+
     <script>
         // Smart redirect: send the visitor to the right store for their device.
         (function () {
             var ua = navigator.userAgent || navigator.vendor || '';
             var APPSTORE = 'https://apps.apple.com/app/snake-measurer/id6760619393';
             var PLAY = 'https://play.google.com/store/apps/details?id=app.serpwidgets.snakemeasurer';
-            if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) location.replace(APPSTORE);
-            else if (/android/i.test(ua)) location.replace(PLAY);
-            else location.replace('/');   // desktop / other → landing page
+            var target, platform;
+            if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) { target = APPSTORE; platform = 'ios'; }
+            else if (/android/i.test(ua)) { target = PLAY; platform = 'android'; }
+            else { target = '/'; platform = 'desktop'; }
+
+            var done = false;
+            function go() { if (!done) { done = true; location.replace(target); } }
+
+            // Record the QR scan / redirect, THEN navigate. event_callback fires once the hit is
+            // sent; the timeout guarantees the user is never stranded if gtag is blocked or slow.
+            try {
+                gtag('event', 'qr_open', {
+                    qr_target: platform,
+                    transport_type: 'beacon',
+                    event_callback: go
+                });
+            } catch (e) { /* gtag unavailable — timeout below still redirects */ }
+            setTimeout(go, 600);
         })();
     </script>
     <style>
