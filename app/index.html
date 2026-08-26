@@ -541,6 +541,133 @@
 })();
 </script>
 
+<script>
+    // Boot watchdog. The wasm is ~7 MB (~2 MB gzipped): on a slow connection the first load
+    // takes well over 30s, and the old "hide loader after 30s regardless" fallback left a
+    // silently blank page while the download was still in flight. Rules now:
+    //  - the loader NEVER hides silently — only Kotlin's onAppReady hides it;
+    //  - at 30s the subtitle switches to a "still loading" reassurance;
+    //  - a fatal wasm error (stale CDN/SW asset mix right after a deploy → 404/compile fail)
+    //    triggers ONE automatic reload per session, which refetches a consistent set;
+    //  - otherwise (or if the retry already happened) the loader becomes an error screen
+    //    with a Reload button and the error text, so failures are visible and reportable.
+    (function() {
+        var RETRY_KEY = 'sm_boot_retried';
+        var loader = document.getElementById('loader');
+        var failed = false;
+
+        window._appReady = false;
+        window._bootError = null;
+
+        function isFatalBootError(msg) {
+            return /webassembly|\.wasm|magic word|instantiat|http status|mime type|chunkloaderror|loading chunk|dynamically imported/i.test(msg || '');
+        }
+
+        function showBootError(msg) {
+            if (window._appReady || failed || !loader.parentNode) return;
+            failed = true;
+            var subtitle = loader.querySelector('.loader-subtitle');
+            var bar = loader.querySelector('.loader-bar-bg');
+            if (bar) bar.style.display = 'none';
+            if (subtitle) subtitle.textContent = 'The app failed to load. Check your connection and try again.';
+            var btn = document.createElement('button');
+            btn.textContent = 'Reload';
+            btn.style.cssText = 'padding:12px 32px;background:#AF52DE;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;';
+            btn.onclick = function() {
+                try { sessionStorage.removeItem(RETRY_KEY); } catch (e) {}
+                location.reload();
+            };
+            loader.appendChild(btn);
+            if (msg) {
+                var err = document.createElement('p');
+                err.textContent = String(msg).slice(0, 200);
+                err.style.cssText = 'font-size:11px;color:#8e8e93;margin:16px 24px 0;max-width:420px;text-align:center;word-break:break-word;';
+                loader.appendChild(err);
+            }
+        }
+
+        window._bootFailed = function(msg) {
+            if (window._appReady) return;
+            var retried = false;
+            try { retried = !!sessionStorage.getItem(RETRY_KEY); } catch (e) {}
+            if (!retried && navigator.onLine !== false) {
+                try { sessionStorage.setItem(RETRY_KEY, '1'); } catch (e) {}
+                location.reload();
+                return;
+            }
+            showBootError(msg);
+        };
+
+        window.addEventListener('error', function(e) {
+            if (window._appReady) return;
+            if (!window._bootError) window._bootError = e.message || 'unknown error';
+            if (isFatalBootError(e.message)) window._bootFailed(e.message);
+        });
+        window.addEventListener('unhandledrejection', function(e) {
+            if (window._appReady) return;
+            var r = e.reason;
+            var msg = (r && (r.message || String(r))) || 'unhandled rejection';
+            if (!window._bootError) window._bootError = msg;
+            if (isFatalBootError(msg)) window._bootFailed(msg);
+        });
+
+        // Slow-connection reassurance; then give up visibly (never a blank page). If the
+        // download does finish later, onAppReady still hides the loader over the error UI.
+        setTimeout(function() {
+            if (!window._appReady && !failed) {
+                var subtitle = loader.querySelector('.loader-subtitle');
+                if (subtitle) subtitle.textContent = 'Still loading — slow connection…';
+            }
+        }, 30000);
+        setTimeout(function() {
+            if (!window._appReady) showBootError(window._bootError);
+        }, 180000);
+    })();
+</script>
+<script>
+    // Real download progress. Gradle stamps the main wasm's hashed name + UNCOMPRESSED size
+    // into the placeholders below (dist only — on the dev server they stay unstamped and this
+    // whole block is a no-op, keeping the indeterminate bar). The prefetch counts streamed
+    // bytes for the percent; the browser HTTP cache / service worker dedups the request when
+    // composeApp.js fetches the same URL moments later — nothing downloads twice.
+    (function() {
+        var wasmUrl = '0c7a3ff214d646587a58.wasm';
+        var wasmSize = parseInt('8642989', 10);
+        if (!wasmUrl || wasmUrl.indexOf('%%') !== -1 || !(wasmSize > 0)) return;
+        if (typeof fetch !== 'function' || typeof ReadableStream === 'undefined') return;
+
+        var bar = document.querySelector('#loader .loader-bar-fill');
+        var subtitle = document.querySelector('#loader .loader-subtitle');
+        var baseText = subtitle ? subtitle.textContent : 'Loading app...';
+
+        fetch(wasmUrl).then(function(resp) {
+            if (!resp.ok || !resp.body) return;
+            var reader = resp.body.getReader();
+            var received = 0;
+            if (bar) {
+                bar.style.animation = 'none';
+                bar.style.transition = 'width 0.2s ease';
+                bar.style.width = '0%';
+            }
+            function step() {
+                return reader.read().then(function(r) {
+                    if (window._appReady) { reader.cancel(); return; }
+                    if (r.done) {
+                        if (bar) bar.style.width = '100%';
+                        if (subtitle) subtitle.textContent = 'Starting…';
+                        return;
+                    }
+                    received += r.value.length;
+                    var pct = Math.min(100, Math.round(received / wasmSize * 100));
+                    if (bar) bar.style.width = pct + '%';
+                    if (subtitle) subtitle.textContent = baseText + ' ' + pct + '%';
+                    return step();
+                });
+            }
+            return step();
+        }).catch(function() { /* prefetch failed — loader keeps the indeterminate animation */ });
+    })();
+</script>
 <script type="application/javascript" src="composeApp.js"></script>
 <script>
     // Hide loader when Compose signals it's ready
@@ -557,6 +684,8 @@
 
         // Called from Kotlin via PlatformInfo.onAppReady()
         window._hideLoader = function() {
+            window._appReady = true;
+            try { sessionStorage.removeItem('sm_boot_retried'); } catch (e) {}
             hideLoader();
 
             // Initialize Telegram Web App after Compose is ready
@@ -598,10 +727,8 @@
             }
         };
 
-        // Fallback: hide after 30s regardless
-        setTimeout(function() {
-            if (!hidden && loader.parentNode) hideLoader();
-        }, 30000);
+        // No time-based fallback here: the boot watchdog above owns the slow/failed paths.
+        // Hiding the loader on a timer while the wasm is still downloading left a blank page.
     })();
 
     // Register Service Worker (skip in Telegram — not needed)

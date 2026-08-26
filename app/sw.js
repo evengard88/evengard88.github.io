@@ -4,9 +4,9 @@
 // and the shell never references chunk/wasm hashes that were already replaced on the server.
 // Auto-updates when new version is deployed
 
-var CACHE_VERSION = 'mryumstj' === '%%' + 'BUILD_TS' + '%%'
+var CACHE_VERSION = 'mt9mbfnt' === '%%' + 'BUILD_TS' + '%%'
     ? 'dev-' + Date.now()   // dev-server: unique on every SW install
-    : 'mryumstj';       // production: stamped by Gradle
+    : 'mt9mbfnt';       // production: stamped by Gradle
 var CACHE_NAME = 'snake-measurer-' + CACHE_VERSION;
 
 // Assets cached on install (shell)
@@ -112,8 +112,12 @@ self.addEventListener('fetch', function(event) {
     //    The big content-hashed assets (.wasm, chunked .js) stay cache-first above, so this
     //    costs only a few KB per open and never re-downloads the wasm.
     if (isAppShellAsset(url)) {
+        // cache: 'no-cache' forces ETag revalidation past the browser HTTP cache (GitHub Pages
+        // serves max-age=600): without it a reload within 10 min of a deploy could still read
+        // the stale shell from the HTTP cache and reference already-deleted hashed assets.
+        // Fetched by URL because a navigation-mode Request can't be re-issued with options.
         event.respondWith(
-            fetch(event.request).then(function(response) {
+            fetch(url.toString(), { cache: 'no-cache', credentials: 'same-origin' }).then(function(response) {
                 if (response.ok && response.type !== 'opaque') {
                     var clone = response.clone();
                     caches.open(CACHE_NAME).then(function(cache) {
