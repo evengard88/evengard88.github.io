@@ -79,6 +79,64 @@
         else window.addEventListener('DOMContentLoaded', window._initTonConnect);
     </script>
 
+    <!-- Telegram Login Widget host: "Continue with Telegram" (web sign-in). Called from Kotlin
+         (TelegramAuthProvider.web.kt) with the bot username the server reports; the widget is
+         official Telegram JS, so this is just a themed overlay around it. See cb contract below. -->
+    <script>
+        window.telegramLogin = function (botUsername, title, cancelLabel, cb) {
+            // cb contract: JSON payload | '' (user closed) | '!busy' (an overlay is already open) |
+            // '!load' (widget script failed to load). Exactly one call.
+            if (document.getElementById('tg-login-backdrop')) { try { cb('!busy'); } catch (e) {} return; }
+            var done = false;
+            var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var backdrop = document.createElement('div');
+            backdrop.id = 'tg-login-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;';
+            var card = document.createElement('div');
+            card.style.cssText = 'background:' + (dark ? '#1c1c1e' : '#ffffff') + ';color:' + (dark ? '#fff' : '#000') +
+                ';border-radius:16px;padding:24px 20px;width:min(92vw,360px);box-sizing:border-box;text-align:center;' +
+                'font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;';
+            var heading = document.createElement('div');
+            heading.textContent = title || 'Sign in';
+            heading.style.cssText = 'font-size:18px;font-weight:600;margin-bottom:16px;';
+            var host = document.createElement('div');
+            host.style.cssText = 'display:flex;justify-content:center;min-height:48px;';
+            var cancel = document.createElement('button');
+            cancel.type = 'button';
+            cancel.textContent = cancelLabel || 'Cancel';
+            cancel.style.cssText = 'margin-top:16px;background:none;border:0;color:#8e8e93;font-size:15px;cursor:pointer;';
+            card.appendChild(heading); card.appendChild(host); card.appendChild(cancel);
+            backdrop.appendChild(card);
+            function onKey(e) { if (e.key === 'Escape') finish(''); }
+            function cleanup() {
+                document.removeEventListener('keydown', onKey);
+                if (backdrop.parentNode) backdrop.parentNode.removeChild(backdrop);
+                window.__tgOnAuth = null;
+            }
+            function finish(json) {
+                if (done) return; done = true; cleanup();
+                try { cb(json || ''); } catch (e) { console.warn('telegramLogin callback failed', e); }
+            }
+            document.addEventListener('keydown', onKey);
+            backdrop.addEventListener('click', function (e) { if (e.target === backdrop) finish(''); });
+            cancel.addEventListener('click', function () { finish(''); });
+            window.__tgOnAuth = function (user) { finish(JSON.stringify(user)); };
+            document.body.appendChild(backdrop);
+            // telegram-widget.js replaces its own <script> tag with the login iframe, so it must be
+            // inserted where the button should render.
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://telegram.org/js/telegram-widget.js?22';
+            s.setAttribute('data-telegram-login', botUsername);
+            s.setAttribute('data-size', 'large');
+            s.setAttribute('data-radius', '10');
+            s.setAttribute('data-request-access', 'write');
+            s.setAttribute('data-onauth', '__tgOnAuth(user)');
+            s.onerror = function () { finish('!load'); };
+            host.appendChild(s);
+        };
+    </script>
+
     <!-- GlitchTip Error Tracking (self-hosted, Sentry-compatible SDK, production only) -->
     <script>
         (function() {
