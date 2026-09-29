@@ -49,8 +49,28 @@
     <!-- Telegram Web App SDK (no-op outside Telegram, ~20KB) -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <!-- RevenueCat Web Billing SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@revenuecat/purchases-js@latest/dist/purchases-js.min.js"></script>
+    <!-- RevenueCat Web Billing: deliberately NOT loaded.
+         The tag here pointed at @revenuecat/purchases-js@latest/dist/purchases-js.min.js. That file
+         has never existed in any published version of the package — even 0.15.0 ships only
+         Purchases.umd.js and Purchases.es.js — so the SDK 404'd from day one and web billing has
+         never worked. Nothing depended on it: entitlements on the web come from our own server
+         (/api/sync/subscription/refresh), and mobile uses the native purchases-kmp SDK, which also
+         caches offline. The only trace was a 404 per page load and "RevenueCat SDK not loaded" in
+         the console.
+
+         The window.rc* glue below and PurchaseService for web are kept on purpose: every path is
+         guarded by `if (!window._rcInstance)`, so they fail closed, and they are the starting point
+         if web billing is ever wanted (it is also the only way the web could hold entitlements
+         offline, independently of our server).
+
+         To enable, three things — a working URL alone would make things WORSE:
+           1. pin a version and use the UMD build:
+              https://cdn.jsdelivr.net/npm/@revenuecat/purchases-js@1.66.0/dist/Purchases.umd.js
+              (it defines globalThis.Purchases, so `Purchases.Purchases.configure(...)` still fits)
+           2. port the glue to the current API: logIn/logOut are gone (changeUser replaces them) and
+              restorePurchases does not exist at all. rcLogIn runs on every sign-in, so loading the
+              SDK without this step would break a flow that works today.
+           3. configure Web Billing on the RevenueCat side, then test a real purchase. -->
 
     <!-- TON Connect UI (crypto payment, web only) -->
     <script src="https://unpkg.com/@tonconnect/ui@2/dist/tonconnect-ui.min.js"></script>
@@ -121,7 +141,10 @@
             backdrop.addEventListener('click', function (e) { if (e.target === backdrop) finish(''); });
             cancel.addEventListener('click', function () { finish(''); });
             window.__tgOnAuth = function (user) { finish(JSON.stringify(user)); };
-            document.body.appendChild(backdrop);
+            // documentElement, NOT body: Compose attaches a shadow root to <body> (Skiko's canvas
+            // lives inside it), and a shadow host stops rendering its light-DOM children. Appended
+            // to body this overlay existed, blocked every later open as "busy", and was invisible.
+            document.documentElement.appendChild(backdrop);
             // telegram-widget.js replaces its own <script> tag with the login iframe, so it must be
             // inserted where the button should render.
             var s = document.createElement('script');
@@ -984,7 +1007,9 @@
                 spinner.id = 'rc-paywall-spinner';
                 container.appendChild(spinner);
 
-                document.body.appendChild(container);
+                // See the Telegram overlay above: body is a shadow host, its light children
+                // never render. Same trap, same fix.
+                document.documentElement.appendChild(container);
 
                 var cleanup = function() {
                     var c = document.getElementById('rc-paywall-container');
