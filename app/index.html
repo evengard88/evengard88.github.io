@@ -103,7 +103,7 @@
          (TelegramAuthProvider.web.kt) with the bot username the server reports; the widget is
          official Telegram JS, so this is just a themed overlay around it. See cb contract below. -->
     <script>
-        window.telegramLogin = function (botUsername, title, cancelLabel, cb) {
+        window.telegramLogin = function (botUsername, title, cancelLabel, appLink, appLabel, cb) {
             // cb contract: JSON payload | '' (user closed) | '!busy' (an overlay is already open) |
             // '!load' (widget script failed to load). Exactly one call.
             if (document.getElementById('tg-login-backdrop')) { try { cb('!busy'); } catch (e) {} return; }
@@ -121,11 +121,26 @@
             heading.style.cssText = 'font-size:18px;font-weight:600;margin-bottom:16px;';
             var host = document.createElement('div');
             host.style.cssText = 'display:flex;justify-content:center;min-height:48px;';
+            // Real <a>, not window.open: the app link is only known after a round trip for the
+            // nonce, by which point the browser no longer treats the open as user-initiated and
+            // blocks it (Safari especially). A link the user clicks is never blocked — and it is
+            // the only path that survives in-app browsers, where the widget's popup is crippled.
+            var appAnchor = null;
+            if (appLink) {
+                appAnchor = document.createElement('a');
+                appAnchor.href = appLink;
+                appAnchor.target = '_blank';
+                appAnchor.rel = 'noopener';
+                appAnchor.textContent = appLabel || 'Open in Telegram';
+                appAnchor.style.cssText = 'display:block;margin-top:14px;color:#2ea6ff;font-size:14px;text-decoration:none;';
+            }
             var cancel = document.createElement('button');
             cancel.type = 'button';
             cancel.textContent = cancelLabel || 'Cancel';
             cancel.style.cssText = 'margin-top:16px;background:none;border:0;color:#8e8e93;font-size:15px;cursor:pointer;';
-            card.appendChild(heading); card.appendChild(host); card.appendChild(cancel);
+            card.appendChild(heading); card.appendChild(host);
+            if (appAnchor) card.appendChild(appAnchor);
+            card.appendChild(cancel);
             backdrop.appendChild(card);
             function onKey(e) { if (e.key === 'Escape') finish(''); }
             function cleanup() {
@@ -141,6 +156,9 @@
             backdrop.addEventListener('click', function (e) { if (e.target === backdrop) finish(''); });
             cancel.addEventListener('click', function () { finish(''); });
             window.__tgOnAuth = function (user) { finish(JSON.stringify(user)); };
+            // The bot path finishes outside this overlay (the app polls the server), so Kotlin needs
+            // a way to take the dialog down without pretending the user cancelled.
+            window.telegramLoginClose = function () { if (!done) { done = true; cleanup(); } };
             // documentElement, NOT body: Compose attaches a shadow root to <body> (Skiko's canvas
             // lives inside it), and a shadow host stops rendering its light-DOM children. Appended
             // to body this overlay existed, blocked every later open as "busy", and was invisible.
