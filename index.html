@@ -158,8 +158,8 @@
             var saved = localStorage.getItem('landing_theme');
             var dark = saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
             if (dark) document.documentElement.classList.add('dark');
-            // Ставится здесь, до первой отрисовки: с ним .reveal прячется и анимируется,
-            // без него (скрипт не выполнился) весь контент виден сразу.
+            // Set here, before first paint: with it .reveal hides and animates,
+            // without it (the script never ran) all the content is visible at once.
             document.documentElement.classList.add('js');
         })();
     </script>
@@ -204,11 +204,11 @@
             --green-h: #14602B;
             --on-accent: #FFFFFF;
             --device-glow: rgba(123, 63, 209, 0.13);
-            /* Подсветка героя: эллипс с ЗАДАННЫМ размером, посаженный на текстовую колонку,
-               с ровным ядром до середины — поэтому читается как освещённая зона вокруг
-               заголовка, подзаголовка и кнопки, а не как размытая точка в углу. Синего
-               здесь нет намеренно: на странице он ничего не значит, а пара фиолетовый+синий
-               на тёмном — самый тиражируемый фон последних лет. */
+            /* Hero wash: an ellipse at an EXPLICIT size, seated on the text column, with an even
+               core out to the middle - so it reads as a lit area around the heading, the
+               subheading and the button, not as a blurred dot in a corner. There is no blue
+               here on purpose: on this page blue means nothing, and purple+blue on dark is
+               the most copied background of recent years. */
             --hero-wash: rgba(123, 63, 209, 0.15);
             --hero-wash-mid: rgba(123, 63, 209, 0.12);
             --wash-soft: rgba(123, 63, 209, 0.07);
@@ -237,7 +237,7 @@
             --green-h: #6FE08A;
             --on-accent: #0B0B0C;
             --device-glow: rgba(191, 90, 242, 0.15);
-            /* В тёмной плотнее, чем в светлой: на чёрном та же заливка читается слабее. */
+            /* Denser in dark than in light: on black the same fill reads weaker. */
             --hero-wash: rgba(123, 63, 209, 0.20);
             --hero-wash-mid: rgba(123, 63, 209, 0.16);
             --wash-soft: rgba(123, 63, 209, 0.11);
@@ -341,20 +341,20 @@
             background: linear-gradient(180deg, var(--hero-wash) 0%,
                         var(--hero-wash-mid) 32%, transparent 72%);
         }
-        /* ── Альтернатива: свет только в герое, эллипсом за текстом ───────────────────────────
-           Вариант, который стоял до нынешнего. Отличается двумя вещами: подсветка живёт только
-           в герое (у .growth / .features / .final-cta её нет), и нарисована она эллипсом,
-           посаженным на текстовую колонку, — цвет приходит слева, а не сверху.
+        /* -- Alternative: light in the hero only, an ellipse behind the text -----------------
+           The version that stood before the current one. It differs in two ways: the wash lives
+           in the hero alone (.growth / .features / .final-cta have none), and it is drawn as an
+           ellipse seated on the text column, so the colour arrives from the left, not above.
 
-           Почему отложен: у эллипса с коротким затуханием (ядро до 52%, прозрачность к 86%)
-           граница попадала внутрь видимой области и на средних ширинах проступала ОБОДОМ —
-           было хорошо видно справа сверху и снизу. Лечится либо эллипсом шире самого героя
-           (размер 100% 120%, прозрачность к 100%), либо тем, что стоит сейчас.
+           Why it was shelved: with a short falloff (core to 52%, transparent by 86%) the edge of
+           the ellipse fell inside the visible area and showed up as a RIM at middle widths -
+           plainly visible top right and bottom right. The cure is either an ellipse wider than
+           the hero itself (size 100% 120%, transparent by 100%), or what stands here now.
 
-           Чтобы вернуть: закомментировать .hero::before выше и блок .growth/.features/
-           .final-cta::before ниже, раскомментировать это, вернуть --hero-wash-x в токены
-           и мобильное переопределение на 50% (на узком экране текст по центру, иначе
-           подсветка уезжает влево). Плотность на светлой тогда была 0.11 / 0.08.
+           To restore: comment out .hero::before above and the .growth/.features/.final-cta::before
+           block below, uncomment this, bring --hero-wash-x back into the tokens together with the
+           mobile override to 50% (on a narrow screen the text is centred, otherwise the wash
+           drifts left). Density in the light theme was 0.11 / 0.08 then.
 
         .hero::before {
             content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -363,11 +363,11 @@
         }
         @media (max-width: 879px) { .hero::before { --hero-wash-x: 50%; } }
         ─────────────────────────────────────────────────────────────────────────────────── */
-        /* Свечения за заголовком здесь больше нет. Два радиальных пятна — фиолетовое и синее —
-           ничего не обозначали: синий на этой странице не значит ровно ничего, а пара
-           фиолетовый+синий на тёмном фоне — самый тиражируемый фон последних лет, по нему
-           страницу не запомнить. Единственное оставшееся свечение привязано к устройству
-           (.hero-visual::before) и читается как свет от его экрана. */
+        /* The glow behind the heading is gone. Two radial blooms - one purple, one blue - stood
+           for nothing: blue means exactly nothing on this page, and purple+blue on a dark
+           background is the most copied look of recent years, nothing to remember a page by.
+           The one glow left belongs to the device (.hero-visual::before) and reads as light
+           coming off its screen. */
         .hero-icon { width: 88px; height: 88px; border-radius: 16px; margin-bottom: 24px; position: relative; }
         /* Onest set the way the artboards do: heavy, tight, and left to breathe on its own line. */
         .hero h1 {
@@ -400,11 +400,11 @@
         @media (max-width: 640px) {
             .growth-card { padding: 20px; }
             .growth-lead { margin-top: -20px; }
-            /* Во всю ширину: снимок экрана читается только в натуральную величину, а
-               24px поля контейнера с каждой стороны съедали её заметную часть. */
-            /* Скруглённый угол модалки остаётся внутри снимка, и на всю ширину он читался
-               как обрубок. Поэтому кадр роста — обычная карточка с полями и радиусом:
-               рамка срезает дугу, и угол выглядит задуманным. */
+            /* Full bleed: a screen capture only reads at life size, and the container's
+               24px gutter on each side ate a visible part of it. */
+            /* The modal's rounded corner stays inside the capture, and full bleed it read as
+               a stump. So the growth frame is an ordinary card with padding and a radius:
+               the frame cuts the arc and the corner looks intended. */
             .growth-shot { padding: 0; border-radius: 16px; overflow: hidden; }
         }
 
@@ -430,17 +430,18 @@
         .hero-grid { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 44px; }
         .hero-copy { position: relative; z-index: 1; max-width: 100%; min-width: 0; }
         .hero-shot { display: none; width: 100%; height: auto; border-radius: 16px; }
-        /* Единственное свечение на странице — от самого устройства, поэтому оно и на телефоне,
-           а не только на десктопе: там за ним стоит кадр замера, и свет от него так же уместен. */
+        /* The only glow on the page comes from the device itself, which is why it is on the phone
+           too and not desktop only: there it sits behind a measuring shot, where light is as apt. */
         .hero-visual::before {
             content: ''; position: absolute; inset: -8% -14%; z-index: 0; pointer-events: none;
             background: radial-gradient(ellipse at 55% 45%, var(--device-glow), transparent 64%);
         }
         .hero-visual { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; max-width: 100%; }
         .phone-mock {
-            /* content-box: при глобальном border-box padding съедал ширину, а aspect-ratio
-               считался по внешней коробке — место под картинку выходило пропорцией 0.44
-               против 0.46 у самого снимка, и object-fit: cover срезал ~5% по бокам. */
+            /* content-box: under a global border-box the padding ate the width while
+               aspect-ratio was computed on the outer box - the space for the image came out
+               at 0.44 against the capture's own 0.46, and object-fit: cover cropped about
+               5% off the sides. */
             box-sizing: content-box;
             width: 216px; max-width: 62vw; aspect-ratio: 1179 / 2556; flex: 0 0 auto;
             padding: 9px; border-radius: 36px;
@@ -466,14 +467,14 @@
         .hero-carousel-wrap { display: none; }
         @media (max-width: 879px) {
             .phone-mock { display: none; }
-            /* Во всю ширину экрана: у горизонтального кадра высота = ширина / 2.13, и поля
-               контейнера по 24px съедали заметную часть и без того невысокой полосы. */
+            /* Full screen width: a landscape frame is width / 2.13 tall, and the container's
+               24px gutters ate a visible part of an already shallow band. */
             .hero-shot { display: block; margin-left: -24px; margin-right: -24px;
                          width: calc(100% + 48px); border-radius: 0; }
-            /* Карусель выключена до появления нормальных картинок: вырезанные змеи на прозрачном
-               фоне в узкой колонке читались хуже, чем один снимок приложения. Разметка её
-               закомментирована ниже, скрипт при отсутствии узлов молча выходит — включить обратно
-               это две правки. */
+            /* The carousel is off until there are pictures worth showing: cut-out snakes on a
+               transparent background read worse in a narrow column than a single shot of the
+               app. Its markup is commented out below and the script exits quietly when the
+               nodes are missing - turning it back on is two edits. */
             .hero-carousel-wrap { display: none; width: 100%; position: relative; }
             .hero-carousel-wrap::before { content: ''; position: absolute; inset: 6% -4%; z-index: 0; pointer-events: none; background: radial-gradient(ellipse at center, rgba(124,42,168,0.14), transparent 70%); }
             .hero-carousel { position: relative; z-index: 1; display: flex; align-items: center; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 12px 0 18px; }
@@ -567,10 +568,10 @@
         }
 
         /* ── Scroll reveal ── */
-        /* Прячет контент НЕ css, а js — и только если он действительно работает. Раньше было
-           наоборот: .reveal { opacity: 0 } в таблице стилей, а показывал наблюдатель. Любая
-           ошибка в скрипте, блокировщик или переход сразу в середину страницы оставляли
-           заголовки разделов висеть над пустотой: шаги, карточки, вопросы — ничего. */
+        /* The content is hidden by JS, NOT by CSS - and only when the script actually runs. It
+           used to be the other way round: .reveal { opacity: 0 } in the stylesheet, with the
+           observer doing the showing. Any script error, blocker or deep link into the middle of
+           the page then left section headings hanging over nothing: steps, cards, questions. */
         .reveal { opacity: 1; transform: none; }
         html.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
         html.js .reveal.in { opacity: 1; transform: none; }
@@ -586,10 +587,10 @@
         /* ── Steps ── */
         .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
         .step { text-align: center; }
-        /* Номер и иконка — одно пятно, а не два кружка друг над другом: раньше на каждый шаг
-           приходилось два одинаково заметных элемента, и глазу было не за что зацепиться.
-           Номер сидит бейджем на углу иконки и лежит ВНУТРИ неё в разметке — иначе
-           абсолютное позиционирование считалось бы от страницы, а не от квадрата. */
+        /* The number and the icon are one mark, not two circles stacked: every step used to
+           carry two equally loud elements with nothing for the eye to settle on. The number
+           sits as a badge on the icon's corner and lives INSIDE it in the markup - otherwise
+           absolute positioning would resolve against the page instead of the square. */
         .step-icon {
             position: relative;
             display: flex; align-items: center; justify-content: center;
@@ -656,15 +657,15 @@
 
         .final-cta { padding: 64px 24px 72px; text-align: center; border-top: 1px solid var(--border); }
         .final-cta p { font-size: 20px; color: var(--text-sec); margin-bottom: 24px; }
-        /* Те же три пути, что в герое: наверху у человека был выбор между вебом и сторами,
-           внизу до этого оставался только веб. Отправлять его прокруткой наверх — лишняя
-           работа: дешевле показать выбор на месте. */
+        /* The same three routes as in the hero: at the top a visitor had a choice between the
+           web and the stores, at the bottom only the web was left. Sending them scrolling back
+           up is wasted work - showing the choice in place is cheaper. */
         .final-cta .hero-cta { margin: 0 auto; }
         .final-cta .store-badges { justify-content: center; margin-top: 18px; }
 
-        /* Свет не только в герое: иначе цвет обрывается на первой секции и читается пятном.
-           Ниже он вдвое тише героя и приходит с другой стороны — страница освещена, а не
-           раскрашена. z-index нужен, чтобы подложка не перекрыла содержимое секции. */
+        /* Light beyond the hero: otherwise the colour stops at the first section and reads as a
+           blotch. Below it is half the hero's strength and arrives from the other side - the
+           page is lit, not painted. The z-index keeps the wash off the section's content. */
         .growth, .features, .final-cta { position: relative; overflow: hidden; }
         .growth::before, .features::before, .final-cta::before {
             content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
@@ -674,8 +675,8 @@
         .final-cta::before { background: radial-gradient(ellipse 70% 120% at 50% 50%, var(--wash-soft) 0%, transparent 76%); }
         .growth .container, .features .container, .final-cta .container { position: relative; z-index: 1; }
 
-        /* Кнопка «наверх»: страница длинная, а дочитавшему до футера подняться было нечем.
-           Появляется только когда прокрутили заметно, чтобы не мешала в начале. */
+        /* Back to top: the page is long and a reader who reached the footer had no way up.
+           It appears only after a noticeable scroll, so it stays out of the way early on. */
         .to-top {
             position: fixed; right: 20px; bottom: 20px; z-index: 50;
             width: 44px; height: 44px; border-radius: 999px;
@@ -706,9 +707,10 @@
             .hero p { font-size: 15px; }
             .hero-cta { padding: 14px 28px; font-size: 17px; }
             .section-title { font-size: 28px; margin-bottom: 32px; }
-            /* На телефоне шаг был колонкой из четырёх ярусов: номер, иконка, заголовок, текст —
-               и три шага занимали больше двух экранов. Теперь это строка: слева иконка с номером
-               на углу, справа заголовок и описание. Высота секции падает примерно вдвое. */
+            /* On a phone a step was a four-tier column - number, icon, heading, text - and three
+               steps ran past two screens. Now it is a row: the icon with the number on its
+               corner at the left, heading and description at the right. The section loses
+               about half its height. */
             .steps-grid { grid-template-columns: 1fr; gap: 20px; }
             .step {
                 display: grid; grid-template-columns: 52px 1fr; gap: 14px;
@@ -747,9 +749,9 @@
             .hero-icon { width: 72px; height: 72px; border-radius: 16px; }
         }
 
-        /* Наведение только там, где есть мышь. На тач-экране :hover «залипает»: первое
-           касание отдаётся под наведение, и кнопка срабатывает лишь со второго раза —
-           на кнопке «наверх» это было особенно заметно. */
+        /* Hover only where there is a mouse. On a touch screen :hover sticks: the first tap is
+           spent on hovering and the button fires only on the second - most noticeable on the
+           back-to-top button. */
         @media (hover: hover) and (pointer: fine) {
             a:hover { text-decoration: underline; }
             .theme-btn:hover { background: var(--border); }
@@ -834,17 +836,18 @@
             </div>
         </div>
         <div class="hero-visual reveal">
-            <!-- На узких экранах вместо портретного макета — горизонтальный кадр замера:
-                 в колонке 390px он читается, а рамка телефона со скриншотом внутри — нет. -->
+            <!-- On narrow screens a landscape measuring shot replaces the portrait mock-up:
+                 in a 390px column it reads, and a phone frame with a screenshot inside does not. -->
             <img class="hero-shot" src="hero-measure.jpg" width="1400" height="657" loading="eager"
                  alt="Snake Measurer: a corn snake traced with 29 points beside a ruler, result 46.8 cm">
             <div class="phone-mock">
                 <img src="screenshot-measure.jpg" alt="Snake Measurer app tracing a snake's length from a photo next to a reference ruler, result 46.6 cm" width="760" height="1648" loading="eager">
             </div>
-            <!-- Карусель кадров замера на телефоне: разметка снята 2026-10-09 вместе с
-                 snake-1/2/3.webp. CSS (.hero-carousel*) и обработчик ниже остались и оба
-                 безвредны — CSS скрыт, скрипт выходит, не найдя элементов. Вернуть, когда будут
-                 снимки, которые стоит показывать: три кадра замера, 1200px по ширине. -->
+            <!-- Carousel of measuring shots on a phone: the markup was removed 2026-10-09 along
+                 with snake-1/2/3.webp. The CSS (.hero-carousel*) and the handler below both
+                 remain and both are harmless - the CSS is hidden, the script exits when it
+                 finds no elements. Bring it back once there are shots worth showing: three
+                 measuring frames, 1200px wide. -->
         </div>
     </div>
 </section>
@@ -888,13 +891,13 @@
         <h2 class="section-title" data-t="growth_title">Two years of her, on one line</h2>
         <p class="growth-lead" data-t="growth_text">Every measurement is saved to the animal&rsquo;s profile. Already have photos from last year? Add them &mdash; each measurement is dated from the photo itself, so the curve fills in backwards.</p>
         <div class="growth-card growth-shot reveal">
-            <!-- Не рисунок: это PNG, который приложение само отдаёт по кнопке "поделиться".
-                 Снят на эмуляторе из засеянной базы, поэтому показывает ровно то, что получит
-                 пользователь, вплоть до водяного знака. -->
+            <!-- Not an illustration: this is the PNG the app itself produces from its share button.
+                 Captured on an emulator from a seeded database, so it shows exactly what a user
+                 gets, down to the watermark. -->
             <picture>
-                <!-- На телефоне ширина экрана 390px, и карточка-экспорт (1080px макета) ужималась
-                     до нечитаемых цифр. Снимок самого экрана — ассет @2.75x: на 390px он ложится
-                     ровно в натуральную величину, как на настоящем телефоне. -->
+                <!-- A phone screen is 390px wide, and the export card (1080px of layout) shrank to
+                     unreadable figures. The screen capture is a @2.75x asset: at 390px it lands
+                     at exactly life size, the way it does on a real phone. -->
                 <source media="(max-width: 640px)" srcset="growth-phone.png" width="1022" height="1124">
                 <img src="growth-chart.png"
                      alt="Growth chart from Snake Measurer: three snakes measured from May 2024 to September 2026, rising from 34 to 118 cm"
@@ -1009,8 +1012,8 @@
 </section>
 
 <!-- Footer -->
-<!-- Последний экран: дочитавший до конца — самый тёплый посетитель, и до этой правки
-     нажать ему здесь было нечего. Одна строка и та же кнопка, что в герое. -->
+<!-- Final screen: whoever read this far is the warmest visitor there is, and until this
+     change there was nothing here to press. One line and the same button as the hero. -->
 <section class="final-cta">
     <div class="container">
         <p data-t="final_line">Your snake is one photo away from a number.</p>
@@ -1859,7 +1862,7 @@
 })();
 </script>
 <script>
-    // ── Кнопка «наверх» ──
+    // -- Back to top --
     (function () {
         var btn = document.getElementById('toTop');
         if (!btn) return;
