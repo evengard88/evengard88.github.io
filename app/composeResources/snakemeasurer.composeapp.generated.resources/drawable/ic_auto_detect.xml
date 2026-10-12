@@ -18,8 +18,15 @@
       android:fillColor="#FFFFFF"
       android:pathData="M10,4 m-1.5,0 a1.5,1.5 0,1,0 3,0 a1.5,1.5 0,1,0 -3,0"/>
 
-  <!-- sparkle — single, larger, set apart in the top-right corner -->
+  <!-- Sparkle — single, larger, set apart in the top-right corner.
+       Centre (20,4), rays reaching 3.8, waist at ~31% of the ray. That ratio is the whole shape: at
+       the 66% this once had, the concavity was too shallow to read and the glyph looked like a plain
+       diamond; much below ~25% the rays turn spindly at 24dp.
+       3.8 is as long as the rays go: it leaves 0.2 inside the 24x24 canvas, and 4.1 would run off it
+       and be clipped. The enclosing button is no constraint — it is a 52dp circle holding this icon
+       at 24dp centred, so the corners of the icon box sit ~17dp from the centre against a 26dp
+       radius. Growing further means moving the centre, not lengthening the rays. -->
   <path
       android:fillColor="#FFFFFF"
-      android:pathData="M20,0.8 L21.5,2.5 L23.2,4 L21.5,5.5 L20,7.2 L18.5,5.5 L16.8,4 L18.5,2.5 z"/>
+      android:pathData="M20,0.2 L20.83,3.17 L23.8,4 L20.83,4.83 L20,7.8 L19.17,4.83 L16.2,4 L19.17,3.17 z"/>
 </vector>

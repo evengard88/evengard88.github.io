@@ -271,11 +271,18 @@
             display: flex; align-items: center; justify-content: space-between; gap: 24px;
             height: 56px; max-width: 1080px; margin: 0 auto; padding: 0 24px;
         }
+        /* The logo is the one part of this row allowed to give way, and that is what keeps the
+           header from ever overflowing. The controls on the right must keep their hit areas and
+           the nav labels cannot be cut mid-word, so if nothing could shrink the row simply ran
+           past the screen edge — which is exactly what happened: a 390px phone got a 448px
+           document that could be dragged sideways. With min-width: 0 and an ellipsis the brand
+           truncates instead, in any language and at any text zoom. */
         .logo {
             display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px;
-            color: var(--text); flex-shrink: 0; white-space: nowrap;
+            color: var(--text); min-width: 0; white-space: nowrap;
         }
-        .logo img { width: 32px; height: 32px; border-radius: 12px; }
+        .logo img { width: 32px; height: 32px; border-radius: 12px; flex-shrink: 0; }
+        .logo span { overflow: hidden; text-overflow: ellipsis; }
         .header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
         /* Ghost, like the theme button next to it. Filled with --bg-card it was the heaviest thing
            in the row and outweighed the call to action, which is the wrong order of importance. */
@@ -313,7 +320,10 @@
             white-space: nowrap; transition: color 0.15s;
         }
         .header-nav a:hover { color: var(--text); }
-        @media (max-width: 1000px) { .header-nav { display: none; } }
+        /* The nav hides while the row still has room to spare, not at the moment it stops fitting:
+           at 1001px the nav came back while the call to action regained its label and the header
+           overran by 66px. Measured against the widest translation, not English. */
+        @media (max-width: 1100px) { .header-nav { display: none; } }
         /* The sticky header is 56px; without this a jump lands with the heading under it. */
         #how, #features, #diary, #faq { scroll-margin-top: 72px; }
 
@@ -712,6 +722,25 @@
             .features-grid { grid-template-columns: 1fr; gap: 16px; }
             .header-cta span { display: none; }
             .header-cta { padding: 8px 12px; }
+        }
+        /* Below 560px the wordmark goes and the mark stays. Neither the logo nor the right-hand
+           group can shrink (both are flex-shrink: 0), so when they stop fitting the row does not
+           wrap or compress — it overflows. At 390px the header has 342px of content width while
+           logo (191) + gap (24) + actions (209) ask for 424: the document became 448px wide on a
+           390px screen, the whole page could be dragged sideways, and that is what clipped the
+           header button and pushed the step icons off the left edge. The threshold is 472px;
+           560 leaves margin. Shrinking the language select instead is not enough on its own —
+           it frees 79px of the 82 needed. */
+        @media (max-width: 560px) {
+            .logo span { display: none; }
+        }
+        /* Narrower than a phone: the 280px cover screen of a folding handset. 360px is NOT
+           this case - it is the commonest Android width and needs no tightening. The mark alone (32) plus the actions (209) still overrun a 232px
+           content box, so the gutter and the gap tighten and the language select gives back the
+           padding it does not need at this size. */
+        @media (max-width: 300px) {
+            .header-inner { padding: 0 16px; gap: 12px; }
+            .lang-select { font-size: 14px; padding: 0 22px 0 8px; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 28px; }

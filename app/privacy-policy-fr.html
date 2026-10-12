@@ -48,19 +48,35 @@
     <div class="container">
         <a href="/" class="back">&larr; Retour à l'application</a>
         <h1>Politique de Confidentialité</h1>
-        <p class="date">Dernière mise à jour : 29 janvier 2025</p>
+        <p class="date">Dernière mise à jour : 9 octobre 2026</p>
+        <p style="background:#f0f6ff;border-left:3px solid #007AFF;padding:12px 15px;border-radius:6px;font-size:14px;"><strong>Ce qui a changé le 9 octobre 2026 :</strong> cette version a été entièrement révisée. La précédente datait de janvier 2025 et était obsolète : elle affirmait que les images ne sont jamais transférées vers nos serveurs, et ne mentionnait ni le traitement des paiements ni le stockage des images. Ces deux points sont corrigés ici. De plus, cette politique couvre désormais aussi Serp Diary.</p>
 
         <h2>1. Introduction</h2>
         <p>Bienvenue sur Snake Measurer (« nous », « notre » ou « nos »). Nous respectons votre vie privée et nous nous engageons à protéger vos données personnelles. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre application.</p>
 
+        <p>Cette politique couvre nos deux produits : <strong>Snake Measurer</strong> (snakemeasurer.com) et <strong>Serp Diary</strong> (serpdiary.com). Ils partagent un compte, un serveur et une base de données — se connecter à l'un atteint les mêmes données —, c'est pourquoi une seule politique les décrit tous les deux.</p>
+
         <h2>2. Informations que nous collectons</h2>
         <p>Nous collectons les types d'informations suivants :</p>
         <ul>
-            <li><strong>Informations de compte :</strong> Lorsque vous créez un compte, nous collectons votre adresse e-mail et vos identifiants d'authentification.</li>
-            <li><strong>Données d'utilisation :</strong> Nous collectons des données analytiques anonymes sur la façon dont vous utilisez l'application, y compris les fonctionnalités utilisées et le nombre de mesures.</li>
-            <li><strong>Informations sur l'appareil :</strong> Nous pouvons collecter le type d'appareil, le système d'exploitation et les informations du navigateur à des fins de compatibilité.</li>
-            <li><strong>Images :</strong> Les photos que vous téléchargez sont traitées localement sur votre appareil. Nous ne stockons ni ne transmettons vos images à nos serveurs.</li>
-            <li><strong>Historique des mesures :</strong> Votre historique de mesures est stocké localement sur votre appareil et peut être synchronisé avec votre compte si vous êtes connecté.</li>
+            <li><strong>Informations de compte :</strong> Lorsque vous créez un compte, nous collectons votre adresse e-mail et vos identifiants d'authentification via Firebase Authentication.</li>
+            <li><strong>Comptes sans nom :</strong> Serp Diary peut être utilisé sans créer de compte nommé. Nous enregistrons néanmoins ce que vous notez, sous un identifiant de compte généré pour vous, et nous ne conservons ni adresse e-mail ni nom. La seule chose qui relie ce compte à vous est un jeton conservé dans votre navigateur : nous ne pouvons pas en rétablir l'accès. Si vous effacez les données du site ou changez d'appareil, les données restent sur nos serveurs mais deviennent inaccessibles. Vous connecter plus tard associe votre nom à ce même compte au lieu d'en créer un nouveau.</li>
+            <li><strong>Telegram :</strong> Si vous liez Telegram, nous conservons votre identifiant d'utilisateur Telegram afin de vous reconnaître et de traiter les paiements effectués par ce biais.</li>
+            <li><strong>Données d'utilisation :</strong> Nous collectons des données analytiques anonymes sur votre usage de l'application, y compris les fonctions utilisées et le nombre de mesures.</li>
+            <li><strong>Informations sur l'appareil :</strong> Nous pouvons collecter le type d'appareil, le système d'exploitation et le navigateur à des fins de compatibilité.</li>
+            <li><strong>Images et photos :</strong> Lorsque vous êtes connecté, vos photos de mesure, les photos de la galerie de vos animaux et les photos jointes aux entrées du journal sont téléversées vers notre stockage cloud (Backblaze B2, UE) afin de permettre la synchronisation entre appareils. Les photos sont conservées de manière sécurisée et associées à votre compte. Sans compte, Snake Measurer conserve les photos uniquement sur votre appareil.</li>
+            <li><strong>Entrées du journal :</strong> Ce que vous notez dans Serp Diary — repas et leur résultat, mues, poids, visites vétérinaires, notes — ainsi que les programmes, les périodes d'état, les terrariums et l'espèce choisie est conservé sur nos serveurs.</li>
+            <li><strong>Données de mesure :</strong> Votre historique de mesures, y compris les points de référence, les points du serpent et les longueurs calculées, est enregistré localement et synchronisé avec nos serveurs lorsque vous êtes connecté.</li>
+            <li><strong>Profils d'animaux :</strong> Les noms, espèces et photos de vos animaux sont conservés sur nos serveurs lors de la synchronisation.</li>
+            <li><strong>Données d'abonnement :</strong> Les informations d'achat et d'abonnement sont traitées par RevenueCat et la boutique concernée (Google Play, Apple App Store ou Stripe sur le web). Nous conservons votre statut d'abonnement (gratuit ou premium) sur nos serveurs.</li>
+        </ul>
+
+        <h2>2a. Informations que d'autres personnes peuvent voir</h2>
+        <p>Serp Diary vous permet de partager un animal, et partager signifie qu'une autre personne voit une partie de vos données :</p>
+        <ul>
+            <li><strong>Adresses e-mail entre éleveurs :</strong> Lorsque vous invitez quelqu'un à s'occuper d'un animal, cette personne voit l'adresse e-mail du propriétaire, et le propriétaire voit les adresses de toutes les personnes ayant accès. C'est ainsi que vous savez avec qui vous partagez.</li>
+            <li><strong>Les entrées portent leur auteur :</strong> Ce qu'écrit une personne qui vous aide conserve son nom, et ce que vous écrivez sur l'animal d'une autre personne conserve le vôtre.</li>
+            <li><strong>Céder un animal :</strong> Lorsque vous cédez un animal à un autre éleveur, une copie des données de cet animal — entrées, photographies et mesures — est créée dans son compte, et vous conservez votre propre copie en archive. Votre adresse e-mail ne lui est pas communiquée.</li>
         </ul>
 
         <h2>3. Comment nous utilisons vos informations</h2>
@@ -77,17 +93,23 @@
         <p>Vos données sont stockées de manière sécurisée en utilisant les pratiques standard de l'industrie :</p>
         <ul>
             <li>L'authentification est gérée par Firebase Authentication (Google)</li>
-            <li>Les images sont traitées localement et ne sont jamais téléchargées sur nos serveurs</li>
-            <li>Les données de mesure sont stockées localement dans le stockage du navigateur (localStorage)</li>
-            <li>Toute transmission de données est chiffrée en utilisant HTTPS/TLS</li>
+            <li>Les données de mesure et les profils d'animaux sont stockés dans PostgreSQL sur nos serveurs</li>
+            <li>Les images sont stockées dans Backblaze B2, région UE (chiffrées au repos)</li>
+            <li>Toute transmission de données est chiffrée via HTTPS/TLS</li>
+            <li>L'accès au serveur est protégé par l'authentification JWT de Firebase</li>
+            <li>La limitation de débit protège contre les abus</li>
         </ul>
 
         <h2>5. Services tiers</h2>
         <p>Nous utilisons les services tiers suivants :</p>
         <ul>
-            <li><strong>Firebase (Google) :</strong> Pour l'authentification et l'analytique. <a href="https://firebase.google.com/support/privacy" target="_blank">Politique de confidentialité de Firebase</a></li>
+            <li><strong>Firebase (Google) :</strong> Pour l'authentification, l'analytique et les rapports d'erreurs. <a href="https://firebase.google.com/support/privacy" target="_blank">Politique de confidentialité de Firebase</a></li>
             <li><strong>Google Sign-In :</strong> Pour l'authentification sociale. <a href="https://policies.google.com/privacy" target="_blank">Politique de confidentialité de Google</a></li>
             <li><strong>Apple Sign-In :</strong> Pour l'authentification sociale sur les appareils Apple. <a href="https://www.apple.com/legal/privacy/" target="_blank">Politique de confidentialité d'Apple</a></li>
+            <li><strong>RevenueCat :</strong> Pour la gestion des abonnements et des achats intégrés. <a href="https://www.revenuecat.com/privacy" target="_blank">Politique de confidentialité de RevenueCat</a></li>
+            <li><strong>Backblaze :</strong> Pour le stockage des images (B2, région UE). <a href="https://www.backblaze.com/company/privacy.html" target="_blank">Politique de confidentialité de Backblaze</a></li>
+            <li><strong>Telegram :</strong> Pour la connexion et les paiements, si vous choisissez de le lier. <a href="https://telegram.org/privacy" target="_blank">Politique de confidentialité de Telegram</a></li>
+            <li><strong>Stripe :</strong> Pour le traitement des paiements web (via RevenueCat). <a href="https://stripe.com/privacy" target="_blank">Politique de confidentialité de Stripe</a></li>
         </ul>
 
         <h2>6. Cookies et suivi</h2>
@@ -104,9 +126,14 @@
         </ul>
 
         <h2>8. Conservation des données</h2>
-        <p>Nous conservons vos données tant que votre compte est actif. Si vous supprimez votre compte, nous supprimerons vos données personnelles dans les 30 jours, sauf si nous sommes tenus de les conserver à des fins légales.</p>
-
-        <h2>9. Confidentialité des enfants</h2>
+        <p>Nous conservons vos données aussi longtemps que votre compte est actif :</p>
+        <ul>
+            <li><strong>Comptes gratuits :</strong> Jusqu'à 30 mesures et 3 profils d'animaux sont conservés sur nos serveurs.</li>
+            <li><strong>Comptes premium :</strong> Les données sont conservées sans limite pendant la durée de votre abonnement.</li>
+            <li><strong>Suppression du compte :</strong> Pour supprimer votre compte et tout ce qu'il contient, utilisez « Supprimer le compte » dans les réglages, ou écrivez à <a href="mailto:support@snakemeasurer.com">support@snakemeasurer.com</a> depuis l'adresse du compte. Toutes les données — images, mesures, entrées du journal et profils d'animaux — sont définitivement supprimées de nos serveurs sous 30 jours, sauf obligation légale de conservation.</li>
+            <li><strong>Expiration de l'abonnement :</strong> Si votre abonnement premium prend fin, tout ce que vous avez déjà enregistré reste en place. Nous ne supprimons pas vos données pour les faire tenir dans une formule plus petite, et lire, modifier, supprimer et exporter vos propres données reste gratuit quelle que soit la formule. Seul l'ajout au-delà des limites gratuites nécessite à nouveau premium.</li>
+        </ul>
+<h2>9. Confidentialité des enfants</h2>
         <p>Notre service n'est pas destiné aux enfants de moins de 13 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants de moins de 13 ans. Si vous êtes un parent et pensez que votre enfant nous a fourni des informations personnelles, veuillez nous contacter.</p>
 
         <h2>10. Modifications de cette politique</h2>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Snake Measurer</title>
+    <title>Privacy Policy - SerpWidgets</title>
     <meta name="description" content="Privacy Policy for Snake Measurer app">
     <meta name="robots" content="noindex">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -48,21 +48,34 @@
     <div class="container">
         <a href="/" class="back">&larr; Back to App</a>
         <h1>Privacy Policy</h1>
-        <p class="date">Last updated: March 16, 2026</p>
+        <p class="date">Last updated: October 9, 2026</p>
+        <p style="background:#f0f6ff;border-left:3px solid #007AFF;padding:12px 15px;border-radius:6px;font-size:14px;"><strong>What changed on 9 October 2026:</strong> this document now covers Serp Diary as well as Snake Measurer; the image storage provider is named correctly (Backblaze B2, EU — it was previously written as Cloudflare R2); the free plan figures are corrected to 3 animals and 30 measurements; and the clause permitting us to remove records above the free limit after a subscription ends has been removed, because we do not do that and have said publicly that we will not.</p>
 
         <h2>1. Introduction</h2>
-        <p>Welcome to Snake Measurer ("we," "our," or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our application.</p>
+        <p>Welcome to SerpWidgets ("we," "our," or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our applications.</p>
+        <p>This policy covers both of our products: <strong>Snake Measurer</strong> (snakemeasurer.com) and <strong>Serp Diary</strong> (serpdiary.com). They share one account, one server and one database — signing in to either reaches the same records — so one policy describes both.</p>
 
         <h2>2. Information We Collect</h2>
         <p>We collect the following types of information:</p>
         <ul>
             <li><strong>Account Information:</strong> When you create an account, we collect your email address and authentication credentials via Firebase Authentication.</li>
+            <li><strong>Accounts Without a Name:</strong> Serp Diary can be used without creating a named account. We still store the records you make, under an account identifier generated for you, and we hold no email address or name for it. The only thing linking that account to you is a token kept in your browser: we cannot restore access to it, so if you clear your site data or move to another device the records remain on our servers but become unreachable. Signing in later attaches your name to the same account rather than starting a new one.</li>
+            <li><strong>Telegram:</strong> If you link Telegram, we store your Telegram user identifier in order to recognise you and to process payments made through it.</li>
             <li><strong>Usage Data:</strong> We collect anonymous analytics data about how you use the app, including features used and measurement counts.</li>
             <li><strong>Device Information:</strong> We may collect device type, operating system, and browser information for compatibility purposes.</li>
-            <li><strong>Images &amp; Photos:</strong> When you are signed in, your measurement photos are uploaded to our cloud storage (Cloudflare R2) to enable cross-device synchronization. Photos are stored securely and associated with your account. Without an account, photos are stored locally on your device only.</li>
+            <li><strong>Images &amp; Photos:</strong> When you are signed in, your measurement photos, animal gallery photos and photos attached to diary entries are uploaded to our cloud storage (Backblaze B2, EU) to enable cross-device synchronization. Photos are stored securely and associated with your account. Without an account, Snake Measurer keeps photos on your device only.</li>
+            <li><strong>Diary Records:</strong> Entries you write in Serp Diary — feedings and their outcome, sheds, weights, vet visits, notes — together with schedules, state spans, enclosures and the species you choose, are stored on our servers.</li>
             <li><strong>Measurement Data:</strong> Your measurement history, including reference points, snake points, and calculated lengths, is stored locally and synced to our servers when you are signed in.</li>
             <li><strong>Animal Profiles:</strong> Names, species, and photos of your animals are stored on our servers when synced.</li>
             <li><strong>Subscription Data:</strong> Purchase and subscription information is processed by RevenueCat and the respective app store (Google Play, Apple App Store, or Stripe for web). We store your subscription status (free or premium) on our servers.</li>
+        </ul>
+
+        <h2>2a. Information Other People Can See</h2>
+        <p>Serp Diary lets you share an animal, and sharing means someone else sees part of your data:</p>
+        <ul>
+            <li><strong>Email addresses between keepers:</strong> When you invite someone to help with an animal, they see the email address of its owner, and the owner sees the email addresses of everyone who has access. This is how you can tell who you are sharing with.</li>
+            <li><strong>Entries carry their author:</strong> Anything a helper writes keeps their name on it, and anything you write on someone else's animal keeps yours.</li>
+            <li><strong>Handing an animal over:</strong> When you hand an animal to another keeper, a copy of that animal's records — entries, photographs and measurements — is created in their account, and you keep your own copy as an archive. Your email address is not disclosed to them.</li>
         </ul>
 
         <h2>3. How We Use Your Information</h2>
@@ -82,7 +95,7 @@
         <ul>
             <li>Authentication is handled by Firebase Authentication (Google)</li>
             <li>Measurement data and animal profiles are stored in PostgreSQL on our servers</li>
-            <li>Images are stored in Cloudflare R2 (encrypted at rest)</li>
+            <li>Images are stored in Backblaze B2, EU region (encrypted at rest)</li>
             <li>All data transmission is encrypted using HTTPS/TLS</li>
             <li>Server access is protected by Firebase JWT authentication</li>
             <li>Rate limiting protects against abuse</li>
@@ -95,7 +108,8 @@
             <li><strong>Google Sign-In:</strong> For social authentication. <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></li>
             <li><strong>Apple Sign-In:</strong> For social authentication on Apple devices. <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple Privacy Policy</a></li>
             <li><strong>RevenueCat:</strong> For subscription and in-app purchase management. <a href="https://www.revenuecat.com/privacy" target="_blank">RevenueCat Privacy Policy</a></li>
-            <li><strong>Cloudflare:</strong> For image storage (R2) and content delivery. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank">Cloudflare Privacy Policy</a></li>
+            <li><strong>Backblaze:</strong> For image storage (B2, EU region). <a href="https://www.backblaze.com/company/privacy.html" target="_blank">Backblaze Privacy Policy</a></li>
+            <li><strong>Telegram:</strong> For sign-in and payments, if you choose to link it. <a href="https://telegram.org/privacy" target="_blank">Telegram Privacy Policy</a></li>
             <li><strong>Stripe:</strong> For web payment processing (via RevenueCat). <a href="https://stripe.com/privacy" target="_blank">Stripe Privacy Policy</a></li>
         </ul>
 
@@ -116,10 +130,10 @@
         <h2>8. Data Retention</h2>
         <p>We retain your data for as long as your account is active:</p>
         <ul>
-            <li><strong>Free accounts:</strong> Up to 10 measurement records and 1 animal profile are stored on our servers.</li>
+            <li><strong>Free accounts:</strong> Up to 30 measurement records and 3 animal profiles are stored on our servers.</li>
             <li><strong>Premium accounts:</strong> Unlimited records are stored for the duration of your subscription.</li>
-            <li><strong>Account deletion:</strong> When you delete your account, all data — including images, measurements, and animal profiles — is permanently deleted from our servers within 30 days.</li>
-            <li><strong>Subscription expiration:</strong> If your premium subscription expires, your data is retained but subject to free tier limits. Excess records may be removed from our servers.</li>
+            <li><strong>Account deletion:</strong> To delete your account and everything in it, use Delete account in settings, or write to <a href="mailto:support@snakemeasurer.com">support@snakemeasurer.com</a> from the address on the account. All data — including images, measurements, diary entries and animal profiles — is permanently deleted from our servers within 30 days.</li>
+            <li><strong>Subscription expiration:</strong> If your premium subscription expires, everything you have already recorded stays where it is. We do not delete your records to fit a smaller plan, and reading, editing, deleting and exporting your own data remains free on any plan; only adding beyond the free limits asks for premium again.</li>
         </ul>
 
         <h2>9. Children's Privacy</h2>
