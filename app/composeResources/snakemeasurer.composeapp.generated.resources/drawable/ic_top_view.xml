@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- A tilted (trapezoid) plane behind a flat rectangle: "see it from above". -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M7,3h10l4,7H3L7,3zM8.1,5l-1.9,3.3h11.6L15.9,5H8.1z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M3,12h18v9H3V12zM5,14v5h14v-5H5z" />
+</vector>

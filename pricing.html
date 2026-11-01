@@ -8,143 +8,124 @@
     <link rel="canonical" href="https://snakemeasurer.com/pricing.html">
     <meta name="robots" content="index, follow">
 
-    <meta name="theme-color" content="#AF52DE" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#BF5AF2" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#141416" media="(prefers-color-scheme: dark)">
 
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <script>(function(){try{var s=localStorage.getItem('landing_theme');var m=(s==='light'||s==='dark')?s:'system';var d=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches;if(m==='dark'||(m==='system'&&d))document.documentElement.classList.add('dark');}catch(e){}})();</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
     <style>
-        :root {
-            --bg: #F2F2F7;
-            --bg-card: #FFFFFF;
-            --text: #1C1C1E;
-            --text-sec: #636366;
-            --accent: #AF52DE;
-            --accent-h: #9B3DC8;
-            --accent2: #007AFF;
-            --border: #E5E5EA;
-            --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-            --highlight-bg: rgba(175, 82, 222, 0.08);
-            --gold: #F4A406;
+        /* Pricing in the main page's vocabulary: a lit hero, cards with soft shadows, stroked icons in
+           tinted squares (no emoji — they render differently on every platform). */
+        .hero-wash { position: relative; text-align: center; padding: 64px 24px 8px; overflow: hidden; }
+        .hero-wash::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background: linear-gradient(180deg, rgba(123,63,209,0.15) 0%, rgba(123,63,209,0.10) 40%, transparent 100%);
         }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #000000;
-                --bg-card: #1C1C1E;
-                --text: #FFFFFF;
-                --text-sec: #98989F;
-                --accent: #BF5AF2;
-                --accent-h: #D17BF7;
-                --accent2: #0A84FF;
-                --border: #38383A;
-                --card-shadow: 0 1px 3px rgba(0,0,0,0.2);
-                --highlight-bg: rgba(191, 90, 242, 0.12);
-                --gold: #FFB836;
-            }
+        .dark .hero-wash::before { background: linear-gradient(180deg, rgba(123,63,209,0.22) 0%, rgba(123,63,209,0.14) 40%, transparent 100%); }
+        .hero-wash > * { position: relative; }
+        .eyebrow {
+            display: inline-block; padding: 4px 12px; border-radius: 999px; margin-bottom: 18px;
+            background: var(--violet-soft); color: var(--violet-text); font-size: 13px; font-weight: 600;
         }
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background: var(--bg);
-            -webkit-font-smoothing: antialiased;
-        }
-        a { color: var(--accent); text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        .hero-wash h1 { font-size: 48px; max-width: 760px; margin: 0 auto 14px; }
+        .hero-wash .subtitle { max-width: 620px; margin: 0 auto; }
+        main { max-width: 880px; padding-top: 32px; }
 
-        header {
-            position: sticky; top: 0; z-index: 100;
-            background: var(--bg); border-bottom: 1px solid var(--border);
-        }
-        .header-inner {
-            display: flex; align-items: center; justify-content: space-between;
-            height: 56px; max-width: 920px; margin: 0 auto; padding: 0 24px;
-        }
-        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; color: var(--text); }
-        .logo img { width: 32px; height: 32px; border-radius: 8px; }
-        .nav-links { display: flex; gap: 20px; font-size: 14px; }
-        .nav-links a { color: var(--text-sec); }
-
-        main { max-width: 920px; margin: 0 auto; padding: 48px 24px 80px; }
-        h1 { font-size: 36px; margin: 0 0 12px; letter-spacing: -0.02em; }
-        h2 { font-size: 24px; margin: 48px 0 16px; letter-spacing: -0.01em; }
-        h3 { font-size: 18px; margin: 24px 0 8px; }
-        .subtitle { color: var(--text-sec); font-size: 18px; margin: 0 0 40px; }
-
-        .plans { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 32px 0; }
-        @media (min-width: 720px) { .plans { grid-template-columns: repeat(2, 1fr); max-width: 620px; margin-left: auto; margin-right: auto; } }
-
+        .plans { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 16px 0 12px; }
+        @media (min-width: 720px) { .plans { grid-template-columns: repeat(2, 1fr); } }
         .plan {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
-            padding: 24px; box-shadow: var(--card-shadow);
-            display: flex; flex-direction: column;
+            background: var(--bg-card); border-radius: 24px; padding: 28px;
+            box-shadow: var(--card-shadow); display: flex; flex-direction: column; position: relative;
+            border: 1px solid var(--border);
         }
-        .plan.featured {
-            border-color: var(--gold); border-width: 2px;
-            background: linear-gradient(180deg, var(--bg-card) 0%, var(--highlight-bg) 100%);
-            position: relative;
+        .plan.featured { border: 2px solid var(--accent); padding: 27px; }
+        .badge {
+            position: absolute; top: -12px; left: 28px;
+            background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 700;
+            padding: 4px 12px; border-radius: 999px; letter-spacing: 0.04em; text-transform: uppercase;
         }
-        .plan.featured::before {
-            content: "MOST POPULAR";
-            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-            background: var(--gold); color: #000; font-size: 11px; font-weight: 700;
-            padding: 3px 10px; border-radius: 10px; letter-spacing: 0.05em;
+        .plan-name { font-size: 15px; color: var(--text-sec); font-weight: 600; }
+        .plan-price { font-size: 48px; font-weight: 700; margin: 6px 0 2px; letter-spacing: -0.03em; line-height: 1.1; }
+        .plan-price-sub { color: var(--text-sec); font-size: 15px; margin-bottom: 20px; }
+        .plan-features { list-style: none; padding: 0; margin: 0 0 24px; font-size: 15px; flex: 1; }
+        .plan-features li { padding: 6px 0 6px 30px; position: relative; }
+        .plan-features li::before {
+            content: ''; position: absolute; left: 0; top: 9px; width: 18px; height: 18px; border-radius: 50%;
+            background: var(--violet-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8'%3E%3Cpath d='M1 4l2.8 3L9 1' stroke='%237B3FD1' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
         }
-        .plan-name { font-size: 14px; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.08em; }
-        .plan-price { font-size: 32px; font-weight: 700; margin: 8px 0 4px; }
-        .plan-price-sub { color: var(--text-sec); font-size: 13px; margin-bottom: 16px; min-height: 20px; }
-        .plan-features { list-style: none; padding: 0; margin: 16px 0; font-size: 14px; }
-        .plan-features li { padding: 4px 0; color: var(--text-sec); }
-        .plan-features li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+        .dark .plan-features li::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8'%3E%3Cpath d='M1 4l2.8 3L9 1' stroke='%23D9A6FA' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        }
+        .plan .btn { justify-content: center; width: 100%; }
+        .plan:not(.featured) .btn { background: none; color: var(--text); border: 1px solid var(--border); }
+        .plan:not(.featured) .btn:hover { background: var(--violet-soft); }
+        .note { color: var(--text-sec); font-size: 14px; margin: 12px 0 0; text-align: center; }
 
-        .features-list { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: var(--card-shadow); }
-        .features-list ul { list-style: none; padding: 0; margin: 0; }
-        .features-list li { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; align-items: start; gap: 12px; }
-        .features-list li:last-child { border-bottom: none; }
-        .features-list .emoji { font-size: 20px; line-height: 1.3; }
-
-        .note { color: var(--text-sec); font-size: 14px; margin: 16px 0; }
-        footer {
-            border-top: 1px solid var(--border); margin-top: 64px; padding: 32px 24px;
-            color: var(--text-sec); font-size: 13px; text-align: center;
+        .section-title { text-align: center; font-size: 30px; margin: 64px 0 24px; }
+        .perks { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 720px) { .perks { grid-template-columns: repeat(3, 1fr); } }
+        .perk { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: var(--card-shadow); }
+        .perk-icon {
+            display: flex; align-items: center; justify-content: center; width: 48px; height: 48px;
+            border-radius: 16px; margin-bottom: 14px;
         }
-        footer a { color: var(--text-sec); margin: 0 8px; }
+        .perk-icon svg { width: 24px; height: 24px; }
+        .perk:nth-child(1) .perk-icon { color: #2E8FFF; background: rgba(46,143,255,0.12); }
+        .perk:nth-child(2) .perk-icon { color: #34C759; background: rgba(52,199,89,0.13); }
+        .perk:nth-child(3) .perk-icon { color: var(--accent); background: var(--violet-soft); }
+        .perk h3 { font-size: 17px; margin: 0 0 6px; }
+        .perk p { font-size: 15px; color: var(--text-sec); margin: 0; line-height: 1.5; }
+
+        .free { margin-top: 16px; text-align: center; color: var(--text-sec); font-size: 15px; }
+        .free strong { color: var(--text); }
+
+        .info { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 24px 28px; box-shadow: var(--card-shadow); margin-top: 16px; }
+        .info h3 { font-size: 18px; margin: 0 0 8px; }
+        .info p { margin: 0 0 10px; }
+        .info ul { margin: 0; padding-left: 20px; }
+        .info li { padding: 4px 0; }
     </style>
 </head>
 <body>
     <header>
         <div class="header-inner">
             <a href="/" class="logo">
-                <img src="favicon.svg" alt="">
+                <img src="/icon-192.png" alt="" width="32" height="32">
                 <span>Snake Measurer</span>
             </a>
             <nav class="nav-links">
-                <a href="/">Home</a>
-                <a href="/pricing.html">Pricing</a>
+                <a href="/" class="opt">Home</a>
+                <a href="/whats-new.html" class="opt">What's new</a>
+                <a href="/app/" class="btn" style="height:36px;padding:0 16px;font-size:14px;border-radius:12px">Open online &rarr;</a>
             </nav>
         </div>
     </header>
 
-    <main>
+    <section class="hero-wash">
+        <span class="eyebrow">Premium</span>
         <h1>Snake Measurer Premium</h1>
         <p class="subtitle">Unlock unlimited saved measurements, multiple snake profiles, and AI auto-detect. Growth charts, CSV/PNG export, and cloud sync are free for everyone.</p>
+    </section>
 
+    <main>
         <div class="plans">
             <div class="plan featured">
+                <span class="badge">Most popular</span>
                 <span class="plan-name">Yearly</span>
                 <div class="plan-price">$12.99</div>
                 <div class="plan-price-sub">per year — about $1.08 / month</div>
                 <ul class="plan-features">
-                    <li>14-day free trial</li>
                     <li>All Premium features</li>
                     <li>Cancel anytime</li>
                     <li>Best value for annual users</li>
                 </ul>
+                <a class="btn" href="/app/">Open Snake Measurer</a>
             </div>
-
             <div class="plan">
                 <span class="plan-name">Lifetime</span>
                 <div class="plan-price">$24.99</div>
@@ -154,39 +135,52 @@
                     <li>No recurring billing</li>
                     <li>Pay once, use forever</li>
                 </ul>
+                <a class="btn" href="/app/">Open Snake Measurer</a>
             </div>
         </div>
-
         <p class="note">Prices in USD. Local currency prices may vary slightly based on App Store, Google Play, and Paddle exchange rates.</p>
 
-        <h2>What's included in Premium</h2>
-        <div class="features-list">
+        <h2 class="section-title">What's included in Premium</h2>
+        <div class="perks">
+            <div class="perk">
+                <div class="perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.2 7.8a6 6 0 1 0 0 8.4L12 12l6.2-4.2z" opacity="0"/><path d="M8 7.5c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5c3.5 0 4.5-4.5 8-9 2.5 0 4.5 2 4.5 4.5s-2 4.5-4.5 4.5c-3.5 0-4.5-4.5-8-9z"/></svg></div>
+                <h3>Unlimited measurements</h3>
+                <p>The free version saves up to 30.</p>
+            </div>
+            <div class="perk">
+                <div class="perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.4 3.3-5.5 6.5-5.5s5.9 2.1 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.9-.3 5 1.4 5.5 4.4"/></svg></div>
+                <h3>Multiple snake profiles</h3>
+                <p>Track several snakes separately (free version: up to 3).</p>
+            </div>
+            <div class="perk">
+                <div class="perk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><path d="M19 14l.9 2.1L22 17l-2.1.9L19 20l-.9-2.1L16 17l2.1-.9z"/></svg></div>
+                <h3>AI auto-detect</h3>
+                <p>Automatic snake and reference outline detection.</p>
+            </div>
+        </div>
+        <p class="free"><strong>Free for everyone:</strong> measuring, growth charts, CSV/PNG export, and cloud sync across devices — no account needed to measure.</p>
+
+        <h2 class="section-title">Cancellation</h2>
+        <div class="info">
+            <p>Subscriptions auto-renew unless cancelled at least 24 hours before the renewal date.</p>
+            <p>See the <a href="/refund-policy.html">Refund Policy</a> for details on cancellation and refunds.</p>
+        </div>
+        <div class="info">
+            <h3>How to cancel</h3>
             <ul>
-                <li><span class="emoji">💾</span><span><strong>Unlimited measurements</strong> — the free version saves up to 30</span></li>
-                <li><span class="emoji">🐍</span><span><strong>Multiple snake profiles</strong> — track several snakes separately (free version: 1 profile)</span></li>
-                <li><span class="emoji">✨</span><span><strong>AI auto-detect</strong> — automatic snake and reference outline detection</span></li>
+                <li><strong>iOS:</strong> Settings → [your name] → Subscriptions → Snake Measurer Premium → Cancel Subscription</li>
+                <li><strong>Android:</strong> Google Play Store → Profile → Payments &amp; subscriptions → Subscriptions → Snake Measurer Premium → Cancel Subscription</li>
+                <li><strong>Web:</strong> Use the link in your purchase confirmation email, or contact <a href="mailto:support@snakemeasurer.com">support@snakemeasurer.com</a></li>
             </ul>
         </div>
-
-        <p class="note">Free for everyone: measuring, growth charts, CSV/PNG export, and cloud sync across devices — no account needed to measure.</p>
-
-        <h2>Cancellation</h2>
-        <p>Subscriptions auto-renew unless cancelled at least 24 hours before the renewal date. The 14-day free trial on the yearly plan converts to a paid subscription if not cancelled before the trial ends.</p>
-        <p>See the <a href="/refund-policy.html">Refund Policy</a> for details on cancellation and refunds.</p>
-
-        <h2>How to cancel</h2>
-        <ul>
-            <li><strong>iOS:</strong> Settings → [your name] → Subscriptions → Snake Measurer Premium → Cancel Subscription</li>
-            <li><strong>Android:</strong> Google Play Store → Profile → Payments &amp; subscriptions → Subscriptions → Snake Measurer Premium → Cancel Subscription</li>
-            <li><strong>Web:</strong> Use the link in your purchase confirmation email, or contact <a href="mailto:support@snakemeasurer.com">support@snakemeasurer.com</a></li>
-        </ul>
-
-        <h2>Support</h2>
-        <p>Questions about pricing or your subscription? Email us at <a href="mailto:support@snakemeasurer.com">support@snakemeasurer.com</a></p>
+        <div class="info">
+            <h3>Support</h3>
+            <p>Questions about pricing or your subscription? Email us at <a href="mailto:support@snakemeasurer.com">support@snakemeasurer.com</a></p>
+        </div>
     </main>
 
     <footer>
-        <a href="/">Home</a> · <a href="/pricing.html">Pricing</a> · <a href="/terms.html">Terms</a> · <a href="/privacy-policy.html">Privacy</a> · <a href="/refund-policy.html">Refund Policy</a>
+        <a href="/">Home</a> · <a href="/pricing.html">Pricing</a> · <a href="/whats-new.html">What's new</a> · <a href="/app/terms.html">Terms</a> · <a href="/app/privacy-policy.html">Privacy</a> · <a href="/refund-policy.html">Refund Policy</a>
         <div style="margin-top: 12px;">© 2026 Snake Measurer · <a href="mailto:support@snakemeasurer.com">support@snakemeasurer.com</a></div>
     </footer>
 </body>

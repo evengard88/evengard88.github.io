@@ -26,6 +26,8 @@
     <meta name="keywords" content="snake measurer, measure snake length, snake length from photo, reference object measurement, reptile measurement tool, snake size calculator, ball python length, boa constrictor size, corn snake measurement, snake growth tracker, snake growth chart, multiple snake profiles, AI snake detection, pet snake growth tracker">
     <meta name="author" content="SerpWidgets">
     <meta name="robots" content="index, follow">
+    <!-- Safari on iPhone/iPad: the system "Open in the App Store" banner. -->
+    <meta name="apple-itunes-app" content="app-id=6760619393">
     <link rel="canonical" href="https://snakemeasurer.com/">
 
     <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
@@ -60,21 +62,21 @@
     <meta name="twitter:description" content="Measure snake length from photos, auto-detect with AI, and track growth over time.">
     <meta name="twitter:image" content="https://snakemeasurer.com/og-image.png">
 
-    <!-- hreflang — single page with JS switching; x-default for all -->
+    <!-- hreflang — one address per language (build-lang-pages.py) -->
     <link rel="alternate" hreflang="x-default" href="https://snakemeasurer.com/">
     <link rel="alternate" hreflang="en" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="ru" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="es" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="fr" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="de" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="pt" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="it" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="uk" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="nl" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="pl" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="ja" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="ko" href="https://snakemeasurer.com/">
-    <link rel="alternate" hreflang="ar" href="https://snakemeasurer.com/">
+    <link rel="alternate" hreflang="ru" href="https://snakemeasurer.com/ru/">
+    <link rel="alternate" hreflang="es" href="https://snakemeasurer.com/es/">
+    <link rel="alternate" hreflang="fr" href="https://snakemeasurer.com/fr/">
+    <link rel="alternate" hreflang="de" href="https://snakemeasurer.com/de/">
+    <link rel="alternate" hreflang="pt" href="https://snakemeasurer.com/pt/">
+    <link rel="alternate" hreflang="it" href="https://snakemeasurer.com/it/">
+    <link rel="alternate" hreflang="uk" href="https://snakemeasurer.com/uk/">
+    <link rel="alternate" hreflang="nl" href="https://snakemeasurer.com/nl/">
+    <link rel="alternate" hreflang="pl" href="https://snakemeasurer.com/pl/">
+    <link rel="alternate" hreflang="ja" href="https://snakemeasurer.com/ja/">
+    <link rel="alternate" hreflang="ko" href="https://snakemeasurer.com/ko/">
+    <link rel="alternate" hreflang="ar" href="https://snakemeasurer.com/ar/">
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -171,9 +173,13 @@
 
     <script>
         (function() {
+            // Three states, like the app and the diary: 'system' (the default), 'light', 'dark'.
+            // Anything else stored, including the two values this page used to write, is read as a
+            // pinned choice and kept — somebody who once picked dark keeps dark.
             var saved = localStorage.getItem('landing_theme');
-            var dark = saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            if (dark) document.documentElement.classList.add('dark');
+            var mode = (saved === 'light' || saved === 'dark') ? saved : 'system';
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (mode === 'dark' || (mode === 'system' && prefersDark)) document.documentElement.classList.add('dark');
             // Set here, before first paint: with it .reveal hides and animates,
             // without it (the script never ran) all the content is visible at once.
             document.documentElement.classList.add('js');
@@ -412,6 +418,22 @@
         .growth-card svg { width: 100%; height: auto; display: block; }
         .growth-shot { padding: 0; overflow: hidden; }
         .growth-shot img { width: 100%; height: auto; display: block; }
+        /* By date / by age: a segmented control over a swipeable pair, as in the app itself. */
+        .growth-tabs {
+            display: flex; gap: 4px; width: max-content; margin: 18px auto 6px; padding: 4px;
+            border-radius: 12px; background: var(--surface2);
+        }
+        .growth-tabs button {
+            font: inherit; font-size: 15px; font-weight: 600; border: 0; cursor: pointer;
+            padding: 7px 16px; border-radius: 9px; background: none; color: var(--text-sec);
+        }
+        .growth-tabs button[aria-selected="true"] { background: var(--bg-card); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .growth-slides {
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .growth-slides::-webkit-scrollbar { display: none; }
+        .growth-slides img { flex: 0 0 100%; scroll-snap-align: center; }
         .growth-shot picture { display: block; }
         @media (max-width: 640px) {
             .growth-card { padding: 20px; }
@@ -436,6 +458,11 @@
             border: 1px solid var(--border); border-radius: 999px;
             font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
             color: var(--green);
+        }
+        .nav-beta {
+            display: inline-block; margin-left: 2px; padding: 0 6px; border: 1px solid var(--border); border-radius: 999px;
+            font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green);
+            vertical-align: 2px;
         }
         .diary-text { color: var(--text-sec); font-size: 17px; line-height: 1.6; max-width: 620px; margin: 0 auto 24px; }
         /* Green, because it leads to Scalebook and a crossing button wears the colour of the
@@ -610,6 +637,18 @@
         html.js .reveal.in { opacity: 1; transform: none; }
         @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1; transform: none; transition: none; } }
 
+        /* ── Theme crossfade ──
+           The browser snapshots the page before and after the class flips, so nothing here needs to
+           know which colours moved. The new frame fades in OVER the old one with normal blending:
+           the default cross-fade blends with plus-lighter, which keeps a fade between SIMILAR frames
+           from dimming, but light and dark are opposites and their sum is brighter than either, so
+           the midpoint would flash. 240ms, the same as the diary's. */
+        ::view-transition-old(root), ::view-transition-new(root) { mix-blend-mode: normal; }
+        ::view-transition-old(root) { animation: none; }
+        ::view-transition-new(root) { animation: theme-fade-in 240ms cubic-bezier(0.2, 0, 0, 1) both; }
+        @keyframes theme-fade-in { from { opacity: 0; } to { opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) { ::view-transition-new(root) { animation: none; } }
+
         /* ── Section shared ── */
         section { padding: 64px 0; }
         .section-title {
@@ -732,6 +771,9 @@
         }
         .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 12px; flex-wrap: wrap; }
         .footer-links a { color: var(--text-sec); }
+        .footer-langs { display: flex; justify-content: center; gap: 6px 14px; flex-wrap: wrap; margin-bottom: 12px; font-size: 14px; }
+        .footer-langs a { color: var(--faint); }
+        .footer-langs a[aria-current="page"] { color: var(--text); font-weight: 600; }
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
@@ -797,7 +839,21 @@
             .to-top:hover { color: var(--text); }
             .footer-links a:hover { color: var(--accent); }
         }
-</style>
+
+        /* Offer of the visitor's own language on the English page (see offerLanguage). */
+        .lang-offer {
+            position: fixed; left: 16px; bottom: 16px; z-index: 60;
+            display: flex; align-items: center; gap: 4px;
+            padding: 6px 6px 6px 16px; border-radius: 999px;
+            background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--card-shadow);
+            font-size: 15px;
+        }
+        .lang-offer a { color: var(--accent); font-weight: 600; text-decoration: none; }
+        .lang-offer button {
+            width: 32px; height: 32px; border: 0; border-radius: 50%;
+            background: transparent; color: var(--text-sec); font-size: 20px; line-height: 1; cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -811,12 +867,11 @@
         <nav class="header-nav" aria-label="Sections">
             <a href="#how" data-t="how_title">How it works</a>
             <a href="#features" data-t="feat_title">Features</a>
-            <!-- Hidden with the Scalebook section it points at (owner, 2026-10-23): the section lives
-                 in a comment, so this link would lead to an anchor that is not in the page at all.
-                 Bring both back together. -->
-            <!-- <a href="#diary" data-t="nav_diary">Diary</a> -->
+            <!-- Shown again with the Scalebook section (owner, 2026-10-28), marked Beta like it. -->
+            <a href="#diary"><span data-t="nav_diary">Diary</span> <span class="nav-beta">Beta</span></a>
             <a href="#faq" data-t="nav_faq">FAQ</a>
             <a href="/pricing.html" data-t="pricing">Pricing</a>
+            <a href="/whats-new.html" data-t="whats_new">What's new</a>
         </nav>
         <div class="header-actions">
             <select class="lang-select" id="langSelect" aria-label="Language">
@@ -927,18 +982,19 @@
         <h2 class="section-title" data-t="growth_title">Two years of her, on one line</h2>
         <p class="growth-lead" data-t="growth_text">Every measurement is saved to the animal&rsquo;s profile. Already have photos from last year? Add them &mdash; each measurement is dated from the photo itself, so the curve fills in backwards.</p>
         <div class="growth-card growth-shot reveal">
-            <!-- Not an illustration: this is the PNG the app itself produces from its share button.
-                 Captured on an emulator from a seeded database, so it shows exactly what a user
-                 gets, down to the watermark. -->
-            <picture>
-                <!-- A phone screen is 390px wide, and the export card (1080px of layout) shrank to
-                     unreadable figures. The screen capture is a @2.75x asset: at 390px it lands
-                     at exactly life size, the way it does on a real phone. -->
-                <source media="(max-width: 640px)" srcset="growth-phone.png" width="1022" height="1124">
-                <img src="growth-chart.png"
-                     alt="Growth chart from Snake Measurer: three snakes measured from May 2024 to September 2026, rising from 34 to 118 cm"
-                     width="1080" height="882" loading="lazy">
-            </picture>
+            <!-- Two views of the same five snakes, as the app shows them (captured on an emulator
+                 from a seeded database): by calendar date, and lined up by age — the 1.8 view that
+                 lets snakes born in different years be compared fairly. -->
+            <div class="growth-tabs" role="tablist" aria-label="Chart view">
+                <button type="button" role="tab" aria-selected="true" data-slide="0" data-t="growth_by_date">By date</button>
+                <button type="button" role="tab" aria-selected="false" data-slide="1" data-t="growth_by_age">By age</button>
+            </div>
+            <div class="growth-slides" id="growthSlides">
+                <img src="analytics-by-date.png" width="1010" height="860" loading="lazy"
+                     alt="Snake Measurer growth chart by date: five snakes measured over six years">
+                <img src="analytics-by-age.png" width="1010" height="860" loading="lazy"
+                     alt="The same five snakes lined up by age, so animals born in different years compare directly">
+            </div>
         </div>
     </div>
 </section>
@@ -1019,18 +1075,13 @@
     </div>
 </section>
 
-<!-- ══ Scalebook block — HIDDEN until the diary is tested and ready to be announced (owner, 2026-10-23;
-     it was hidden once before, 2026-10-07, and shown briefly in between).
-     Kept whole, with its strings in all 13 languages and its CSS, so bringing it back is
-     uncommenting this one block together with the nav link above. Do not delete: the copy was written
-     and translated once, and rewritten on 2026-10-23 so that it says nothing about the animal's sex or species.
-
-<!— Scalebook — placed AFTER the product is explained, never above it: this page has one job,
+<!-- Scalebook — placed AFTER the product is explained, never above it: this page has one job,
      turning a stranger into a first measurement, and a second product offered before that job is
      done competes with it. Whoever scrolled this far is already warm.
      The href points at scalebook.app/go rather than the diary itself — that doorway is re-aimable
      from the server, so the day the mobile diary ships nothing here has to change.
-     BETA marks it honestly while the diary is still being finished (2026-10-23); remove with the beta. —>
+     BETA marks it honestly while the diary is still being finished (2026-10-23); remove with the beta.
+     Shown again 2026-10-28 (owner). -->
 <section id="diary" class="diary">
     <div class="container">
         <div class="diary-card reveal">
@@ -1041,7 +1092,6 @@
         </div>
     </div>
 </section>
-     ══ end of hidden Scalebook block -->
 
 <!-- FAQ -->
 <section id="faq" class="faq">
@@ -1112,9 +1162,12 @@
     <div class="container">
         <div class="footer-links">
             <a href="/pricing.html" data-t="pricing">Pricing</a>
-            <a href="#" id="privacyLink" data-t="privacy">Privacy Policy</a>
-            <a href="#" id="termsLink" data-t="terms">Terms of Use</a>
+            <a href="/whats-new.html" data-t="whats_new">What's new</a>
+            <a href="/app/privacy-policy.html" id="privacyLink" data-t="privacy">Privacy Policy</a>
+            <a href="/app/terms.html" id="termsLink" data-t="terms">Terms of Use</a>
         </div>
+        <!-- Every language's page, as plain links (filled by build-lang-pages.py). -->
+        <nav class="footer-langs" aria-label="Language"><!--LANG_LINKS--><a href="/" hreflang="en" lang="en" aria-current="page">English</a><a href="/ru/" hreflang="ru" lang="ru">Русский</a><a href="/es/" hreflang="es" lang="es">Español</a><a href="/fr/" hreflang="fr" lang="fr">Français</a><a href="/de/" hreflang="de" lang="de">Deutsch</a><a href="/pt/" hreflang="pt" lang="pt">Português</a><a href="/it/" hreflang="it" lang="it">Italiano</a><a href="/uk/" hreflang="uk" lang="uk">Українська</a><a href="/nl/" hreflang="nl" lang="nl">Nederlands</a><a href="/pl/" hreflang="pl" lang="pl">Polski</a><a href="/ja/" hreflang="ja" lang="ja">日本語</a><a href="/ko/" hreflang="ko" lang="ko">한국어</a><a href="/ar/" hreflang="ar" lang="ar">العربية</a></nav>
         <p>&copy; 2026 SerpWidgets. All rights reserved.</p>
     </div>
 </footer>
@@ -1124,12 +1177,15 @@
     /* ── Translations ── */
     var L = {
         en: {
+            growth_by_date: "By date",
+            growth_by_age: "By age",
             nav_diary: "Diary",
             nav_faq: "FAQ",
             app_name: "Snake Measurer",
             meta_keywords: "snake measurer, measure snake length, snake length from photo, reptile measurement tool, snake size calculator, reference object measurement, ball python length, boa constrictor size, corn snake measurement, snake growth tracker, snake growth chart, multiple snake profiles, AI snake detection, how to measure a snake",
             nav_cta: "Open online",
             pricing: "Pricing",
+            whats_new: "What's new",
             hero_title: "Measure Your Snake's Length from Photos",
             hero_sub: "Measure length from a photo, auto-detect with AI, and track every snake's growth over time. Free, and works on any device.",
             hero_cta: "Measure online",
@@ -1188,12 +1244,15 @@
             terms: "Terms of Use"
         },
         ru: {
+            growth_by_date: "По датам",
+            growth_by_age: "По возрасту",
             nav_diary: "Дневник",
             nav_faq: "Вопросы",
-            app_name: "\u0418\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0437\u043c\u0435\u0439",
+            app_name: "Snake Measurer",
             meta_keywords: "\u0438\u0437\u043c\u0435\u0440\u0438\u0442\u044c \u0434\u043b\u0438\u043d\u0443 \u0437\u043c\u0435\u0438, \u0438\u0437\u043c\u0435\u0440\u0438\u0442\u0435\u043b\u044c \u0437\u043c\u0435\u0439, \u0434\u043b\u0438\u043d\u0430 \u0437\u043c\u0435\u0438 \u043f\u043e \u0444\u043e\u0442\u043e, \u043a\u0430\u043a \u0438\u0437\u043c\u0435\u0440\u0438\u0442\u044c \u0437\u043c\u0435\u044e, \u0440\u0430\u0437\u043c\u0435\u0440 \u0437\u043c\u0435\u0438, \u043f\u0438\u0442\u043e\u043d \u0434\u043b\u0438\u043d\u0430, \u0443\u0434\u0430\u0432 \u0440\u0430\u0437\u043c\u0435\u0440, \u043a\u043e\u0440\u043e\u043b\u0435\u0432\u0441\u043a\u0438\u0439 \u043f\u0438\u0442\u043e\u043d, \u043c\u043e\u043b\u043e\u0447\u043d\u0430\u044f \u0437\u043c\u0435\u044f, \u0440\u043e\u0441\u0442 \u0437\u043c\u0435\u0438, \u0442\u0435\u0440\u0440\u0430\u0440\u0438\u0443\u043c\u043d\u044b\u0435 \u0436\u0438\u0432\u043e\u0442\u043d\u044b\u0435, \u0441\u043e\u0434\u0435\u0440\u0436\u0430\u043d\u0438\u0435 \u0437\u043c\u0435\u0439, \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u0435 \u0440\u0435\u043f\u0442\u0438\u043b\u0438\u0439",
             nav_cta: "Открыть онлайн",
             pricing: "Цены",
+            whats_new: "Что нового",
             hero_title: "\u0418\u0437\u043c\u0435\u0440\u044f\u0439\u0442\u0435 \u0434\u043b\u0438\u043d\u0443 \u0437\u043c\u0435\u0438 \u043f\u043e \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0438",
             hero_sub: "Измеряйте длину по фото, распознавайте змею с помощью ИИ и следите за ростом каждой змеи со временем. Бесплатно, на любом устройстве.",
             hero_cta: "\u0418\u0437\u043c\u0435\u0440\u0438\u0442\u044c \u043e\u043d\u043b\u0430\u0439\u043d",
@@ -1252,12 +1311,15 @@
             terms: "\u0423\u0441\u043b\u043e\u0432\u0438\u044f \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u044f"
         },
         es: {
+            growth_by_date: "Por fecha",
+            growth_by_age: "Por edad",
             nav_diary: "Diario",
             nav_faq: "FAQ",
-            app_name: "Medidor de Serpientes",
+            app_name: "Snake Measurer",
             meta_keywords: "medir serpiente, medidor de serpientes, longitud de serpiente por foto, medir largo de serpiente, tama\u00f1o de serpiente, pit\u00f3n bola longitud, boa constrictor tama\u00f1o, serpiente del ma\u00edz, herramienta medici\u00f3n reptiles, crecimiento serpiente mascota, c\u00f3mo medir una serpiente, cuidado de reptiles",
             nav_cta: "Abrir en línea",
             pricing: "Precios",
+            whats_new: "Novedades",
             hero_title: "Mide la longitud de tu serpiente con fotos",
             hero_sub: "Mide la longitud desde una foto, detecta con IA y sigue el crecimiento de cada serpiente con el tiempo. Gratis y en cualquier dispositivo.",
             hero_cta: "Medir en l\u00ednea",
@@ -1311,12 +1373,15 @@
             privacy: "Pol\u00edtica de privacidad", terms: "T\u00e9rminos de uso"
         },
         fr: {
+            growth_by_date: "Par date",
+            growth_by_age: "Par âge",
             nav_diary: "Journal",
             nav_faq: "FAQ",
-            app_name: "Mesureur de Serpents",
+            app_name: "Snake Measurer",
             meta_keywords: "mesurer serpent, mesureur de serpents, longueur serpent photo, taille du serpent, python royal longueur, boa constrictor taille, serpent des bl\u00e9s, outil mesure reptile, croissance serpent, comment mesurer un serpent, application serpent, soins reptiles, terrariophilie",
             nav_cta: "Ouvrir en ligne",
             pricing: "Tarifs",
+            whats_new: "Nouveautés",
             hero_title: "Mesurez votre serpent \u00e0 partir de photos",
             hero_sub: "Mesurez la longueur à partir d’une photo, détectez avec l’IA et suivez la croissance de chaque serpent dans le temps. Gratuit, sur tout appareil.",
             hero_cta: "Mesurer en ligne",
@@ -1370,12 +1435,15 @@
             privacy: "Politique de confidentialit\u00e9", terms: "Conditions d\u2019utilisation"
         },
         de: {
+            growth_by_date: "Nach Datum",
+            growth_by_age: "Nach Alter",
             nav_diary: "Tagebuch",
             nav_faq: "FAQ",
-            app_name: "Schlangenmesser",
+            app_name: "Snake Measurer",
             meta_keywords: "Schlange messen, Schlangenmesser, Schlangenl\u00e4nge Foto, Schlange vermessen, K\u00f6nigspython L\u00e4nge, Boa Constrictor Gr\u00f6\u00dfe, Kornnatter messen, Reptilien Messwerkzeug, Schlangenwachstum, wie Schlange messen, Reptilienpflege, Terrarienhaltung, Schlangen App",
             nav_cta: "Online öffnen",
             pricing: "Preise",
+            whats_new: "Neuigkeiten",
             hero_title: "Messen Sie Ihre Schlange anhand von Fotos",
             hero_sub: "Messen Sie die Länge anhand eines Fotos, erkennen Sie sie per KI und verfolgen Sie das Wachstum jeder Schlange über die Zeit. Kostenlos, auf jedem Gerät.",
             hero_cta: "Online messen",
@@ -1429,12 +1497,15 @@
             privacy: "Datenschutz", terms: "Nutzungsbedingungen"
         },
         pt: {
+            growth_by_date: "Por data",
+            growth_by_age: "Por idade",
             nav_diary: "Diário",
             nav_faq: "FAQ",
-            app_name: "Medidor de Cobras",
+            app_name: "Snake Measurer",
             meta_keywords: "medir cobra, medidor de cobras, comprimento cobra foto, tamanho de cobra, p\u00edton-real comprimento, jiboia tamanho, cobra do milho, ferramenta medi\u00e7\u00e3o r\u00e9pteis, crescimento cobra, como medir uma cobra, cuidados r\u00e9pteis, app serpentes",
             nav_cta: "Abrir online",
             pricing: "Preços",
+            whats_new: "Novidades",
             hero_title: "Me\u00e7a o comprimento da sua cobra com fotos",
             hero_sub: "Meça o comprimento a partir de uma foto, detecte com IA e acompanhe o crescimento de cada cobra ao longo do tempo. Grátis, em qualquer dispositivo.",
             hero_cta: "Medir online",
@@ -1488,12 +1559,15 @@
             privacy: "Pol\u00edtica de privacidade", terms: "Termos de uso"
         },
         it: {
+            growth_by_date: "Per data",
+            growth_by_age: "Per età",
             nav_diary: "Diario",
             nav_faq: "FAQ",
-            app_name: "Misuratore di Serpenti",
+            app_name: "Snake Measurer",
             meta_keywords: "misurare serpente, misuratore di serpenti, lunghezza serpente foto, dimensioni serpente, pitone reale lunghezza, boa constrictor dimensioni, serpente del grano, strumento misurazione rettili, crescita serpente, come misurare un serpente, cura rettili, terrariofilia, app serpenti",
             nav_cta: "Apri online",
             pricing: "Prezzi",
+            whats_new: "Novità",
             hero_title: "Misura la lunghezza del tuo serpente dalle foto",
             hero_sub: "Misura la lunghezza da una foto, rileva con l’IA e monitora la crescita di ogni serpente nel tempo. Gratis, su qualsiasi dispositivo.",
             hero_cta: "Misura online",
@@ -1547,12 +1621,15 @@
             privacy: "Privacy Policy", terms: "Termini di utilizzo"
         },
         uk: {
+            growth_by_date: "За датами",
+            growth_by_age: "За віком",
             nav_diary: "Щоденник",
             nav_faq: "Питання",
-            app_name: "Вимірювач змій",
+            app_name: "Snake Measurer",
             meta_keywords: "виміряти довжину змії, вимірювач змій, довжина змії за фото, як виміряти змію, розмір змії, королівський пітон довжина, удав розмір, маїсовий полоз, інструмент вимірювання рептилій, ріст змії, відстеження росту, утримання рептилій, догляд за зміями",
             nav_cta: "Відкрити онлайн",
             pricing: "Ціни",
+            whats_new: "Що нового",
             hero_title: "Вимірюйте довжину змії за фотографіями",
             hero_sub: "Вимірюйте довжину за фото, розпізнавайте змію за допомогою ШІ та відстежуйте ріст кожної змії з часом. Безкоштовно та на будь-якому пристрої.",
             hero_cta: "\u0412\u0438\u043c\u0456\u0440\u044f\u0442\u0438 \u043e\u043d\u043b\u0430\u0439\u043d",
@@ -1611,12 +1688,15 @@
             terms: "Умови використання"
         },
         nl: {
+            growth_by_date: "Op datum",
+            growth_by_age: "Op leeftijd",
             nav_diary: "Dagboek",
             nav_faq: "FAQ",
-            app_name: "Slangenmeter",
+            app_name: "Snake Measurer",
             meta_keywords: "slang meten, slangenmeter, lengte slang via foto, hoe meet je een slang, grootte slang, koningspython lengte, boa constrictor grootte, korenslang meten, meetinstrument reptielen, groei slang volgen, reptielenverzorging, slangen app",
             nav_cta: "Online openen",
             pricing: "Prijzen",
+            whats_new: "Wat is nieuw",
             hero_title: "Meet de lengte van je slang met foto’s",
             hero_sub: "Meet de lengte vanaf een foto, herken automatisch met AI en volg de groei van elke slang in de tijd. Gratis en werkt op elk apparaat.",
             hero_cta: "Online meten",
@@ -1675,12 +1755,15 @@
             terms: "Gebruiksvoorwaarden"
         },
         pl: {
+            growth_by_date: "Wg daty",
+            growth_by_age: "Wg wieku",
             nav_diary: "Dziennik",
             nav_faq: "FAQ",
-            app_name: "Miernik węży",
+            app_name: "Snake Measurer",
             meta_keywords: "pomiar węża, miernik węży, długość węża ze zdjęcia, jak zmierzyć węża, rozmiar węża, pyton królewski długość, boa dusiciel rozmiar, wąż zbożowy, narzędzie do pomiaru gadów, śledzenie wzrostu węża, hodowla gadów, opieka nad wężami",
             nav_cta: "Otwórz online",
             pricing: "Cennik",
+            whats_new: "Co nowego",
             hero_title: "Zmierz długość swojego węża na podstawie zdjęć",
             hero_sub: "Zmierz długość ze zdjęcia, wykryj automatycznie dzięki AI i śledź wzrost każdego węża w czasie. Za darmo i na każdym urządzeniu.",
             hero_cta: "Zmierz online",
@@ -1739,12 +1822,15 @@
             terms: "Warunki użytkowania"
         },
         ja: {
+            growth_by_date: "日付順",
+            growth_by_age: "年齢順",
             nav_diary: "日記",
             nav_faq: "よくある質問",
-            app_name: "ヘビ計測",
+            app_name: "Snake Measurer",
             meta_keywords: "ヘビ 測定, ヘビ 長さ 写真, ヘビのサイズ, ヘビの計測アプリ, ボールパイソン 長さ, ボアコンストリクター サイズ, コーンスネーク 測定, 爬虫類 計測ツール, ヘビ 成長記録, ヘビの飼育, 爬虫類 飼育, ヘビ 長さ 測り方",
             nav_cta: "オンラインで開く",
             pricing: "料金",
+            whats_new: "新機能",
             hero_title: "写真からヘビの長さを測定",
             hero_sub: "写真から長さを測定し、AIで自動検出して、各ヘビの成長を記録できます。無料で、どんなデバイスでも使えます。",
             hero_cta: "\u30aa\u30f3\u30e9\u30a4\u30f3\u3067\u6e2c\u308b",
@@ -1803,12 +1889,15 @@
             terms: "利用規約"
         },
         ko: {
+            growth_by_date: "날짜별",
+            growth_by_age: "나이별",
             nav_diary: "다이어리",
             nav_faq: "FAQ",
-            app_name: "뱀 측정기",
+            app_name: "Snake Measurer",
             meta_keywords: "뱀 측정, 뱀 길이 측정, 사진으로 뱀 길이, 뱀 크기, 볼파이톤 길이, 보아뱀 크기, 콘스네이크 측정, 파충류 측정 도구, 뱀 성장 기록, 파충류 사육, 뱀 관리 앱, 뱀 길이 재는 법",
             nav_cta: "온라인으로 열기",
             pricing: "가격",
+            whats_new: "새로운 기능",
             hero_title: "사진으로 뱀의 길이를 측정하세요",
             hero_sub: "사진으로 길이를 측정하고, AI로 자동 인식하며, 각 뱀의 성장을 시간에 따라 기록하세요. 무료이며 모든 기기에서 작동합니다.",
             hero_cta: "\uc628\ub77c\uc778\uc73c\ub85c \uce21\uc815",
@@ -1867,12 +1956,15 @@
             terms: "이용약관"
         },
         ar: {
+            growth_by_date: "حسب التاريخ",
+            growth_by_age: "حسب العمر",
             nav_diary: "اليوميات",
             nav_faq: "الأسئلة",
-            app_name: "مقياس الثعابين",
+            app_name: "Snake Measurer",
             meta_keywords: "قياس الثعبان, قياس طول الثعبان, طول الثعبان من صورة, كيفية قياس ثعبان, حجم الثعبان, طول بايثون الكرة, حجم البوا العاصرة, ثعبان الذرة, أداة قياس الزواحف, تتبع نمو الثعبان, تربية الزواحف, العناية بالثعابين",
             nav_cta: "فتح عبر الإنترنت",
             pricing: "الأسعار",
+            whats_new: "ما الجديد",
             hero_title: "قِس طول ثعبانك من الصور",
             hero_sub: "قِس الطول من صورة، واكتشفه تلقائيًا بالذكاء الاصطناعي، وتتبّع نمو كل ثعبان مع مرور الوقت. مجاني ويعمل على أي جهاز.",
             hero_cta: "\u0627\u0644\u0642\u064a\u0627\u0633 \u0639\u0628\u0631 \u0627\u0644\u0625\u0646\u062a\u0631\u0646\u062a",
@@ -1937,20 +2029,21 @@
 
     /* ── State ── */
     var lang = 'en';
-    var isDark = document.documentElement.classList.contains('dark');
+    /* Each language has its own address (/ru/, /de/, … ; English at the root) — the way search
+       engines expect it. build-lang-pages.py writes the page's language here. */
+    var PAGE_LANG = 'en'; /*PAGE_LANG*/
+    function pageUrl(code) { return code === 'en' ? '/' : '/' + code + '/'; }
+    var themeMode = (function() {
+        var v = localStorage.getItem('landing_theme');
+        return (v === 'light' || v === 'dark') ? v : 'system';
+    })();
 
     /* ── Detect language ── */
     function detectLang() {
-        /* 1. URL hash */
+        /* Old shared links carried the language in the hash (/#ru): send them to its page. */
         var h = location.hash.replace('#', '').toLowerCase();
-        if (L[h]) return h;
-        /* 2. localStorage */
-        var saved = localStorage.getItem('landing_lang');
-        if (L[saved]) return saved;
-        /* 3. Browser language */
-        var nav = (navigator.language || '').slice(0, 2).toLowerCase();
-        if (L[nav]) return nav;
-        return 'en';
+        if (L[h] && h !== PAGE_LANG) { location.replace(pageUrl(h)); return PAGE_LANG; }
+        return PAGE_LANG;
     }
 
     /* ── Apply translations ── */
@@ -1959,7 +2052,6 @@
         localStorage.setItem('landing_lang', code);
         document.documentElement.lang = code;
         document.documentElement.dir = (code === 'ar') ? 'rtl' : 'ltr';
-        location.hash = code === 'en' ? '' : code;
         document.getElementById('langSelect').value = code;
 
         var strings = L[code] || L.en;
@@ -1991,9 +2083,13 @@
         for (var k = 0; k < badges.length; k++) {
             var kind = badges[k].getAttribute('data-badge');
             badges[k].src = kind === 'app-store'
-                ? 'badges/app-store-' + appleCode + '.svg'
-                : 'badges/google-play-' + code + '.png';
+                ? '/badges/app-store-' + appleCode + '.svg'
+                : '/badges/google-play-' + code + '.png';
         }
+
+        /* "What's new" has a page per language too. */
+        var wn = document.querySelectorAll('a[data-t="whats_new"]');
+        for (var w = 0; w < wn.length; w++) wn[w].setAttribute('href', code === 'en' ? '/whats-new.html' : '/' + code + '/whats-new.html');
 
         /* Update policy links */
         var suffix = policySuffix[code] || '';
@@ -2003,26 +2099,123 @@
 
     /* ── Theme toggle ── */
     var themeBtn = document.getElementById('themeBtn');
-    var ICON_SUN = '<svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    var SVG_OPEN = '<svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+    var ICON_SUN = SVG_OPEN
         + '<circle cx="10" cy="10" r="3.6"/>'
         + '<path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.5 4.5l1.4 1.4M14.1 14.1l1.4 1.4M15.5 4.5l-1.4 1.4M5.9 14.1l-1.4 1.4"/></svg>';
-    var ICON_MOON = '<svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    var ICON_MOON = SVG_OPEN
         + '<path d="M16.5 11.8A7 7 0 0 1 8.2 3.5a7 7 0 1 0 8.3 8.3z"/></svg>';
-    function updateThemeBtn() {
-        themeBtn.innerHTML = isDark ? ICON_SUN : ICON_MOON;
+    // "Whatever the system says" — a circle with one half filled, the same glyph the app ships as
+    // ic_auto and the diary as IconAppearance. Sun and moon everybody reads; this is the one that
+    // gets misread, so it is worth being the SAME shape in all three places.
+    var ICON_AUTO = SVG_OPEN
+        + '<circle cx="10" cy="10" r="6.8"/>'
+        + '<path d="M10 3.2a6.8 6.8 0 0 1 0 13.6z" fill="currentColor" stroke="none"/></svg>';
+    var THEME_ICON = { system: ICON_AUTO, light: ICON_SUN, dark: ICON_MOON };
+    var THEME_NEXT = { system: 'light', light: 'dark', dark: 'system' };
+    var THEME_LABEL = { system: 'Switch to the light theme', light: 'Switch to the dark theme', dark: 'Follow the system theme' };
+    var systemDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+    function paintTheme() {
+        var dark = themeMode === 'dark' || (themeMode === 'system' && systemDark && systemDark.matches);
+        document.documentElement.classList.toggle('dark', dark);
+        // The icon shows the state you are IN; the label says where the next tap goes.
+        themeBtn.innerHTML = THEME_ICON[themeMode];
+        themeBtn.setAttribute('aria-label', THEME_LABEL[themeMode]);
+    }
+    // Cycling is a compromise on a header that has no room for three of anything: the states it
+    // does not show cannot be seen. What it must not do is strand you — the two-state switch this
+    // replaced wrote 'light' or 'dark' on the first tap and never let anybody back to 'system'.
+    function setTheme(mode) {
+        themeMode = mode;
+        if (mode === 'system') localStorage.removeItem('landing_theme');
+        else localStorage.setItem('landing_theme', mode);
+        paintTheme();
     }
     themeBtn.addEventListener('click', function() {
-        isDark = !isDark;
-        document.documentElement.classList.toggle('dark', isDark);
-        localStorage.setItem('landing_theme', isDark ? 'dark' : 'light');
-        updateThemeBtn();
+        var next = THEME_NEXT[themeMode];
+        if (document.startViewTransition) document.startViewTransition(function() { setTheme(next); });
+        else setTheme(next);
     });
-    updateThemeBtn();
+    // In 'system' mode the page follows the OS while it is open — that switch happens by itself at
+    // sunset, with nobody touching anything, and a page that ignored it would just be stale.
+    if (systemDark) {
+        var onSystemChange = function() { if (themeMode === 'system') paintTheme(); };
+        if (systemDark.addEventListener) systemDark.addEventListener('change', onSystemChange);
+        else if (systemDark.addListener) systemDark.addListener(onSystemChange);
+    }
+    paintTheme();
 
     /* ── Language selector ── */
+    /* Switching language: the text changes in place — no reload, no flash — and the address
+       becomes that language's page (/de/ …), so a shared link, a bookmark and Back all land on
+       it. Every language also has its real page with the text in the HTML: that is what search
+       engines read, and what a reload or a fresh visit opens. */
+    function markFooterLang(code) {
+        var links = document.querySelectorAll('.footer-langs a');
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].getAttribute('hreflang') === code) links[i].setAttribute('aria-current', 'page');
+            else links[i].removeAttribute('aria-current');
+        }
+    }
+    function switchLang(code, push) {
+        if (!L[code] || code === lang) return;
+        applyLang(code);
+        markFooterLang(code);
+        var canon = document.querySelector('link[rel="canonical"]');
+        if (canon) canon.href = 'https://snakemeasurer.com' + pageUrl(code);
+        if (push) history.pushState({ lang: code }, '', pageUrl(code) + location.search);
+    }
     document.getElementById('langSelect').addEventListener('change', function() {
-        applyLang(this.value);
+        switchLang(this.value, true);
     });
+    document.addEventListener('click', function(e) {
+        var a = e.target.closest ? e.target.closest('.footer-langs a, .lang-offer a') : null;
+        if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+        var code = a.getAttribute('hreflang');
+        if (!L[code]) return;
+        e.preventDefault();
+        switchLang(code, true);
+        var offer = document.querySelector('.lang-offer');
+        if (offer) offer.remove();
+    });
+    window.addEventListener('popstate', function() {
+        var m = location.pathname.match(/^\/([a-z]{2})\/?$/);
+        switchLang(m && L[m[1]] ? m[1] : 'en', false);
+    });
+
+    /* On the English page only: a visitor whose browser (or earlier choice) speaks another of our
+       languages is OFFERED it — never redirected, so search engines and anyone who wants English
+       still get English. Dismissal is remembered. */
+    (function offerLanguage() {
+        if (PAGE_LANG !== 'en') return;
+        try { if (localStorage.getItem('landing_lang_offer_closed')) return; } catch (e) { return; }
+        var want = localStorage.getItem('landing_lang');
+        if (!L[want] || want === 'en') want = (navigator.language || '').slice(0, 2).toLowerCase();
+        if (!L[want] || want === 'en') return;
+        var opt = document.querySelector('#langSelect option[value="' + want + '"]');
+        if (!opt) return;
+        var bar = document.createElement('div');
+        bar.className = 'lang-offer';
+        bar.setAttribute('dir', want === 'ar' ? 'rtl' : 'ltr');
+        bar.setAttribute('lang', want);
+        var a = document.createElement('a');
+        a.href = pageUrl(want);
+        a.setAttribute('hreflang', want);
+        a.textContent = opt.textContent + ' \u2192';
+        a.addEventListener('click', function() { localStorage.setItem('landing_lang', want); });
+        var x = document.createElement('button');
+        x.type = 'button';
+        x.setAttribute('aria-label', 'Close');
+        x.textContent = '\u00D7';
+        x.addEventListener('click', function() {
+            localStorage.setItem('landing_lang_offer_closed', '1');
+            bar.remove();
+        });
+        bar.appendChild(a);
+        bar.appendChild(x);
+        document.body.appendChild(bar);
+    })();
 
     /* ── FAQ accordion ── */
     var faqBtns = document.querySelectorAll('.faq-q');
@@ -2085,6 +2278,21 @@
     })();
 </script>
 
+<script>
+    // ── Growth chart: by date / by age ──
+    (function () {
+        var box = document.getElementById('growthSlides');
+        if (!box) return;
+        var tabs = document.querySelectorAll('.growth-tabs [role=tab]');
+        function mark(i) { for (var k = 0; k < tabs.length; k++) tabs[k].setAttribute('aria-selected', k === i ? 'true' : 'false'); }
+        function go(i) { box.scrollTo({ left: i * box.clientWidth, behavior: 'smooth' }); mark(i); }
+        var auto = setInterval(function () { go(Math.round(box.scrollLeft / box.clientWidth) === 0 ? 1 : 0); }, 5000);
+        function stop() { clearInterval(auto); }
+        for (var t = 0; t < tabs.length; t++) (function (i) { tabs[i].addEventListener('click', function () { stop(); go(i); }); })(t);
+        box.addEventListener('touchstart', stop, { passive: true });
+        box.addEventListener('scroll', function () { mark(Math.round(box.scrollLeft / box.clientWidth)); }, { passive: true });
+    })();
+</script>
 <script>
     // ── Hero snake carousel (mobile): native swipe + auto-advance + dots ──
     (function () {

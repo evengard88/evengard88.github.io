@@ -1,0 +1,113 @@
+/* The landing's look for every page that is not the main one (what's new, release posts, pricing,
+   refund policy). Tokens, font, header and cards are copied from index.html so the pages read as
+   one site: when the main page's palette changes, change it here too. Dark is the `.dark` class,
+   set before paint by the same inline script and the same `landing_theme` key as the main page. */
+
+:root {
+    --bg: #F2F2F7;
+    --header-bg: rgba(242, 242, 247, 0.86);
+    --bg-card: #FFFFFF;
+    --text: #1C1C1E;
+    --text-sec: #5D5D66;
+    --faint: #6E6E78;
+    --accent: #7B3FD1;
+    --accent-h: #542E8E;
+    --green: #1B7D38;
+    --gold: #B26A00;
+    --on-accent: #FFFFFF;
+    --violet-soft: #EFE4FB;
+    --violet-text: #5B2AA6;
+    --border: #D9D9DE;
+    --card-shadow: 0 1px 2px rgba(28,28,30,0.06), 0 12px 32px rgba(28,28,30,0.10);
+}
+.dark {
+    --bg: #141416;
+    --header-bg: rgba(20, 20, 22, 0.86);
+    --bg-card: #1C1C1E;
+    --text: #F4F4F6;
+    --text-sec: #A9A9B2;
+    --faint: #8A8A93;
+    --accent: #BF5AF2;
+    --accent-h: #D9A6FA;
+    --green: #30D158;
+    --gold: #FFB836;
+    --on-accent: #0B0B0C;
+    --violet-soft: #2B1F35;
+    --violet-text: #D9A6FA;
+    --border: #38383A;
+    --card-shadow: 0 1px 2px rgba(0,0,0,0.35), 0 12px 32px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: Onest, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6; color: var(--text); background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header — as on the main page once it has scrolled: translucent, blurred, a hairline under it. */
+header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--header-bg); border-bottom: 1px solid var(--border);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.header-inner {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    height: 56px; max-width: 1080px; margin: 0 auto; padding: 0 24px;
+}
+.logo {
+    display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px;
+    color: var(--text); min-width: 0; white-space: nowrap;
+}
+.logo:hover { text-decoration: none; }
+.logo img { width: 32px; height: 32px; border-radius: 12px; flex-shrink: 0; }
+.logo span { overflow: hidden; text-overflow: ellipsis; }
+.nav-links { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+.nav-links a { font-size: 15px; font-weight: 500; color: var(--text-sec); white-space: nowrap; }
+.nav-links a:hover { color: var(--text); text-decoration: none; }
+.nav-links .btn, .nav-links .btn:hover { color: var(--on-accent); }
+.lang-select {
+    background: none; color: var(--text-sec); border: 1px solid var(--border);
+    border-radius: 12px; height: 36px; padding: 0 26px 0 10px; font: inherit; font-size: 15px; cursor: pointer;
+    -webkit-appearance: none; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6'%3E%3Cpath d='M1 1l3.5 4L8 1' stroke='%238A8A93' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 9px center;
+}
+.lang-select:hover { color: var(--text); }
+.lang-select option { color: var(--text); background: var(--bg-card); }
+
+/* Page body */
+main { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+h1 { font-size: 40px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 12px; font-weight: 700; }
+h2 { font-size: 24px; line-height: 1.25; letter-spacing: -0.01em; margin: 40px 0 14px; font-weight: 700; }
+.subtitle { color: var(--text-sec); font-size: 18px; margin: 0 0 36px; }
+.card {
+    background: var(--bg-card); border-radius: 20px; padding: 24px 26px;
+    box-shadow: var(--card-shadow); margin: 0 0 16px;
+}
+.btn {
+    display: inline-flex; align-items: center; gap: 6px; height: 48px; padding: 0 22px;
+    border-radius: 14px; background: var(--accent); color: var(--on-accent); font-weight: 600; font-size: 16px;
+}
+.btn:hover { text-decoration: none; background: var(--accent-h); }
+.dark .btn:hover { color: var(--on-accent); }
+
+footer {
+    border-top: 1px solid var(--border); margin-top: 64px; padding: 32px 24px;
+    color: var(--text-sec); font-size: 14px; text-align: center;
+}
+footer a { color: var(--text-sec); margin: 0 8px; }
+footer a:hover { color: var(--text); text-decoration: none; }
+
+[dir="rtl"] ul { padding-left: 0; padding-right: 20px; }
+
+@media (max-width: 560px) {
+    .header-inner { padding: 0 16px; gap: 10px; }
+    .nav-links { gap: 12px; }
+    .nav-links .opt { display: none; }
+    main { padding: 32px 16px 64px; }
+    h1 { font-size: 32px; }
+}
