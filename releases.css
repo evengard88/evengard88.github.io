@@ -1,0 +1,105 @@
+/* Release pages share the landing palette but keep their own editorial layout. */
+.release-list-page,
+.release-post-page {
+    --release-wash: rgba(123, 63, 209, .13);
+    --release-line: rgba(123, 63, 209, .28);
+    overflow-x: hidden;
+}
+.dark.release-list-page,
+.dark.release-post-page,
+.dark .release-list-page,
+.dark .release-post-page {
+    --release-wash: rgba(191, 90, 242, .14);
+    --release-line: rgba(191, 90, 242, .32);
+}
+/* The dark class belongs to html; the variables inherit to the page body. */
+html.dark body.release-list-page,
+html.dark body.release-post-page {
+    --release-wash: rgba(191, 90, 242, .14);
+    --release-line: rgba(191, 90, 242, .32);
+}
+.release-list-page main,
+.release-post-page main { position: relative; isolation: isolate; }
+.release-list-page main::before,
+.release-post-page main::before {
+    content: ""; position: absolute; z-index: -1; pointer-events: none;
+    inset: -56px -35vw auto; height: 430px;
+    background: radial-gradient(ellipse 46% 75% at 50% 0%, var(--release-wash), transparent 78%);
+}
+.release-list-page main { max-width: 1240px; padding-top: 28px; }
+.release-intro { text-align: left; padding: 0 0 24px; }
+.release-eyebrow {
+    display: inline-block; color: var(--violet-text); background: var(--violet-soft);
+    border: 1px solid var(--release-line); border-radius: 999px;
+    padding: 5px 13px; margin-bottom: 18px; font-size: 12px;
+    font-weight: 700; letter-spacing: .055em;
+}
+.release-intro h1 {
+    font-size: clamp(32px, 4vw, 44px); letter-spacing: -.035em; margin-bottom: 8px;
+}
+.release-intro .subtitle { max-width: 650px; margin: 0; line-height: 1.6; }
+.release-list-page #releases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.release {
+    position: relative; overflow: hidden; background: var(--bg-card);
+    border: 1px solid var(--border); border-radius: 20px; padding: 26px 28px;
+    box-shadow: var(--card-shadow); margin: 0; display: flex; flex-direction: column; min-height: 200px;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.release:first-child { border-color: var(--release-line); }
+.release:first-child::before {
+    content: ""; position: absolute; inset: 0 0 auto; height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent 80%);
+}
+.release-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.release-head h2 { font-size: 25px; margin: 0; letter-spacing: -.025em; }
+.release-head h2 a { color: var(--text); }
+.release-head time { color: var(--text-sec); font-size: 14px; }
+.release .lead { margin: 0 0 14px; font-size: 17px; line-height: 1.6; }
+.release .more { display: inline-block; font-weight: 700; text-underline-offset: 4px; margin-top: auto; padding-top: 12px; }
+.release ul { margin: 0; padding-inline-start: 20px; }
+.release li { margin: 4px 0; }
+.release .en-only, .release-post-page .en-only { color: var(--text-sec); font-size: 13px; }
+.release-post-page main { max-width: 800px; }
+.release-post-page article {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px;
+    box-shadow: var(--card-shadow); padding: clamp(24px, 5vw, 48px);
+}
+.release-post-page .meta { color: var(--violet-text); font-size: 14px; font-weight: 700; margin: 0 0 18px; }
+.release-post-page h1 { font-size: clamp(30px, 4.6vw, 43px); letter-spacing: -.035em; line-height: 1.18; margin: 0 0 28px; overflow-wrap: anywhere; }
+.story p, .story li { color: var(--text-sec); font-size: 18px; line-height: 1.75; margin: 0 0 20px; }
+.story strong { color: var(--text); }
+.story ul { padding-inline-start: 22px; }
+.story .shot-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 28px 0 36px; }
+.story .shot { margin: 0; text-align: center; min-width: 0; }
+.story .shot img { display: block; max-width: 100%; max-height: 500px; width: auto; height: auto; margin: 0 auto; border-radius: 16px; box-shadow: var(--card-shadow); }
+.story .shot figcaption { color: var(--text-sec); font-size: 13px; line-height: 1.4; margin-top: 10px; }
+.release-post-page .cta { margin: 16px 0 0; }
+.post-nav { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.post-nav a { padding: 8px 0; font-size: 15px; font-weight: 600; }
+.langs { color: var(--text-sec); font-size: 14px; margin-top: 22px; line-height: 2; }
+.langs a { color: var(--text-sec); white-space: nowrap; }
+.langs a[aria-current] { color: var(--text); font-weight: 700; }
+.release-list-page :focus-visible, .release-post-page :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+@media (hover: hover) and (pointer: fine) {
+    .release:hover { transform: translateY(-3px); border-color: var(--release-line); }
+    .release .more:hover { color: var(--accent-h); }
+}
+@media (prefers-reduced-motion: no-preference) {
+    @keyframes release-appear { from { opacity: .01; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .release-intro, .release-post-page article { animation: release-appear .45s ease-out backwards; }
+    .release { animation: release-appear .45s ease-out backwards; }
+    .release:nth-child(2) { animation-delay: .05s; }
+    .release:nth-child(3) { animation-delay: .1s; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .release { transition: none; }
+}
+@media (max-width: 560px) {
+    .release-intro { padding: 0 0 20px; }
+    .release { padding: 22px; border-radius: 18px; }
+    .release-post-page article { border-radius: 20px; }
+    .story p, .story li { font-size: 16px; }
+    .story .shot-pair { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 900px) { .release-list-page #releases { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 580px) { .release-list-page #releases { grid-template-columns: 1fr; } }

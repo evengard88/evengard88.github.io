@@ -10,6 +10,7 @@ English notes that shipped on the App Store at the time (kept inline below).
     python3 landing/build-whats-new.py
 """
 import json
+import hashlib
 import os
 import re
 import sys
@@ -18,6 +19,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 META = os.path.join(ROOT, "fastlane", "metadata", "android")
 LANDING = os.path.join(ROOT, "landing")
 SITE = "https://snakemeasurer.com"
+RELEASE_CSS_VERSION = hashlib.sha256(open(os.path.join(LANDING, "releases.css"), "rb").read()).hexdigest()[:12]
 
 
 def page_path(lang):
@@ -30,6 +32,7 @@ def home_path(lang):
 
 # version shown, release date, Android versionCode whose changelog carries the notes.
 RELEASES = [
+    ("1.8.2", "", 81),  # Preparing; no release date announced yet.
     ("1.8",   "2026-10-22", 63),
     ("1.7.6", "2026-09-18", 62),
     ("1.7.5", "2026-08-24", 61),
@@ -89,21 +92,30 @@ STORIES = os.path.join(ROOT, "landing", "whats-new-stories")
 
 def story_html(code, lang):
     """The site's longer, human text for a release (whats-new-stories/<code>.<lang>.md), as HTML;
-    None when that language has none — the page then shows the store notes."""
+    None when that language has none — the post then uses the translated store notes."""
     path = os.path.join(STORIES, f"{code}.{lang}.md")
     if not os.path.exists(path):
         return None
     paras = [p.strip() for p in open(path, encoding="utf-8").read().split("\n\n") if p.strip()]
     out = []
+    in_shots = False
     for p in paras:
         img = re.fullmatch(r"!\[([^\]]*)\]\(([^)\s]+)\)", p)
         if img:
+            if not in_shots:
+                out.append('<div class="shot-pair">')
+                in_shots = True
             alt = img.group(1).replace("&", "&amp;").replace('"', "&quot;")
-            out.append(f'<figure class="shot"><img src="{img.group(2)}" alt="{alt}" loading="lazy"></figure>')
+            out.append(f'<figure class="shot"><img src="{img.group(2)}" alt="{alt}" loading="lazy"><figcaption>{alt}</figcaption></figure>')
             continue
+        if in_shots:
+            out.append('</div>')
+            in_shots = False
         t = p.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
         t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
         out.append(f"<p>{t}</p>")
+    if in_shots:
+        out.append('</div>')
     return "".join(out)
 
 
@@ -170,12 +182,15 @@ def build():
             src = path if os.path.exists(path) else fallback
             if not os.path.exists(src):
                 sys.exit(f"missing changelog {src}")
+            items = bullets(src)
             story = story_html(code, lang)
-            releases.append({"v": version, "d": date, "items": bullets(src), "en": src == fallback and lang != "en",
-                             "story": story, "post": post_path(lang, version) if story else None,
-                             "lead": first_sentence(story) if story else None, "code": code})
+            lead = first_sentence(story) if story else items[0]
+            releases.append({"v": version, "d": date, "items": items, "en": src == fallback and lang != "en",
+                             "story": story, "post": post_path(lang, version),
+                             "lead": lead, "code": code})
         for version, date, items in LEGACY:
-            releases.append({"v": version, "d": date, "items": items, "en": lang != "en", "story": None})
+            releases.append({"v": version, "d": date, "items": items, "en": lang != "en", "story": None,
+                             "post": post_path(lang, version), "lead": items[0]})
         data[lang] = releases
     return data
 
@@ -188,7 +203,7 @@ def releases_html(data, lang):
     ui = UI.get(lang, UI["en"])
     out = []
     for r in data[lang]:
-        if r.get("story"):
+        if r.get("post"):
             more = POST_UI.get(lang, POST_UI["en"])["more"]
             body = f'<p class="lead">{esc(r["lead"])}</p><a class="more" href="{r["post"]}">{esc(more)} \u2192</a>'
         else:
@@ -196,7 +211,8 @@ def releases_html(data, lang):
             note = f'<p class="en-only">{esc(ui["en_only"])}</p>' if r["en"] else ""
             body = f"<ul>{items}</ul>{note}"
         head = f'<a href="{r["post"]}">{esc(r["v"])}</a>' if r.get("post") else esc(r["v"])
-        out.append(f'<section class="release"><div class="release-head"><h2>{head}</h2><time datetime="{r["d"]}">{r["d"]}</time></div>{body}</section>')
+        date = f'<time datetime="{r["d"]}">{r["d"]}</time>' if r["d"] else ''
+        out.append(f'<section class="release"><div class="release-head"><h2>{head}</h2>{date}</div>{body}</section>')
     return "".join(out)
 
 
@@ -227,26 +243,15 @@ def html(data, lang):
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/site.css">
-    <style>
-        .release {{ background: var(--bg-card); border-radius: 20px; padding: 22px 26px; box-shadow: var(--card-shadow); margin: 0 0 16px; }}
-        .release-head {{ display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }}
-        .release-head h2 {{ font-size: 24px; margin: 0; }}
-        .release-head h2 a {{ color: var(--text); }}
-        .release-head time {{ color: var(--text-sec); font-size: 14px; }}
-        .release ul {{ margin: 0; padding-left: 20px; }}
-        .release li {{ margin: 4px 0; }}
-        .release .lead {{ margin: 0 0 8px; font-size: 17px; }}
-        .release .more {{ font-weight: 600; }}
-        .release .en-only {{ color: var(--text-sec); font-size: 13px; margin: 8px 0 0; }}
-    </style>
+    <link rel="stylesheet" href="/releases.css?v={RELEASE_CSS_VERSION}">
 </head>
-<body>
+<body class="release-list-page">
     <header>
         <div class="header-inner">
             <a href="{home_path(lang)}" class="logo"><img src="/icon-192.png" alt="" width="32" height="32"><span>Snake Measurer</span></a>
             <nav class="nav-links">
                 <a href="{home_path(lang)}" id="homeLink">{esc(ui["home"])}</a>
-                <a href="/pricing.html" id="pricingLink">{esc(ui["pricing"])}</a>
+                <a href="/pricing.html" id="pricingLink" class="opt">{esc(ui["pricing"])}</a>
                 <select class="lang-select" id="langSelect" aria-label="Language">
 {options}
                 </select>
@@ -254,8 +259,10 @@ def html(data, lang):
         </div>
     </header>
     <main>
-        <h1 id="title">{esc(ui["title"])}</h1>
-        <p class="subtitle" id="subtitle">{esc(ui["sub"])}</p>
+        <div class="release-intro">
+            <h1 id="title">{esc(ui["title"])}</h1>
+            <p class="subtitle" id="subtitle">{esc(ui["sub"])}</p>
+        </div>
         <div id="releases">{releases_html(data, lang)}</div>
     </main>
     <footer>
@@ -279,6 +286,7 @@ def html(data, lang):
         }}
         function esc(s) {{ return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }}
         function fmtDate(iso, lang) {{
+            if (!iso) return '';
             try {{ return new Date(iso + 'T00:00:00').toLocaleDateString(lang, {{ year: 'numeric', month: 'long', day: 'numeric' }}); }}
             catch (e) {{ return iso; }}
         }}
@@ -297,7 +305,7 @@ def html(data, lang):
             ['pricingLink', 'pricingLink2'].forEach(function(id) {{ document.getElementById(id).textContent = ui.pricing; }});
             var out = '';
             D.releases[lang].forEach(function(r) {{
-                out += '<section class="release"><div class="release-head"><h2>' + (r.post ? '<a href="' + r.post + '">' + esc(r.v) + '</a>' : esc(r.v)) + '</h2><time datetime="' + r.d + '">' + esc(fmtDate(r.d, lang)) + '</time></div>';
+                out += '<section class="release"><div class="release-head"><h2>' + (r.post ? '<a href="' + r.post + '">' + esc(r.v) + '</a>' : esc(r.v)) + '</h2>' + (r.d ? '<time datetime="' + r.d + '">' + esc(fmtDate(r.d, lang)) + '</time>' : '') + '</div>';
                 if (r.post) {{
                     var more = (D.post[lang] || D.post.en).more;
                     out += '<p class="lead">' + esc(r.lead) + '</p><a class="more" href="' + r.post + '">' + esc(more) + ' \\u2192</a>';
@@ -346,8 +354,17 @@ def post_html(data, lang, idx):
     nav += f'<a href="{page_path(lang)}">{esc(pu["all"])}</a>'
     if newer: nav += f'<a href="{newer["post"]}">{esc(newer["v"])} \u2192</a>'
     ld = json.dumps({"@context": "https://schema.org", "@type": "BlogPosting", "headline": title,
-                     "datePublished": r["d"], "inLanguage": lang, "url": SITE + post_path(lang, r["v"]),
+                     **({"datePublished": r["d"]} if r["d"] else {}), "inLanguage": lang, "url": SITE + post_path(lang, r["v"]),
                      "publisher": {"@type": "Organization", "name": "SerpWidgets"}}, ensure_ascii=False)
+    if r["story"]:
+        body = story_without_lead(r["story"], r["lead"])
+        description = re.sub(r'<[^>]+>', '', r['story'])[:300]
+    else:
+        # The first translated store note is the heading; the others form the article.
+        body = '<ul>' + ''.join(f'<li>{esc(item)}</li>' for item in r['items'][1:]) + '</ul>'
+        description = ' '.join(r['items'])[:300]
+    language_note = f'<p class="en-only">{esc(ui["en_only"])}</p>\n            ' if r['en'] else ''
+    content_lang = ' lang="en" dir="ltr"' if r['en'] else ''
     return f"""<!DOCTYPE html>
 <!-- GENERATED by landing/build-whats-new.py from landing/whats-new-stories — do not edit by hand. -->
 <html lang="{lang}"{' dir="rtl"' if lang == "ar" else ""}>
@@ -355,7 +372,7 @@ def post_html(data, lang, idx):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{esc(title)}</title>
-    <meta name="description" content="{esc(re.sub(r'<[^>]+>', '', r['story'])[:300])}">
+    <meta name="description" content="{esc(description)}">
     <link rel="canonical" href="{SITE}{post_path(lang, r['v'])}">
 {hreflang}
     <meta property="og:type" content="article">
@@ -371,30 +388,19 @@ def post_html(data, lang, idx):
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="/releases.css?v={RELEASE_CSS_VERSION}">
     <script type="application/ld+json">{ld}</script>
-    <style>
-        .meta {{ color: var(--text-sec); font-size: 15px; margin: 0 0 10px; }}
-        .story p {{ font-size: 18px; line-height: 1.65; margin: 0 0 16px; }}
-        .story strong {{ color: var(--text); }}
-        .story .shot {{ margin: 8px 0 24px; text-align: center; }}
-        .story .shot img {{ max-width: min(100%, 520px); max-height: 640px; border-radius: 16px; box-shadow: var(--card-shadow); }}
-        .cta {{ margin: 24px 0 8px; }}
-        .post-nav {{ display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }}
-        .langs {{ color: var(--text-sec); font-size: 14px; margin-top: 24px; }}
-        .langs a {{ color: var(--text-sec); }}
-        .langs a[aria-current] {{ color: var(--text); font-weight: 600; }}
-    </style>
 </head>
-<body>
+<body class="release-post-page">
     <header><div class="header-inner">
         <a href="{home_path(lang)}" class="logo"><img src="/icon-192.png" alt="" width="32" height="32"><span>Snake Measurer</span></a>
         <nav class="nav-links"><a href="{page_path(lang)}">{esc(ui["title"])}</a></nav>
     </div></header>
     <main>
         <article>
-            <p class="meta">Snake Measurer {esc(r["v"])} · <time datetime="{r["d"]}" id="postDate">{r["d"]}</time></p>
-            <h1>{esc(r["lead"])}</h1>
-            <div class="story">{story_without_lead(r["story"], r["lead"])}</div>
+            <p class="meta">Snake Measurer {esc(r["v"])}{(' · <time datetime="' + r['d'] + '" id="postDate">' + r['d'] + '</time>') if r['d'] else ''}</p>
+            {language_note}<h1{content_lang}>{esc(r["lead"])}</h1>
+            <div class="story"{content_lang}>{body}</div>
             <a class="btn cta" href="/app/">{esc(pu["open"])} &rarr;</a>
         </article>
         <nav class="post-nav">{nav}</nav>
@@ -403,7 +409,7 @@ def post_html(data, lang, idx):
     <script>
         (function () {{
             var t = document.getElementById('postDate');
-            try {{ t.textContent = new Date(t.getAttribute('datetime') + 'T00:00:00').toLocaleDateString('{lang}', {{ year: 'numeric', month: 'long', day: 'numeric' }}); }} catch (e) {{}}
+            if (t) try {{ t.textContent = new Date(t.getAttribute('datetime') + 'T00:00:00').toLocaleDateString('{lang}', {{ year: 'numeric', month: 'long', day: 'numeric' }}); }} catch (e) {{}}
         }})();
     </script>
 </body>
