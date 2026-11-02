@@ -2,9 +2,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
+    android:viewportWidth="20"
+    android:viewportHeight="20">
+  <!-- The same half-filled circle as before, now outlined to match the sun and the moon beside it.
+       The landing has no third state to copy — it is a two-state toggle — so the shape is kept and
+       only its weight changes. Identical to the diary's IconAppearance (r 6.8 on a 20 grid), so the
+       "auto" state is one symbol across the app, the diary and its landing. -->
+  <!-- The ring. -->
   <path
-      android:pathData="M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20V4c4.41,0 8,3.59 8,8s-3.59,8 -8,8z"
+      android:pathData="M10,3.2a6.8,6.8 0 1,0 0,13.6a6.8,6.8 0 1,0 0,-13.6z"
+      android:fillColor="#00000000"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="1.8"
+      android:strokeLineCap="round"
+      android:strokeLineJoin="round"/>
+  <!-- The half that is filled: top to bottom clockwise, closed by the diameter. -->
+  <path
+      android:pathData="M10,3.2a6.8,6.8 0 0,1 0,13.6z"
       android:fillColor="#FFFFFF"/>
 </vector>

@@ -2,9 +2,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
+    android:viewportWidth="20"
+    android:viewportHeight="20">
+  <!-- Outlined, on a 20-unit viewport, because that is the Snake Measurer landing's theme button,
+       to the digit: landing/index.html, ICON_SUN / ICON_MOON. The box stays 24dp and the viewport
+       does the scaling, so the paths need no arithmetic and the stroke keeps the landing's
+       proportion (1.8 of 20). It replaces a FILLED Material icon — filled against outlined was the
+       real difference between the two products, far more visible than any coordinate.
+       Tinting is unaffected: both call sites draw these with Image(colorFilter = tint), which
+       recolours the stroke and leaves the transparent fill alone. -->
+  <!-- The disc. A vector drawable has no <circle>, so it is two half-arcs. -->
   <path
-      android:pathData="M12,7c-2.76,0 -5,2.24 -5,5s2.24,5 5,5s5,-2.24 5,-5S14.76,7 12,7zM2,13h2c0.55,0 1,-0.45 1,-1s-0.45,-1 -1,-1H2c-0.55,0 -1,0.45 -1,1S1.45,13 2,13zM20,13h2c0.55,0 1,-0.45 1,-1s-0.45,-1 -1,-1h-2c-0.55,0 -1,0.45 -1,1S19.45,13 20,13zM11,2v2c0,0.55 0.45,1 1,1s1,-0.45 1,-1V2c0,-0.55 -0.45,-1 -1,-1S11,1.45 11,2zM11,20v2c0,0.55 0.45,1 1,1s1,-0.45 1,-1v-2c0,-0.55 -0.45,-1 -1,-1S11,19.45 11,20zM5.99,4.58c-0.39,-0.39 -1.03,-0.39 -1.41,0c-0.39,0.39 -0.39,1.03 0,1.41l1.06,1.06c0.39,0.39 1.03,0.39 1.41,0s0.39,-1.03 0,-1.41L5.99,4.58zM18.36,16.95c-0.39,-0.39 -1.03,-0.39 -1.41,0c-0.39,0.39 -0.39,1.03 0,1.41l1.06,1.06c0.39,0.39 1.03,0.39 1.41,0c0.39,-0.39 0.39,-1.03 0,-1.41L18.36,16.95zM19.42,5.99c0.39,-0.39 0.39,-1.03 0,-1.41c-0.39,-0.39 -1.03,-0.39 -1.41,0l-1.06,1.06c-0.39,0.39 -0.39,1.03 0,1.41s1.03,0.39 1.41,0L19.42,5.99zM7.05,18.36c0.39,-0.39 0.39,-1.03 0,-1.41c-0.39,-0.39 -1.03,-0.39 -1.41,0l-1.06,1.06c-0.39,0.39 -0.39,1.03 0,1.41s1.03,0.39 1.41,0L7.05,18.36z"
-      android:fillColor="#FFFFFF"/>
+      android:pathData="M10,6.4a3.6,3.6 0 1,0 0,7.2a3.6,3.6 0 1,0 0,-7.2z"
+      android:fillColor="#00000000"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="1.8"
+      android:strokeLineCap="round"
+      android:strokeLineJoin="round"/>
+  <!-- Eight separate rays, reaching the edges of the grid. -->
+  <path
+      android:pathData="M10,2 v2 M10,16 v2 M2,10 h2 M16,10 h2 M4.5,4.5 l1.4,1.4 M14.1,14.1 l1.4,1.4 M15.5,4.5 l-1.4,1.4 M5.9,14.1 l-1.4,1.4"
+      android:fillColor="#00000000"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="1.8"
+      android:strokeLineCap="round"
+      android:strokeLineJoin="round"/>
 </vector>
