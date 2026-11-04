@@ -136,7 +136,9 @@ def localise(src, L, code, langs):
             if not isinstance(en_val, str) or len(en_val) < 12 or not t(key) or t(key) == en_val:
                 continue
             block = block.replace(json.dumps(en_val, ensure_ascii=False)[1:-1], json.dumps(t(key), ensure_ascii=False)[1:-1])
-        return block.replace('"@context"', f'"inLanguage": "{code}",\n        "@context"', 1)
+        if '"inLanguage"' not in block:
+            block = block.replace('"@context"', f'"inLanguage": "{code}",\n        "@context"', 1)
+        return block
     page = re.sub(r'<script type="application/ld\+json">.*?</script>', ld_sub, page, flags=re.S)
 
     # Store badges and policy links, as the script would set them.
