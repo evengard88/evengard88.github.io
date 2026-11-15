@@ -30,7 +30,9 @@ OG_LOCALE = {
     "en": "en_US", "ru": "ru_RU", "es": "es_ES", "fr": "fr_FR", "de": "de_DE", "pt": "pt_BR",
     "it": "it_IT", "uk": "uk_UA", "nl": "nl_NL", "pl": "pl_PL", "ja": "ja_JP", "ko": "ko_KR", "ar": "ar_AR",
 }
-POLICY_SUFFIX = {"en": ""}  # others: "-<lang>", as the page's own script does
+# Only these translations are shipped in composeApp/src/webMain/resources.
+# Keep the same English fallback as policySuffix in the page's language-switching script.
+POLICY_SUFFIX = {"en": "", **{code: f"-{code}" for code in ("ru", "es", "fr", "de", "pt", "it")}}
 
 
 def page_url(code):
@@ -145,9 +147,10 @@ def localise(src, L, code, langs):
     apple = "en" if code in ("uk", "ar") else code
     page = re.sub(r'src="badges/app-store-en\.svg"', f'src="/badges/app-store-{apple}.svg"', page)
     page = re.sub(r'src="badges/google-play-en\.png"', f'src="/badges/google-play-{code}.png"', page)
-    suffix = POLICY_SUFFIX.get(code, f"-{code}")
-    page = page.replace('<a href="#" id="privacyLink"', f'<a href="/app/privacy-policy{suffix}.html" id="privacyLink"', 1)
-    page = page.replace('<a href="#" id="termsLink"', f'<a href="/app/terms{suffix}.html" id="termsLink"', 1)
+    suffix = POLICY_SUFFIX.get(code, "")
+    # The root has real links after the first generation; don't require the old href="#" stub.
+    page = re.sub(r'<a href="[^"]*" id="privacyLink"', f'<a href="/app/privacy-policy{suffix}.html" id="privacyLink"', page, count=1)
+    page = re.sub(r'<a href="[^"]*" id="termsLink"', f'<a href="/app/terms{suffix}.html" id="termsLink"', page, count=1)
 
     # "What's new" has its own page per language (build-whats-new.py).
     page = page.replace('href="/whats-new.html"', f'href="/{code}/whats-new.html"')
@@ -211,8 +214,8 @@ def main():
             p_alts += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{by_lang["en"]}"/>'
         for c, u in sorted(by_lang.items()):
             urls.append(f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{today}</lastmod>\n    <priority>0.5</priority>{p_alts}\n  </url>")
-    for path, prio in [("/pricing.html", "0.7"), ("/app/", "0.8"),
-                       ("/app/privacy-policy.html", "0.3"), ("/app/terms.html", "0.3"), ("/refund-policy.html", "0.3")]:
+    # Privacy Policy and Terms intentionally carry noindex and must not be in the sitemap.
+    for path, prio in [("/pricing.html", "0.7"), ("/app/", "0.8"), ("/refund-policy.html", "0.3")]:
         urls.append(f"  <url>\n    <loc>{SITE}{path}</loc>\n    <lastmod>{today}</lastmod>\n    <priority>{prio}</priority>\n  </url>")
     sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n'
                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
