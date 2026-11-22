@@ -32,6 +32,7 @@ def home_path(lang):
 
 # version shown, release date, Android versionCode whose changelog carries the notes.
 RELEASES = [
+    ("1.8.4", "", 85),  # Release date will be added after store availability is confirmed.
     ("1.8.3", "", 83),  # Preparing; no release date announced yet.
     ("1.8.2", "", 81),
     ("1.8",   "2026-10-22", 63),

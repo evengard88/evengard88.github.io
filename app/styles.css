@@ -36,3 +36,72 @@ textarea {
     opacity: 0.01 !important;
     caret-color: transparent !important;
 }
+@font-face {
+    font-family: Onest;
+    src: url("composeResources/snakemeasurer.composeapp.generated.resources/font/onest_regular.ttf") format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: Onest;
+    src: url("composeResources/snakemeasurer.composeapp.generated.resources/font/onest_semibold.ttf") format("truetype");
+    font-weight: 600;
+    font-display: swap;
+}
+
+#nativeLoginOverlay {
+    --login-surface: #fff;
+    --login-field: #f2f2f7;
+    --login-ink: #19191b;
+    --login-edge: #c7c7cc;
+    --login-fill: #aa47dc;
+    --login-link: #8230ab;
+    --login-danger: #bf2c24;
+    --login-success: #217d38;
+    box-sizing: border-box;
+    width: min(448px, calc(100% - 32px));
+    max-height: calc(100dvh - 24px);
+    padding: 20px;
+    border: 0;
+    border-radius: 20px;
+    background: var(--login-surface);
+    color: var(--login-ink);
+    font: 400 16px/1.4 Onest, system-ui, sans-serif;
+    overflow-y: auto;
+}
+#nativeLoginOverlay[data-dark="true"] {
+    color-scheme: dark;
+    --login-surface: #2c2c2e;
+    --login-field: #3a3a3c;
+    --login-ink: #fff;
+    --login-edge: #6e6e73;
+    --login-fill: #a64ed3;
+    --login-link: #d693f7;
+    --login-danger: #ff8179;
+    --login-success: #30d158;
+}
+#nativeLoginOverlay::backdrop { background: rgba(0, 0, 0, .5); }
+#nativeLoginForm header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+#nativeLoginTitle { margin: 0; font-size: 18px; font-weight: 600; overflow-wrap: anywhere; }
+#nativeLoginForm label { display: block; margin-top: 12px; font-size: 12px; font-weight: 600; }
+#nativeLoginForm input, #nativeLoginForm button { font: inherit; box-sizing: border-box; min-height: 44px; border-radius: 12px; }
+#nativeLoginForm input { width: 100%; margin-top: 4px; padding: 8px 12px; border: 1px solid var(--login-edge); color: inherit; background: var(--login-field); }
+#nativeLoginForm button { cursor: pointer; border: 0; color: var(--login-link); background: transparent; }
+#nativeLoginForm :focus-visible { outline: 2px solid var(--login-link); outline-offset: 2px; }
+#nativeLoginForm #nativeLoginClose { flex: 0 0 44px; font-size: 22px; background: var(--login-field); color: inherit; }
+#nativeLoginForm #nativeLoginSubmit { width: 100%; margin-top: 16px; padding: 8px 12px; background: var(--login-fill); color: #fff; font-weight: 600; }
+.native-login-links { display: flex; flex-wrap: wrap; gap: 0 8px; justify-content: space-between; margin-top: 8px; }
+#nativeLoginForm .native-login-links button { font-size: 14px; text-align: start; }
+#nativeLoginForm [hidden] { display: none; }
+#nativeLoginError { font-size: 14px; overflow-wrap: anywhere; color: var(--login-danger); }
+#nativeLoginError[data-success] { color: var(--login-success); }
+@media (max-width: 639px) {
+    #nativeLoginOverlay {
+        inset: auto 0 0;
+        width: 100%;
+        max-width: none;
+        max-height: 92dvh;
+        margin: 0;
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+        border-radius: 20px 20px 0 0;
+    }
+}

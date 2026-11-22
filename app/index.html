@@ -456,6 +456,7 @@
 <script>
 (function() {
     var overlay, form, emailInput, passwordInput, titleEl, submitBtn, toggleLink, forgotLink, closeBtn, errorDiv;
+    var labels;
     var isCreate = false;
     var isForgot = false;
     var built = false;
@@ -464,25 +465,22 @@
         if (built) return;
         built = true;
 
-        overlay = document.createElement('div');
+        overlay = document.createElement('dialog');
         overlay.id = 'nativeLoginOverlay';
-        overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;width:' + window.innerWidth + 'px;height:' + window.innerHeight + 'px;background:rgba(0,0,0,0.5);z-index:2147483647;display:none;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;';
-
+        overlay.setAttribute('aria-labelledby', 'nativeLoginTitle');
         overlay.innerHTML =
-            '<form id="nativeLoginForm" autocomplete="on" style="border-radius:16px;padding:24px;width:90%;max-width:400px;box-sizing:border-box;">' +
-                '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">' +
-                    '<h2 id="nativeLoginTitle" style="margin:0;font-size:18px;">Sign In</h2>' +
-                    '<button type="button" id="nativeLoginClose" style="background:none;border:none;font-size:22px;cursor:pointer;color:#8e8e93;padding:4px 8px;">&times;</button>' +
-                '</div>' +
-                '<div id="nativeLoginError" style="display:none;border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:14px;text-align:center;"></div>' +
-                '<input id="nativeLoginEmail" type="email" name="email" autocomplete="username" placeholder="Email" required ' +
-                    'style="display:block;width:100%;padding:12px;margin-bottom:12px;border-radius:12px;font-size:16px;box-sizing:border-box;outline:none;">' +
-                '<input id="nativeLoginPassword" type="password" name="password" autocomplete="current-password" placeholder="Password" required ' +
-                    'style="display:block;width:100%;padding:12px;margin-bottom:16px;border-radius:12px;font-size:16px;box-sizing:border-box;outline:none;">' +
-                '<button type="submit" id="nativeLoginSubmit" style="display:block;width:100%;padding:14px;background:#AF52DE;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;">Sign In</button>' +
-                '<div style="display:flex;justify-content:space-between;margin-top:12px;">' +
-                    '<a href="#" id="nativeLoginToggle" style="font-size:13px;color:#AF52DE;text-decoration:none;">No account? Create one</a>' +
-                    '<a href="#" id="nativeLoginForgot" style="font-size:13px;color:#8e8e93;text-decoration:none;">Forgot password?</a>' +
+            '<form id="nativeLoginForm" autocomplete="on">' +
+                '<header><h2 id="nativeLoginTitle"></h2>' +
+                    '<button type="button" id="nativeLoginClose">&times;</button></header>' +
+                '<div id="nativeLoginError" role="status" style="display:none"></div>' +
+                '<label for="nativeLoginEmail"></label>' +
+                '<input id="nativeLoginEmail" type="email" name="email" autocomplete="username" required>' +
+                '<label for="nativeLoginPassword"></label>' +
+                '<input id="nativeLoginPassword" type="password" name="password" autocomplete="current-password" required>' +
+                '<button type="submit" id="nativeLoginSubmit"></button>' +
+                '<div class="native-login-links">' +
+                    '<button type="button" id="nativeLoginToggle"></button>' +
+                    '<button type="button" id="nativeLoginForgot"></button>' +
                 '</div>' +
             '</form>';
 
@@ -504,11 +502,9 @@
             if (isForgot) {
                 if (email && window._nativeLoginOnForgotPassword) {
                     window._nativeLoginOnForgotPassword(email);
-                    errorDiv.style.color = '#34C759';
-                    errorDiv.style.background = 'transparent';
-                    errorDiv.textContent = 'If an account exists for ' + email + ', a reset link has been sent. Check your inbox and spam folder.';
+                    errorDiv.dataset.success = 'true';
+                    errorDiv.textContent = labels.password_reset_check_inbox;
                     errorDiv.style.display = 'block';
-                    setTimeout(function() { setForgotMode(false); }, 3000);
                 }
                 return;
             }
@@ -537,98 +533,81 @@
             setForgotMode(true);
         });
 
-        closeBtn.addEventListener('click', function() {
-            window.hideNativeLoginForm();
-            if (window._nativeLoginOnDismiss) window._nativeLoginOnDismiss();
-        });
-
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                window.hideNativeLoginForm();
-                if (window._nativeLoginOnDismiss) window._nativeLoginOnDismiss();
+        closeBtn.addEventListener('click', dismiss);
+        overlay.addEventListener('cancel', function(e) {
+            e.preventDefault();
+            if (isCreate || isForgot) {
+                updateMode(false);
+                emailInput.focus();
+            } else {
+                dismiss();
             }
         });
+        overlay.addEventListener('click', function(e) {
+            if (e.target !== overlay) return;
+            const bounds = overlay.getBoundingClientRect();
+            if (e.clientX < bounds.left || e.clientX > bounds.right ||
+                e.clientY < bounds.top || e.clientY > bounds.bottom) dismiss();
+        });
+    }
+
+    function dismiss() {
+        window.hideNativeLoginForm();
+        if (window._nativeLoginOnDismiss) window._nativeLoginOnDismiss();
     }
 
     function setForgotMode(forgot) {
+        passwordInput.value = "";
         isForgot = forgot;
-        errorDiv.style.display = 'none';
-        if (forgot) {
-            titleEl.textContent = 'Reset Password';
-            submitBtn.textContent = 'Send Reset Link';
-            passwordInput.style.display = 'none';
-            passwordInput.removeAttribute('required');
-            forgotLink.style.display = 'none';
-            toggleLink.textContent = 'Back to Sign In';
-        } else {
-            passwordInput.style.display = 'block';
-            passwordInput.setAttribute('required', '');
-            updateMode(isCreate);
-        }
+        renderMode();
+        emailInput.focus();
     }
 
     function updateMode(createMode) {
+        passwordInput.value = "";
         isCreate = createMode;
         isForgot = false;
-        titleEl.textContent = isCreate ? 'Create Account' : 'Sign In';
-        submitBtn.textContent = isCreate ? 'Create Account' : 'Sign In';
-        passwordInput.style.display = 'block';
-        passwordInput.setAttribute('required', '');
+        renderMode();
+    }
+
+    function renderMode() {
+        errorDiv.style.display = 'none';
+        titleEl.textContent = isForgot ? labels.reset_password : isCreate ? labels.create_account : labels.sign_in_email;
+        submitBtn.textContent = isForgot ? labels.send_reset_link : isCreate ? labels.create_account : labels.sign_in;
+        passwordInput.hidden = isForgot;
+        form.querySelector('label[for="nativeLoginPassword"]').hidden = isForgot;
+        passwordInput.required = !isForgot;
         passwordInput.autocomplete = isCreate ? 'new-password' : 'current-password';
-        toggleLink.textContent = isCreate ? 'Already have an account? Sign in' : 'No account? Create one';
-        forgotLink.style.display = isCreate ? 'none' : '';
+        toggleLink.textContent = isForgot ? labels.back_to_sign_in
+            : isCreate ? labels.already_have_account + ' ' + labels.sign_in
+            : labels.no_account + ' ' + labels.create_account;
+        forgotLink.hidden = isCreate || isForgot;
+        forgotLink.textContent = labels.forgot_password;
     }
 
-    function applyTheme(isDark) {
-        // Colors matching AppTheme.kt
-        var bg = isDark ? '#2c2c2e' : '#fff';
-        var textColor = isDark ? '#fff' : '#000';
-        var inputBg = isDark ? '#1c1c1e' : '#fff';
-        var inputColor = isDark ? '#fff' : '#000';
-        var inputBorder = isDark ? '#48484a' : '#d1d1d6';
-        var errBg = isDark ? '#3a1c1c' : '#ffe0e0';
-        var errColor = isDark ? '#ff6b6b' : '#c00';
-        var snake = isDark ? '#BF5AF2' : '#AF52DE';
-
-        form.style.background = bg;
-        titleEl.style.color = textColor;
-        emailInput.style.background = inputBg;
-        emailInput.style.color = inputColor;
-        emailInput.style.border = '1px solid ' + inputBorder;
-        passwordInput.style.background = inputBg;
-        passwordInput.style.color = inputColor;
-        passwordInput.style.border = '1px solid ' + inputBorder;
-        errorDiv.style.background = errBg;
-        errorDiv.style.color = errColor;
-        submitBtn.style.background = snake;
-        toggleLink.style.color = snake;
-    }
-
-    function setCanvasPointerEvents(enabled) {
-        var canvas = document.querySelector('canvas');
-        if (canvas) canvas.style.pointerEvents = enabled ? 'auto' : 'none';
-    }
-
-    window.showNativeLoginForm = function(mode, isDark) {
+    window.showNativeLoginForm = function(mode, isDark, language, translations) {
         buildForm();
-        applyTheme(isDark);
+        labels = translations;
+        overlay.lang = language;
+        overlay.dir = language === 'ar' ? 'rtl' : 'ltr';
+        overlay.dataset.dark = String(isDark);
+        closeBtn.setAttribute('aria-label', labels.close);
+        form.querySelector('label[for="nativeLoginEmail"]').textContent = labels.email;
+        form.querySelector('label[for="nativeLoginPassword"]').textContent = labels.password;
         updateMode(mode === 'create');
         emailInput.value = '';
         passwordInput.value = '';
-        errorDiv.style.display = 'none';
-        overlay.style.display = 'flex';
-        setCanvasPointerEvents(false);
-
-        setTimeout(function() { emailInput.focus(); }, 50);
+        if (!overlay.open) overlay.showModal();
+        emailInput.focus();
     };
 
     window.hideNativeLoginForm = function() {
-        if (overlay) overlay.style.display = 'none';
-        setCanvasPointerEvents(true);
+        if (overlay && overlay.open) overlay.close();
     };
 
     window.showNativeLoginError = function(msg) {
         if (errorDiv) {
+            delete errorDiv.dataset.success;
             errorDiv.textContent = msg;
             errorDiv.style.display = msg ? 'block' : 'none';
         }
@@ -671,7 +650,7 @@
             if (subtitle) subtitle.textContent = 'The app failed to load. Check your connection and try again.';
             var btn = document.createElement('button');
             btn.textContent = 'Reload';
-            btn.style.cssText = 'padding:12px 32px;background:#AF52DE;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;';
+            btn.style.cssText = 'padding:12px 32px;background:#AA47DC;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;';
             btn.onclick = function() {
                 try { sessionStorage.removeItem(RETRY_KEY); } catch (e) {}
                 location.reload();
@@ -707,7 +686,9 @@
             var r = e.reason;
             var msg = (r && (r.message || String(r))) || 'unhandled rejection';
             if (!window._bootError) window._bootError = msg;
-            if (isFatalBootError(msg)) window._bootFailed(msg);
+            var wasmFetchFailed = /failed to fetch|networkerror|load failed/i.test(msg)
+                && /composeApp|\.wasm/i.test(r && r.stack || '');
+            if (isFatalBootError(msg) || wasmFetchFailed) window._bootFailed(msg);
         });
 
         // Slow-connection reassurance; then give up visibly (never a blank page). If the
@@ -730,8 +711,8 @@
     // bytes for the percent; the browser HTTP cache / service worker dedups the request when
     // composeApp.js fetches the same URL moments later — nothing downloads twice.
     (function() {
-        var wasmUrl = '0c7a3ff214d646587a58.wasm';
-        var wasmSize = parseInt('8642989', 10);
+        var wasmUrl = '658820f72b4617efb380.wasm';
+        var wasmSize = parseInt('8648883', 10);
         if (!wasmUrl || wasmUrl.indexOf('%%') !== -1 || !(wasmSize > 0)) return;
         if (typeof fetch !== 'function' || typeof ReadableStream === 'undefined') return;
 
@@ -767,7 +748,7 @@
         }).catch(function() { /* prefetch failed — loader keeps the indeterminate animation */ });
     })();
 </script>
-<script type="application/javascript" src="composeApp.js"></script>
+<script type="application/javascript" src="composeApp.js" onerror="window._bootFailed('Failed to load composeApp.js')"></script>
 <script>
     // Hide loader when Compose signals it's ready
     (function() {
@@ -840,11 +821,20 @@
     // Load Firebase AFTER Canvas is ready (non-blocking)
     function loadFirebase() {
         var scripts = [
-            'https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js',
-            'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js',
-            'https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js'
+            'https://www.gstatic.com/firebasejs/13.2.0/firebase-app-compat.js',
+            'https://www.gstatic.com/firebasejs/13.2.0/firebase-auth-compat.js'
         ];
         var loaded = 0;
+        var finished = false;
+        var timeout = setTimeout(fail, 15000);
+
+        function fail() {
+            if (finished) return;
+            finished = true;
+            clearTimeout(timeout);
+            window.firebaseAuth = null;
+            if (window._firebaseReadyResolve) window._firebaseReadyResolve(false);
+        }
 
         function onAllLoaded() {
             var firebaseConfig = {
@@ -856,31 +846,44 @@
                 appId: "1:223904200399:web:2e98ea1c1f3f9fa54069ba",
                 measurementId: "G-L6SQPK4C0V"
             };
-            window.firebaseApp = firebase.initializeApp(firebaseConfig);
-            window.firebaseAnalytics = null;
-            window._firebaseReady = true;
+            try {
+                window.firebaseApp = firebase.initializeApp(firebaseConfig);
+                window.firebaseAnalytics = null;
+                window.firebaseAuth = firebase.auth();
+                window.firebaseAuth.onAuthStateChanged(function(user) {
+                    window.currentFirebaseUser = user;
+                    // Notify Kotlin side about auth state change (session restore after page reload)
+                    if (typeof window._onAuthStateChangedKotlin === 'function') {
+                        window._onAuthStateChangedKotlin(user);
+                    }
+                });
+                window._firebaseAuthReady = true;
+                window._firebaseReady = true;
+                finished = true;
+                clearTimeout(timeout);
+                if (window._firebaseReadyResolve) window._firebaseReadyResolve(true);
+            } catch (e) {
+                fail();
+                return;
+            }
 
-            // Initialize Auth immediately so it's ready for Kotlin
-            window.firebaseAuth = firebase.auth();
-            window.firebaseAuth.onAuthStateChanged(function(user) {
-                window.currentFirebaseUser = user;
-                // Notify Kotlin side about auth state change (session restore after page reload)
-                if (typeof window._onAuthStateChangedKotlin === 'function') {
-                    window._onAuthStateChangedKotlin(user);
-                }
-            });
-            window._firebaseAuthReady = true;
-
-            if (window._firebaseReadyResolve) window._firebaseReadyResolve();
+            // Analytics is optional and must not delay or block sign-in.
+            var analyticsScript = document.createElement('script');
+            analyticsScript.src = 'https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics-compat.js';
+            analyticsScript.onload = function() {
+                if (window._firebaseAnalyticsRequested) window.initFirebaseAnalytics(true);
+            };
+            document.head.appendChild(analyticsScript);
         }
 
-        // Load scripts sequentially (auth depends on app, analytics depends on app)
+        // Auth depends on the app SDK, so load these sequentially.
         function loadNext() {
+            if (finished) return;
             if (loaded >= scripts.length) { onAllLoaded(); return; }
             var s = document.createElement('script');
             s.src = scripts[loaded];
             s.onload = function() { loaded++; loadNext(); };
-            s.onerror = function() { loaded++; loadNext(); };
+            s.onerror = fail;
             document.head.appendChild(s);
         }
         loadNext();
@@ -894,11 +897,15 @@
 
     // Firebase helper functions (safe to call before Firebase loads)
     window.initFirebaseAnalytics = function(enabled) {
+        window._firebaseAnalyticsRequested = enabled;
+        if (!enabled) return;
         if (!window._firebaseReady) {
-            window._firebaseReadyPromise.then(function() { window.initFirebaseAnalytics(enabled); });
+            window._firebaseReadyPromise.then(function(ready) {
+                if (ready && window._firebaseAnalyticsRequested) window.initFirebaseAnalytics(true);
+            });
             return;
         }
-        if (enabled && !window.firebaseAnalytics) {
+        if (typeof firebase.analytics === 'function' && !window.firebaseAnalytics) {
             window.firebaseAnalytics = firebase.analytics();
             // Distinguish Telegram Mini App vs regular web traffic
             firebase.analytics().setUserProperties({

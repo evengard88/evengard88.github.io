@@ -1,0 +1,14 @@
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="466"
+    android:viewportHeight="466">
+  <!-- Scalebook's IconAnimals, centered in a square viewport. -->
+  <group android:translateX="8" android:translateY="68">
+    <path
+        android:pathData="M6 277C34 297 69 299 91 281C112 262 101 235 90 211C78 187 75 169 83 146C96 111 129 88 165 89C202 89 231 112 244 147C255 176 251 204 270 225C287 245 312 231 307 210C304 193 291 170 282 149C270 122 270 101 280 80C290 60 306 55 325 43C345 30 346 16 365 12C386 8 388 22 432 18C450 36 428 60 404 80C384 97 377 102 357 105C341 108 343 121 348 138C352 156 368 182 374 205C386 249 365 284 328 302C289 322 246 313 216 285C190 261 180 226 174 195C170 173 166 160 156 162C142 165 141 177 146 197C151 221 163 247 159 269C155 293 139 311 117 319C76 336 32 313 6 277ZM381 37L411 30C400 45 394 49 381 37Z"
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"/>
+  </group>
+</vector>
