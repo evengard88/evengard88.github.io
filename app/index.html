@@ -926,9 +926,10 @@
     // --- RevenueCat Web Billing ---
     window._rcInstance = null;
     window._rcReady = false;
-    window._rcApiKey = 'YOUR_REVENUECAT_WEB_API_KEY'; // TODO: replace with real web API key
+    window._rcApiKey = null; // Web Billing is disabled. Signed-in users get Premium from the server.
 
     window.rcConfigure = function(userId) {
+        if (!window._rcApiKey) return false;
         try {
             if (typeof Purchases === 'undefined') {
                 console.warn('RevenueCat SDK not loaded');
